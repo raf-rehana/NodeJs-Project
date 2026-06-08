@@ -1,0 +1,103 @@
+<div class="py-5" style="background-color: lavender;">
+  <div class="container py-5 mt-4">
+    <div class="text-center mb-5 max-w-700 mx-auto">
+      <span class="badge bg-white text-dark border border-secondary-subtle rounded-pill px-3 py-2 fw-bold small text-uppercase mb-3 tracking-wide shadow-sm">Enterprise Service Bundles</span>
+      <h1 class="fw-bold text-dark display-4 mb-3" style="letter-spacing: -1px;">Scale operations predictably.</h1>
+      <p class="lead text-secondary fs-5">Select a comprehensive service package tailored to your immediate business requirements. Transparent pricing, no hidden overhead.</p>
+    </div>
+
+    <!-- Filter Nav -->
+    <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
+      @for (cat of categories; track cat.id) {
+        <button 
+          class="btn rounded-pill px-4 py-2 fw-bold transition-all border"
+          [ngClass]="selectedCategory() === cat.id ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle hover-bg-light'"
+          (click)="selectedCategory.set(cat.id)">
+          <i class="bi {{ cat.icon }} me-2"></i> {{ cat.label }}
+        </button>
+      }
+    </div>
+
+    <!-- Pricing Grid -->
+    <div class="row g-4 align-items-stretch">
+      @for (pkg of filteredPackages(); track pkg.id) {
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-secondary-subtle shadow-sm rounded-4 overflow-hidden bg-white position-relative hover-lift">
+            <div class="card-body p-4 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge rounded-pill fw-bold px-3 py-2 small shadow-sm" style="background-color: var(--bs-primary); color: white;">
+                  {{ pkg.badge }}
+                </span>
+                <i class="bi {{ pkg.icon }} fs-3 text-secondary opacity-50"></i>
+              </div>
+              
+              <h3 class="fw-bold text-dark mb-1">{{ pkg.name }}</h3>
+              <p class="small text-secondary mb-4">{{ pkg.tagline }}</p>
+              
+              <div class="mb-4 pb-4 border-bottom border-secondary-subtle">
+                <div class="d-flex align-items-baseline">
+                  <span class="fs-6 text-secondary fw-bold me-1">{{ pkg.currency }}</span>
+                  <span class="fs-4 fw-bold text-dark" style="letter-spacing: -1px;">{{ pkg.price | number }}</span>
+                  <span class="text-secondary small ms-1">{{ pkg.period }}</span>
+                </div>
+              </div>
+              
+              <ul class="list-unstyled mb-4 flex-grow-1">
+                @for (feat of pkg.features; track feat) {
+                  <li class="d-flex align-items-start mb-3 small text-dark">
+                    <i class="bi bi-check-circle-fill text-dark me-3 mt-1 opacity-75"></i>
+                    <span class="fw-medium">{{ feat }}</span>
+                  </li>
+                }
+              </ul>
+              
+              <button 
+                class="btn w-100 py-3 fw-bold rounded-3 shadow-sm border-0 text-white"
+                style="background-color: var(--bs-primary);"
+                (click)="onSubscribe(pkg)">
+                Deploy Package <i class="bi bi-arrow-right ms-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (filteredPackages().length === 0) {
+        <div class="col-12 text-center py-5">
+          <i class="bi bi-inbox fs-1 text-secondary opacity-25 d-block mb-3"></i>
+          <h4 class="fw-bold text-dark">No packages found</h4>
+          <p class="text-secondary">Try adjusting your filters to discover available stacks.</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="bg-white border-top border-secondary-subtle py-5">
+  <div class="container py-5">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <h2 class="fw-bold text-dark mb-4 fs-2" style="letter-spacing: -1px;">Deployment Protocol</h2>
+        <p class="text-secondary mb-4">Our onboarding pipeline is engineered to eliminate friction. From subscription to operational delivery, every stage is monitored and accelerated.</p>
+        <button class="btn btn-outline-dark fw-bold rounded-pill px-4" routerLink="/contact" (click)="scrollToTop()">Consult an Architect</button>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-4">
+          @for (step of howItWorks; track step.title; let i = $index) {
+            <div class="col-md-6">
+              <div class="d-flex gap-3">
+                <div class="bg-light border border-secondary-subtle text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center shadow-sm flex-shrink-0" style="width: 48px; height: 48px;">
+                  {{ i + 1 }}
+                </div>
+                <div>
+                  <h6 class="fw-bold text-dark mb-2">{{ step.title }}</h6>
+                  <p class="small text-secondary mb-0">{{ step.desc }}</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

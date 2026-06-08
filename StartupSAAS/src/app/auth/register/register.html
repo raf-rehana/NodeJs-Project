@@ -1,0 +1,254 @@
+<div class="py-5 min-vh-100" style="background-color: lavender;">
+  <div class="container py-5 mt-4">
+    <div class="row g-5 align-items-start">
+      
+      <!-- Text / Info Side -->
+      <div class="col-lg-5 mb-5 mb-lg-0 sticky-top" style="top: 100px;">
+        <a routerLink="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-4">
+          <div class="bg-white shadow-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+            <i class="bi bi-box-fill text-dark fs-5"></i>
+          </div>
+          <span class="fw-bold text-dark fs-4 tracking-tight">StartupSAAS</span>
+        </a>
+
+        <h1 class="display-4 fw-bold text-dark mb-4" style="letter-spacing: -1px;">Scale operations predictably.</h1>
+        <ul class="list-unstyled d-flex flex-column gap-4 text-secondary mb-5">
+          <li class="d-flex align-items-start gap-3">
+            <i class="bi bi-shield-check text-success fs-5"></i>
+            <span>Secure authentication and legal corporate onboarding protocols.</span>
+          </li>
+          <li class="d-flex align-items-start gap-3">
+            <i class="bi bi-hdd-network text-info fs-5"></i>
+            <span>Dedicated service modules for infrastructure, marketing, and engineering.</span>
+          </li>
+          <li class="d-flex align-items-start gap-3">
+            <i class="bi bi-headset text-warning fs-5"></i>
+            <span>Continuous operational support and Service Level Agreements (SLA).</span>
+          </li>
+        </ul>
+        
+        <div class="d-flex gap-3 text-secondary text-opacity-75 small fw-bold">
+          <span>&copy; StartupSAAS Systems</span>
+        </div>
+      </div>
+
+      <!-- Form Side -->
+      <div class="col-lg-6 offset-lg-1">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 overflow-hidden bg-white">
+          <div class="card-body p-4 p-md-5">
+
+      @if (success()) {
+        <div class="text-center py-5">
+          <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+          <h2 class="fw-bold text-dark mt-4 mb-3">Identity Registered</h2>
+          <p class="text-secondary mb-4">Your corporate identity has been successfully authenticated in the StartupSAAS registry. Rerouting to authorization gateway...</p>
+          <div class="spinner-border text-dark spinner-border-sm" role="status"></div>
+        </div>
+      } @else {
+        <h4 class="fw-bold text-dark mb-2">Initialize Entity</h4>
+        <p class="text-secondary small mb-4">Register your corporate identity to access the StartupSAAS infrastructure.</p>
+
+        <!-- Progress Indicator -->
+        <div class="d-flex align-items-center mb-5">
+          <div class="d-flex flex-column align-items-center gap-2" style="width: 33%;">
+            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold transition-all" 
+                 [ngClass]="currentStep() >= 1 ? 'bg-dark text-white' : 'bg-light text-secondary border border-secondary-subtle'" 
+                 style="width: 32px; height: 32px; font-size: 0.8rem;">1</div>
+            <span class="small fw-bold" [ngClass]="currentStep() >= 1 ? 'text-dark' : 'text-secondary'">Entity Data</span>
+          </div>
+          <div class="flex-grow-1 border-top border-2" [ngClass]="currentStep() >= 2 ? 'border-dark' : 'border-secondary-subtle'"></div>
+          <div class="d-flex flex-column align-items-center gap-2" style="width: 33%;">
+            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold transition-all" 
+                 [ngClass]="currentStep() >= 2 ? 'bg-dark text-white' : 'bg-light text-secondary border border-secondary-subtle'" 
+                 style="width: 32px; height: 32px; font-size: 0.8rem;">2</div>
+            <span class="small fw-bold" [ngClass]="currentStep() >= 2 ? 'text-dark' : 'text-secondary'">Location</span>
+          </div>
+          <div class="flex-grow-1 border-top border-2" [ngClass]="currentStep() === 3 ? 'border-dark' : 'border-secondary-subtle'"></div>
+          <div class="d-flex flex-column align-items-center gap-2" style="width: 33%;">
+            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold transition-all" 
+                 [ngClass]="currentStep() === 3 ? 'bg-dark text-white' : 'bg-light text-secondary border border-secondary-subtle'" 
+                 style="width: 32px; height: 32px; font-size: 0.8rem;">3</div>
+            <span class="small fw-bold" [ngClass]="currentStep() === 3 ? 'text-dark' : 'text-secondary'">Security</span>
+          </div>
+        </div>
+
+        @if (error()) {
+          <div class="alert bg-danger bg-opacity-10 border border-danger border-opacity-25 text-danger rounded-3 p-3 d-flex align-items-center gap-3 mb-4 shadow-sm">
+            <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+            <span class="small fw-bold">{{ error() }}</span>
+          </div>
+        }
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+          <!-- Step 1: Corporate Info -->
+          @if (currentStep() === 1) {
+            <div class="row g-3 mb-5">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Registered Entity Name</label>
+                <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="companyName" placeholder="e.g. Acme Corp Ltd.">
+                @if (form.get('companyName')?.invalid && form.get('companyName')?.touched) {
+                  <div class="small text-danger mt-2 fw-medium"><i class="bi bi-info-circle me-1"></i> Entity name is required.</div>
+                }
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Industry Sector</label>
+                <select class="form-select bg-white border border-secondary-subtle py-3 rounded-3 text-dark shadow-none" formControlName="businessType">
+                  <option value="" disabled selected>Select Primary Industry</option>
+                  <option value="Technology">Technology & Software</option>
+                  <option value="E-Commerce">E-Commerce & Retail</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Finance">Financial Services</option>
+                  <option value="Education">Education & EdTech</option>
+                  <option value="Other">Other Category</option>
+                </select>
+                @if (form.get('businessType')?.invalid && form.get('businessType')?.touched) {
+                  <div class="small text-danger mt-2 fw-medium"><i class="bi bi-info-circle me-1"></i> Sector selection is required.</div>
+                }
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-lavender w-100 py-3 rounded-3 fw-bold shadow-sm d-flex justify-content-center align-items-center gap-2 hover-lift" (click)="nextStep()">
+              Proceed to Location <i class="bi bi-arrow-right"></i>
+            </button>
+          }
+
+          <!-- Step 2: Geography -->
+          @if (currentStep() === 2) {
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Sovereign State</label>
+                <select class="form-select bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="country" (change)="onCountryChange()">
+                  @for (c of countries(); track c.name) {
+                    <option [value]="c.name">{{ c.name }}</option>
+                  }
+                </select>
+              </div>
+
+              @if (form.get('country')?.value === 'Bangladesh') {
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Division</label>
+                  <select class="form-select bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="division" (change)="onDivisionChange()">
+                    <option value="">Select Division</option>
+                    @for (d of divisions(); track d.name) {
+                      <option [value]="d.name">{{ d.name }}</option>
+                    }
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">District</label>
+                  <select class="form-select bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="district" (change)="onDistrictChange()" [disabled]="!form.get('division')?.value">
+                    <option value="">Select District</option>
+                    @for (d of districts(); track d.name) {
+                      <option [value]="d.name">{{ d.name }}</option>
+                    }
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Precinct (Thana)</label>
+                  <select class="form-select bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="thana" [disabled]="!form.get('district')?.value">
+                    <option value="">Select Thana</option>
+                    @for (t of thanas(); track t.name) {
+                      <option [value]="t.name">{{ t.name }}</option>
+                    }
+                  </select>
+                </div>
+              }
+            </div>
+
+            <div class="mb-5">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Micro-Location / Street</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="village" placeholder="House 12, Road 4, Area">
+              @if (form.get('village')?.invalid && form.get('village')?.touched) {
+                <div class="small text-danger mt-1 fw-medium">Required for operational logistics.</div>
+              }
+            </div>
+
+            <div class="d-flex gap-3">
+              <button type="button" class="btn btn-light border border-secondary-subtle py-3 rounded-3 fw-bold w-50 hover-bg-secondary-soft transition-all" (click)="prevStep()">
+                <i class="bi bi-arrow-left me-2"></i> Back
+              </button>
+              <button type="button" class="btn btn-lavender w-50 py-3 rounded-3 fw-bold shadow-sm d-flex justify-content-center align-items-center gap-2 hover-lift" (click)="nextStep()">
+                Proceed <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          }
+
+          <!-- Step 3: Security & Identity -->
+          @if (currentStep() === 3) {
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Representative Name</label>
+                <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="name" placeholder="Enter Your name">
+                @if (form.get('name')?.invalid && form.get('name')?.touched) {
+                  <div class="small text-danger mt-1 fw-medium">Name required.</div>
+                }
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Primary Email</label>
+                <input type="email" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="email" placeholder="Enter Your Email">
+                @if (form.get('email')?.invalid && form.get('email')?.touched) {
+                  <div class="small text-danger mt-1 fw-medium">Valid email required for UID.</div>
+                }
+              </div>
+            </div>
+
+            <div class="row g-2 mb-3">
+              <label class="col-12 form-label small fw-bold text-secondary text-uppercase tracking-wide mb-0" style="color: #8c98a4 !important; font-size: 0.75rem;">Contact Node</label>
+              <div class="col-4 col-sm-3">
+                <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 text-center fw-bold shadow-none" formControlName="countryCode" readonly>
+              </div>
+              <div class="col-8 col-sm-9">
+                <input type="tel" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" formControlName="phone" placeholder="1700000000">
+              </div>
+              @if (form.get('phone')?.invalid && form.get('phone')?.touched) {
+                <div class="col-12 small text-danger mt-1 fw-medium">Contact node required.</div>
+              }
+            </div>
+
+            <div class="mb-5">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Passphrase</label>
+              <div class="position-relative">
+                <input [type]="showPassword() ? 'text' : 'password'" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 pe-5 shadow-none" formControlName="password" placeholder="Enter secure Password">
+                <button class="btn border-0 text-secondary position-absolute top-50 end-0 translate-middle-y me-1 shadow-none" type="button" (click)="showPassword.set(!showPassword())" style="z-index: 5;">
+                  <i class="bi" [ngClass]="showPassword() ? 'bi-eye-slash' : 'bi-eye'"></i>
+                </button>
+              </div>
+              @if (form.get('password')?.invalid && form.get('password')?.touched) {
+                <div class="small text-danger mt-1 fw-medium">Secure passphrase (min 6 char) required.</div>
+              }
+            </div>
+
+            <div class="d-flex gap-3">
+              <button type="button" class="btn btn-light border border-secondary-subtle py-3 rounded-3 fw-bold w-50 hover-bg-secondary-soft transition-all" (click)="prevStep()">
+                <i class="bi bi-arrow-left me-2"></i> Back
+              </button>
+              <button type="submit" class="btn btn-lavender w-50 py-3 rounded-3 fw-bold shadow-sm d-flex justify-content-center align-items-center gap-2 hover-lift" [disabled]="loading()">
+                @if (loading()) {
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Processing...
+                } @else {
+                  Deploy Entity <i class="bi bi-check2-circle"></i>
+                }
+              </button>
+            </div>
+          }
+        </form>
+
+        <div class="text-center mt-5 pt-4 border-top border-secondary-subtle">
+          <p class="small text-secondary fw-medium">
+            Already possess credentials? 
+            <a routerLink="/login" class="fw-bold text-dark text-decoration-none border-bottom border-dark pb-1 ms-1 hover-text-primary">Initialize session</a>
+          </p>
+        </div>
+      }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

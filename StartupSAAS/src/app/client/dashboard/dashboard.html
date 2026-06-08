@@ -1,0 +1,162 @@
+<div class="container-fluid py-4 px-lg-5">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-1 small text-secondary">
+          <li class="breadcrumb-item">Organization</li>
+          <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Client Dashboard</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Welcome back, {{ authService.currentUser()?.name }}</h2>
+    </div>
+    <div class="d-flex gap-3 align-items-center">
+      <div class="text-end d-none d-md-block">
+        <div class="small fw-bold text-dark">{{ authService.currentUser()?.companyName || 'Business Client' }}</div>
+        <div class="small text-secondary">Active Subscription</div>
+      </div>
+      <img [src]="authService.currentUser()?.avatar || 'assets/default-avatar.png'" class="rounded-circle border" width="40" height="40" alt="Profile">
+    </div>
+  </header>
+
+  <main>
+    <!-- Top KPI Row -->
+    <div class="row g-4 mb-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white">
+          <div class="card-body p-4 d-flex flex-column justify-content-between">
+            <h6 class="text-secondary text-uppercase fw-bold small mb-3">Live Projects</h6>
+            <div class="d-flex justify-content-between align-items-end">
+              <h2 class="fw-bold text-dark mb-0 fs-1">{{ activeProjectsCount() }}</h2>
+              <a routerLink="/client/my-requests" class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-bold small">Pipeline <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white">
+          <div class="card-body p-4">
+            <h6 class="text-secondary text-uppercase fw-bold small mb-3">Target Deliveries</h6>
+            <div class="fs-1 fw-bold text-dark">{{ upcomingDeliveriesCount() }}</div>
+            <div class="small text-secondary mt-1">Pending QA & Review</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between mb-3">
+              <h6 class="text-secondary text-uppercase fw-bold small mb-0">System Utilization</h6>
+              <span class="badge bg-light text-dark border border-secondary-subtle rounded-pill small px-3">Aggregated Progress</span>
+            </div>
+            <div class="fs-1 fw-bold text-dark mb-3">{{ avgProgress() }}% <span class="fs-6 text-secondary fw-normal">Mean Completion</span></div>
+            <div class="progress" style="height: 8px;">
+              <div class="progress-bar bg-dark" role="progressbar" [style.width.%]="avgProgress()"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Activity Feed -->
+      <div class="col-lg-8">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 overflow-hidden bg-white h-100">
+          <div class="card-header bg-white border-bottom border-secondary-subtle p-4 d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="fw-bold text-dark mb-0 fs-5">Active Service Stream</h5>
+              <div class="small text-secondary mt-1">Monitor in-progress tasks and latest updates.</div>
+            </div>
+            <a routerLink="/client/my-requests" class="btn btn-outline-secondary btn-sm fw-bold rounded-pill px-3">View Registry</a>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                  <tr>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3 ps-4">Service Details</th>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3 w-25">Velocity</th>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3 text-center">Status</th>
+                    <th class="border-0 py-3 pe-4"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (req of recentRequests(); track req.id) {
+                    <tr class="border-bottom border-secondary-subtle">
+                      <td class="ps-4 py-3">
+                        <div class="fw-bold text-dark">REF-{{ req.id }} &bull; {{ req.serviceName || 'Service Request' }}</div>
+                        <div class="small text-secondary mt-1"><i class="bi bi-tag me-1"></i>{{ req.categoryName || 'General Request' }}</div>
+                      </td>
+                      <td class="py-3">
+                        <div class="d-flex align-items-center gap-3 pe-3">
+                          <div class="progress flex-grow-1 bg-light" style="height: 6px;">
+                            <div class="progress-bar bg-dark" role="progressbar" [style.width.%]="req.progress || 0"></div>
+                          </div>
+                          <span class="small fw-bold text-dark">{{ req.progress || 0 }}%</span>
+                        </div>
+                      </td>
+                      <td class="text-center py-3"><app-status-badge [status]="req.status"></app-status-badge></td>
+                      <td class="text-end pe-4 py-3">
+                        <a [routerLink]="['/client/request-detail', req.id]" class="btn btn-light border btn-sm fw-bold rounded-3">Examine</a>
+                      </td>
+                    </tr>
+                  }
+                  @if (requests().length === 0) {
+                    <tr>
+                      <td colspan="4" class="text-center py-5">
+                        <div class="text-secondary small fw-bold">No registered services. Initialize a request to begin.</div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action & Billing sidebar -->
+      <div class="col-lg-4">
+        <div class="d-flex flex-column gap-4">
+          @if (pendingInvoice()) {
+            <div class="card border border-danger-subtle shadow-sm rounded-4 bg-danger bg-opacity-10">
+              <div class="card-body p-4">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <div class="bg-danger p-2 rounded-3 text-white">
+                    <i class="bi bi-exclamation-triangle fs-5"></i>
+                  </div>
+                  <div>
+                    <h6 class="fw-bold text-danger mb-0">Billing Attention Required</h6>
+                  </div>
+                </div>
+                <p class="small text-dark mb-3">Invoice outstanding for <strong>{{ pendingInvoice().item }}</strong>. Please clear this to ensure uninterrupted service delivery.</p>
+                <button class="btn btn-danger w-100 fw-bold rounded-3" routerLink="/client/payments">Resolve Now (BDT {{ pendingInvoice().amount | number }})</button>
+              </div>
+            </div>
+          }
+
+          <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white">
+            <div class="card-body p-4">
+              <h6 class="fw-bold text-secondary text-uppercase small mb-4">Subscription Tier</h6>
+              @if (activeSubscription()) {
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="fw-bold text-dark mb-0">{{ activeSubscription().item }}</h4>
+                  <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 rounded-pill px-3">Operational</span>
+                </div>
+                <div class="small text-secondary mb-4 border-top border-secondary-subtle pt-3">
+                  Total CAPEX: <strong>BDT {{ amountSpent() | number }}</strong>
+                </div>
+                <button class="btn btn-outline-dark w-100 fw-bold rounded-3" routerLink="/client/payments">Billing Portal</button>
+              } @else {
+                <div class="text-center py-2">
+                  <h5 class="fw-bold text-dark mb-2">Standard Tier</h5>
+                  <p class="small text-secondary mb-4">You are currently operating without an active priority SLA.</p>
+                  <button class="btn btn-dark w-100 fw-bold rounded-3" routerLink="/client/plans">Review Enterprise Plans</button>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

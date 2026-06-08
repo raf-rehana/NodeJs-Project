@@ -1,0 +1,32 @@
+.packages-hero {
+  background-color: var(--primary-color) !important;
+  min-height: 320px;
+}
+
+.stat-pill {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.category-btn {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+  background: var(--primary-hover);
+  color: #fff;
+}
+
+.category-btn.active {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.package-card {
+  border: 1px solid rgba(0,0,0,0.08);
+}

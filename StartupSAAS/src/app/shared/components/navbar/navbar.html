@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg bg-white border-bottom border-secondary-subtle sticky-top shadow-sm" style="min-height: 72px;">
+  <div class="container-fluid px-lg-4">
+    
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/">
+      <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+        <i class="bi bi-box-fill text-white fs-5"></i>
+      </div>
+      <span class="fw-bold text-dark fs-4 tracking-tight" style="letter-spacing: -1px;">StartupSAAS</span>
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler border-0 shadow-none text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCore" aria-controls="navbarCore" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-list fs-2"></i>
+    </button>
+
+    <!-- Navigation Core -->
+    <div class="collapse navbar-collapse" id="navbarCore">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-medium gap-lg-3 ms-lg-4">
+        <li class="nav-item">
+          <a class="nav-link text-secondary hover-dark transition-all px-3 rounded-pill" routerLink="/" routerLinkActive="text-dark bg-light fw-bold" [routerLinkActiveOptions]="{exact: true}">Platform</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-secondary hover-dark transition-all px-3 rounded-pill" routerLink="/packages" routerLinkActive="text-dark bg-light fw-bold">Packages</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-secondary hover-dark transition-all px-3 rounded-pill" routerLink="/service" routerLinkActive="text-dark bg-light fw-bold">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-secondary hover-dark transition-all px-3 rounded-pill" routerLink="/contact" routerLinkActive="text-dark bg-light fw-bold">Contact</a>
+        </li>
+      </ul>
+
+      <!-- Action Area -->
+      <div class="d-flex align-items-center gap-3">
+        @if (authService.isLoggedIn()) {
+          <app-notification-bell></app-notification-bell>
+          
+          <div class="dropdown">
+            <button class="btn btn-light border border-secondary-subtle rounded-pill py-2 px-3 d-flex align-items-center gap-2 hover-bg-secondary-soft transition-all" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img [src]="authService.currentUser()?.avatar || 'assets/default-avatar.png'" alt="User" class="rounded-circle object-fit-cover" width="28" height="28">
+              <span class="small fw-bold text-dark d-none d-md-inline-block">{{ authService.currentUser()?.name }}</span>
+              <i class="bi bi-chevron-down small text-secondary"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg border-secondary-subtle rounded-4 mt-2 p-2" style="min-width: 240px;">
+              <li class="px-3 py-2 border-bottom border-secondary-subtle mb-2">
+                <div class="fw-bold text-dark small">{{ authService.currentUser()?.name }}</div>
+                <div class="text-secondary small">{{ authService.currentUser()?.email }}</div>
+                <div class="badge bg-dark mt-2">{{ authService.currentUser()?.role }}</div>
+              </li>
+              
+              @if (authService.hasRole('ADMIN') || authService.hasRole('SUPER_ADMIN')) {
+                <li><a class="dropdown-item py-2 fw-medium small rounded-3 hover-bg-light" routerLink="/admin/dashboard"><i class="bi bi-speedometer2 me-2 text-secondary"></i> Admin Dashboard</a></li>
+              } @else if (authService.hasRole('EMPLOYEE')) {
+                <li><a class="dropdown-item py-2 fw-medium small rounded-3 hover-bg-light" routerLink="/employee/summary"><i class="bi bi-kanban me-2 text-secondary"></i> Employee Dashboard</a></li>
+              } @else {
+                <li><a class="dropdown-item py-2 fw-medium small rounded-3 hover-bg-light" routerLink="/client/dashboard"><i class="bi bi-grid me-2 text-secondary"></i> Client Dashboard</a></li>
+              }
+              
+              <li><a class="dropdown-item py-2 fw-medium small rounded-3 hover-bg-light" routerLink="/client/profile"><i class="bi bi-person-gear me-2 text-secondary"></i> Identity Profile</a></li>
+              <li><hr class="dropdown-divider border-secondary-subtle my-2"></li>
+              <li><button class="dropdown-item py-2 fw-bold small text-danger rounded-3 hover-bg-danger-soft" (click)="logout()"><i class="bi bi-box-arrow-right me-2"></i> Terminate Session</button></li>
+            </ul>
+          </div>
+        } @else {
+          <a class="btn fw-bold text-dark hover-text-primary transition-all px-3" routerLink="/login">Login</a>
+          <a class="btn btn-register fw-bold rounded-pill shadow-sm px-4 py-2 hover-lift" routerLink="/register">Register</a>
+        }
+      </div>
+    </div>
+  </div>
+</nav>

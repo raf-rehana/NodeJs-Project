@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+.btn-lavender {
+  background: linear-gradient(135deg, #a88bec, #8b6bed) !important;
+  color: white !important;
+  border: none !important;
+  transition: all 0.3s ease;
+}
+
+.btn-lavender:hover {
+  background: white !important;
+  color: #8b6bed !important;
+  border: 1px solid #8b6bed !important;
+  box-shadow: 0 4px 15px rgba(139, 107, 237, 0.3) !important;
+}

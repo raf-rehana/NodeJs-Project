@@ -1,0 +1,40 @@
+.bg-soft-primary {
+  background-color: #eef2ff;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #fff !important;
+  box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.1);
+  border: 1px solid #4f46e5 !important;
+}
+
+.contact-cards .card {
+  transition: transform 0.3s ease;
+}
+
+.contact-cards .card:hover {
+  transform: translateX(10px);
+}
+
+.contact-wrapper {
+  min-height: 100vh;
+}
+
+.btn-primary {
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3) !important;
+}

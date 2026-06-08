@@ -1,0 +1,68 @@
+<footer class="pb-4 border-top border-secondary-subtle" [ngClass]="isMinimal() ? 'pt-3' : 'pt-5'" style="background-color: lavender;">
+  <div class="container px-lg-4" [ngClass]="isMinimal() ? '' : 'pt-4'">
+    @if (!isMinimal()) {
+      <div class="row g-5 mb-5">
+      <!-- Brand & Mission -->
+      <div class="col-lg-4">
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <div class="bg-white rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+            <i class="bi bi-box-fill text-primary fs-5"></i>
+          </div>
+          <span class="fw-bold text-dark fs-4 tracking-tight" style="letter-spacing: -1px;">StartupSAAS</span>
+        </div>
+        <p class="text-dark text-opacity-75 small lh-lg mb-4 max-w-400">
+          We abstract the complexities of corporate infrastructure, legal compliance, and digital scaling, delivering a unified SaaS command center for enterprise velocity.
+        </p>
+        <div class="d-flex gap-3">
+          <a href="#" class="btn btn-outline-dark rounded-circle p-2 d-flex align-items-center justify-content-center transition-all hover-bg-dark hover-text-white" style="width: 40px; height: 40px;"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="btn btn-outline-dark rounded-circle p-2 d-flex align-items-center justify-content-center transition-all hover-bg-dark hover-text-white" style="width: 40px; height: 40px;"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="btn btn-outline-dark rounded-circle p-2 d-flex align-items-center justify-content-center transition-all hover-bg-dark hover-text-white" style="width: 40px; height: 40px;"><i class="bi bi-github"></i></a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="col-lg-2 col-md-4 col-6">
+        <h6 class="fw-bold text-dark text-uppercase tracking-wide small mb-4">Platform</h6>
+        <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+          <li><a routerLink="/packages" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Packages</a></li>
+          <li><a routerLink="/service" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Services</a></li>
+          <li><a href="#" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Integrations</a></li>
+          <li><a href="#" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">System Status</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-4 col-6">
+        <h6 class="fw-bold text-dark text-uppercase tracking-wide small mb-4">Company</h6>
+        <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+          <li><a routerLink="/about" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">About Us</a></li>
+          <li><a routerLink="/careers" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Careers</a></li>
+          <li><a routerLink="/contact" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Contact</a></li>
+          <li><a href="#" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Security</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col-lg-4 col-md-4">
+        <h6 class="fw-bold text-dark text-uppercase tracking-wide small mb-4">System Updates</h6>
+        <p class="text-dark text-opacity-75 small mb-4">Subscribe to receive technical release notes and platform infrastructure updates.</p>
+        <div class="input-group">
+          <input type="email" class="form-control bg-white border-secondary text-dark shadow-none px-4 py-3" placeholder="Enter your work email">
+          <button class="btn btn-primary fw-bold px-4" type="button">Subscribe</button>
+        </div>
+      </div>
+      </div>
+    }
+
+    <!-- Bottom -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center" [ngClass]="isMinimal() ? '' : 'pt-4 border-top border-secondary-subtle'">
+      <div class="small text-dark text-opacity-75 mb-3 mb-md-0">
+        &copy; 2026 StartupSAAS Systems. All rights reserved.
+      </div>
+      <div class="d-flex gap-4">
+        <a href="#" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Terms of Service</a>
+        <a href="#" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Privacy Policy</a>
+        <a href="#" class="text-dark text-opacity-75 text-decoration-none small hover-text-dark transition-all">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+</footer>

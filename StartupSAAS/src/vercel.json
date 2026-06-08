@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "ng build --configuration production",
+  "outputDirectory": "dist/StartupSAAS/browser",
+  "installCommand": "npm install",
+  "framework": "angular",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}

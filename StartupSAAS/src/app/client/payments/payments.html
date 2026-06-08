@@ -1,0 +1,241 @@
+<div class="container-fluid py-4 px-lg-5">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-1 small text-secondary">
+          <li class="breadcrumb-item">Organization</li>
+          <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Financial Hub</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Billing & Transactions</h2>
+    </div>
+    <div class="d-flex gap-3 align-items-center">
+      <button class="btn btn-outline-dark fw-bold rounded-pill px-4" (click)="showHistory.set(!showHistory())">
+        <i class="bi bi-receipt me-2"></i> {{ showHistory() ? 'Make Payment' : 'Payment History' }}
+      </button>
+    </div>
+  </header>
+
+  <main>
+    @if (paymentStatus()) {
+      <div class="card border-0 shadow-sm rounded-4 mb-5" [ngClass]="paymentStatus() === 'success' ? 'bg-success bg-opacity-10' : 'bg-danger bg-opacity-10'">
+        <div class="card-body p-5 text-center">
+          <i class="bi display-1 mb-3" [ngClass]="paymentStatus() === 'success' ? 'bi-check-circle-fill text-success' : 'bi-x-circle-fill text-danger'"></i>
+          <h3 class="fw-bold text-dark mb-2">
+            {{ paymentStatus() === 'success' ? 'Transaction Authorized' : 'Transaction Failed' }}
+          </h3>
+          <p class="text-secondary mb-4">
+            {{ paymentStatus() === 'success' ? 'Your payment has been securely processed.' : 'There was an issue processing your payment. Please attempt again or contact support.' }}
+          </p>
+          @if (paymentStatus() === 'success') {
+            <div class="bg-white rounded-3 p-3 d-inline-block border border-success-subtle mb-4 shadow-sm text-start">
+              <div class="small text-secondary fw-bold mb-1">Transaction Ref</div>
+              <div class="fw-bold text-dark font-monospace">{{ tranId() }}</div>
+              <hr class="my-2 text-secondary">
+              <div class="small text-secondary fw-bold mb-1">Cleared Amount</div>
+              <div class="fw-bold text-dark">BDT {{ paidAmount() | number }}</div>
+            </div>
+            <br>
+            <button class="btn btn-dark fw-bold rounded-pill px-5" routerLink="/client/dashboard">Return to Dashboard</button>
+          } @else {
+            <button class="btn btn-danger fw-bold rounded-pill px-5" (click)="paymentStatus.set(null)">Retry Payment</button>
+          }
+        </div>
+      </div>
+    }
+
+    @if (!paymentStatus()) {
+      @if (showHistory()) {
+        <!-- Payment History Table -->
+        <div class="card border-secondary-subtle shadow-sm rounded-4 overflow-hidden bg-white mb-5">
+          <div class="card-header bg-white border-bottom border-secondary-subtle p-4">
+            <h5 class="fw-bold text-dark mb-0 fs-5">Ledger Details</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                  <tr>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3 ps-4">Date</th>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3">Description</th>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3">Amount</th>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3">Method</th>
+                    <th class="border-0 text-end py-3 pe-4">Document</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (p of paidPayments(); track p.id) {
+                    <tr class="border-bottom border-secondary-subtle">
+                      <td class="ps-4 py-3 small fw-bold text-secondary">{{ p.date | date:'mediumDate' }}</td>
+                      <td class="py-3 fw-bold text-dark">{{ p.item }}</td>
+                      <td class="py-3 fw-bold text-dark">BDT {{ p.amount | number }}</td>
+                      <td class="py-3"><span class="badge bg-light text-dark border border-secondary-subtle rounded-pill px-3">{{ p.method }}</span></td>
+                      <td class="text-end pe-4 py-3">
+                        <button class="btn btn-sm btn-outline-dark fw-bold rounded-3" (click)="generateInvoice(p)"><i class="bi bi-download me-1"></i> Invoice</button>
+                      </td>
+                    </tr>
+                  }
+                  @if (paidPayments().length === 0) {
+                    <tr>
+                      <td colspan="5" class="text-center py-5 text-secondary">No historical transactions available.</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <!-- Pending Actions & Checkout -->
+        <div class="row g-5">
+          <!-- Left Column: Pending Invoices & Selection -->
+          <div class="col-lg-7">
+            @if (pendingPayments().length > 0) {
+              <div class="mb-5">
+                <h6 class="fw-bold text-secondary text-uppercase small mb-3">Outstanding Balances</h6>
+                <div class="d-flex flex-column gap-3">
+                  @for (inv of pendingPayments(); track inv.id) {
+                    <div class="card border-danger-subtle shadow-sm rounded-4 cursor-pointer transition-all"
+                         [ngClass]="selectedPendingItem()?.id === inv.id ? 'bg-danger bg-opacity-10 border-danger' : 'bg-white hover-lift'"
+                         (click)="selectPendingPayment(inv)">
+                      <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                        <div>
+                          <div class="d-flex align-items-center gap-2 mb-1">
+                            <span class="badge bg-danger text-white rounded-pill small">REQUIRED</span>
+                            <span class="fw-bold text-dark">Ref #{{ inv.id }}</span>
+                          </div>
+                          <h6 class="fw-bold text-dark mb-0 fs-5">{{ inv.item }}</h6>
+                          <div class="small text-secondary mt-1">Generated: {{ inv.date | date:'mediumDate' }}</div>
+                        </div>
+                        <div class="text-end">
+                          <div class="fs-4 fw-bold text-dark mb-1">BDT {{ inv.amount | number }}</div>
+                          <button class="btn btn-sm fw-bold rounded-pill px-3" [ngClass]="selectedPendingItem()?.id === inv.id ? 'btn-danger' : 'btn-outline-danger'">
+                            {{ selectedPendingItem()?.id === inv.id ? 'Selected' : 'Resolve Balance' }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            <div class="payment-gateway-section">
+              <h6 class="fw-bold text-secondary text-uppercase small mb-3">Select Payment Protocol</h6>
+              
+              <div class="d-flex flex-wrap gap-2 mb-4">
+                <button class="btn px-4 py-3 fw-bold rounded-4 flex-grow-1 border transition-all"
+                        [ngClass]="methodCategory() === 'ONLINE' ? 'btn-dark border-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle hover-bg-light'"
+                        (click)="methodCategory.set('ONLINE')">
+                  <i class="bi bi-credit-card me-2"></i> Auto-Detect Gateway
+                </button>
+                <button class="btn px-4 py-3 fw-bold rounded-4 flex-grow-1 border transition-all"
+                        [ngClass]="methodCategory() === 'MOBILE_WALLET' ? 'btn-dark border-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle hover-bg-light'"
+                        (click)="methodCategory.set('MOBILE_WALLET')">
+                  <i class="bi bi-phone me-2"></i> MFS / Wallet
+                </button>
+                <button class="btn px-4 py-3 fw-bold rounded-4 flex-grow-1 border transition-all"
+                        [ngClass]="methodCategory() === 'CASH' ? 'btn-dark border-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle hover-bg-light'"
+                        (click)="methodCategory.set('CASH')">
+                  <i class="bi bi-cash-stack me-2"></i> Manual Transfer
+                </button>
+              </div>
+
+              <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white mb-4">
+                <div class="card-body p-4">
+                  @if (methodCategory() === 'ONLINE') {
+                    <div class="text-center py-4">
+                      <i class="bi bi-shield-lock fs-1 text-success mb-3 d-block"></i>
+                      <h5 class="fw-bold text-dark">Secure SSLCommerz Gateway</h5>
+                      <p class="text-secondary small max-w-400 mx-auto">You will be redirected to the secure SSLCommerz portal where you can choose your preferred card or banking method.</p>
+                    </div>
+                  }
+                  
+                  @if (methodCategory() === 'MOBILE_WALLET') {
+                    <h6 class="fw-bold text-dark mb-3">Select MFS Provider</h6>
+                    <div class="row g-3">
+                      @for (w of wallets; track w.id) {
+                        <div class="col-6">
+                          <div class="border rounded-4 p-3 cursor-pointer transition-all d-flex align-items-center gap-3"
+                               [ngClass]="selectedWallet() === w.id ? 'border-primary shadow-sm' : 'border-secondary-subtle opacity-75 hover-opacity-100'"
+                               [style.backgroundColor]="selectedWallet() === w.id ? w.bg : '#ffffff'"
+                               (click)="selectedWallet.set(w.id)">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center text-white" [style.backgroundColor]="w.color" style="width: 40px; height: 40px;">
+                              <i class="bi {{ w.icon }} fs-5"></i>
+                            </div>
+                            <span class="fw-bold text-dark">{{ w.label }}</span>
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  }
+
+                  @if (methodCategory() === 'CASH') {
+                    <div class="py-2">
+                      <div class="d-flex align-items-start gap-3 mb-4 p-3 bg-warning bg-opacity-10 border border-warning border-opacity-25 rounded-3">
+                        <i class="bi bi-exclamation-triangle-fill text-warning fs-4"></i>
+                        <div>
+                          <h6 class="fw-bold text-dark mb-1">Manual Verification Required</h6>
+                          <p class="small text-secondary mb-0">Cash or offline transfers require financial audit. Service commencement will be delayed until funds clear.</p>
+                        </div>
+                      </div>
+                      <h6 class="fw-bold text-dark mb-2">Corporate Bank Coordinates</h6>
+                      <div class="bg-light p-3 rounded-3 border border-secondary-subtle font-monospace text-dark small fw-bold">
+                        <div>Bank: Standard Chartered Bangladesh</div>
+                        <div>Account Name: StartupSAAS Corporation</div>
+                        <div>Account No: 01-11223344-01</div>
+                        <div>Routing: 123456789</div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Cost Breakdown -->
+          <div class="col-lg-5">
+            <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white sticky-top" style="top: 2rem;">
+              <div class="card-body p-4 p-xl-5">
+                <h5 class="fw-bold text-dark mb-4 border-bottom border-secondary-subtle pb-3">Financial Abstract</h5>
+                
+                <div class="d-flex justify-content-between mb-3">
+                  <span class="text-secondary fw-bold">Item Description</span>
+                  <span class="text-dark fw-bold text-end max-w-200">{{ selectedPlanName() || 'No Item Selected' }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <span class="text-secondary fw-bold">Base Cost</span>
+                  <span class="text-dark fw-bold">{{ selectedPlanPrice() | number }} Taka</span>
+                </div>
+                <div class="d-flex justify-content-between mb-4 border-bottom border-secondary-subtle pb-4">
+                  <span class="text-secondary fw-bold">VAT (5%)</span>
+                  <span class="text-dark fw-bold">{{ vat() | number }} Taka</span>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <span class="text-dark fw-bold fs-5">Total Expenditure</span>
+                  <span class="text-dark fw-bold fs-4 text-nowrap" style="letter-spacing: -0.5px; text-align: right;">{{ total() | number }} <span class="fs-6 text-secondary">Taka</span></span>
+                </div>
+
+                @if (selectedPlanPrice() > 0) {
+                  <button class="btn btn-dark w-100 py-3 fw-bold rounded-4 shadow-sm fs-5 d-flex align-items-center justify-content-center gap-2 hover-lift" (click)="pay()" [disabled]="loadingPayment()">
+                    @if (loadingPayment()) {
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...
+                    } @else {
+                      <i class="bi bi-shield-check"></i> Authorize Transaction
+                    }
+                  </button>
+                  <p class="text-center small text-secondary mt-3 mb-0"><i class="bi bi-lock-fill text-success me-1"></i> End-to-end encrypted transfer</p>
+                } @else {
+                  <div class="text-center py-3 px-3 bg-light rounded-3 border border-secondary-subtle text-secondary small fw-bold">
+                    Select an outstanding invoice or package to proceed.
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    }
+  </main>
+</div>

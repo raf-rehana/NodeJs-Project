@@ -1,0 +1,77 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div class="d-flex align-items-center gap-4">
+      <button class="btn btn-white border border-secondary-subtle shadow-sm rounded-circle d-flex align-items-center justify-content-center hover-bg-light transition-all" style="width: 44px; height: 44px;" (click)="goBack()">
+        <i class="bi bi-arrow-left fs-5"></i>
+      </button>
+      <div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-1 small text-secondary">
+            <li class="breadcrumb-item">Employee Dashboard</li>
+            <li class="breadcrumb-item text-dark fw-bold" aria-current="page">My Tasks</li>
+          </ol>
+        </nav>
+        <h2 class="fw-bold text-dark mb-0 fs-3">Assigned Tasks</h2>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+    <div class="d-flex flex-wrap gap-2 mb-4">
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="statusFilter() === 'ALL' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="filterStatus('ALL')">All Allocations</button>
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="statusFilter() === 'ASSIGNED' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="filterStatus('ASSIGNED')">Newly Assigned</button>
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="statusFilter() === 'IN_PROGRESS' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="filterStatus('IN_PROGRESS')">In Progress</button>
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="statusFilter() === 'REVIEW' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="filterStatus('REVIEW')">Under Review</button>
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="statusFilter() === 'COMPLETED' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="filterStatus('COMPLETED')">Completed</button>
+    </div>
+
+    <div class="row g-4">
+      @for (task of filteredTasks(); track task.id) {
+        <div class="col-xl-4 col-lg-6">
+          <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white transition-all hover-lift">
+            <div class="card-body p-4 p-xl-5 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-4">
+                <span class="badge bg-light text-dark border border-secondary-subtle rounded-pill shadow-sm small fw-bold">REF-{{ task.id }}</span>
+                <app-status-badge [status]="task.status" [size]="'sm'"></app-status-badge>
+              </div>
+              
+              <h5 class="fw-bold text-dark mb-1 fs-5">{{ task.serviceName }}</h5>
+              <p class="text-secondary small fw-medium mb-4">{{ task.companyName || 'Standard Client' }}</p>
+
+              <div class="mb-4 mt-auto">
+                <div class="d-flex justify-content-between text-secondary small fw-bold mb-2">
+                  <span>Completion Telemetry</span>
+                  <span>{{ task.progress || 0 }}%</span>
+                </div>
+                <div class="progress rounded-pill bg-secondary bg-opacity-25" style="height: 6px;">
+                  <div class="progress-bar bg-dark" [style.width]="(task.progress || 0) + '%'"></div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center pt-4 border-top border-secondary-subtle">
+                <div class="small fw-bold text-secondary">
+                  <i class="bi bi-clock-history me-1"></i> {{ task.workedHours || 0 }} hrs
+                </div>
+                <a [routerLink]="['/employee/task-detail', task.id]" class="btn btn-dark btn-sm rounded-pill px-4 fw-bold shadow-sm d-flex align-items-center gap-2">
+                  Open Dashboard <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (filteredTasks().length === 0) {
+        <div class="col-12 text-center py-5">
+          <div class="bg-white border border-secondary-subtle rounded-4 p-5 shadow-sm">
+            <i class="bi bi-inbox fs-1 text-secondary opacity-50 mb-3 d-block"></i>
+            <h5 class="fw-bold text-dark">No Allocations Found</h5>
+            <p class="small text-secondary mb-0">There are currently no tasks matching the selected filter criteria.</p>
+          </div>
+        </div>
+      }
+    </div>
+  </main>
+</div>

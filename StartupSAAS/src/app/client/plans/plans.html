@@ -1,0 +1,120 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div class="d-flex align-items-center gap-4">
+      <button class="btn btn-white border border-secondary-subtle shadow-sm rounded-circle d-flex align-items-center justify-content-center hover-bg-light transition-all" style="width: 44px; height: 44px;" (click)="goBack()">
+        <i class="bi bi-arrow-left fs-5"></i>
+      </button>
+      <div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-1 small text-secondary">
+            <li class="breadcrumb-item">Marketplace</li>
+            <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Custom Packages</li>
+          </ol>
+        </nav>
+        <h2 class="fw-bold text-dark mb-0 fs-3">Propose Custom Infrastructure</h2>
+      </div>
+    </div>
+  </header>
+
+  <main class="row justify-content-center g-5">
+    <div class="col-lg-10 col-xl-8">
+      
+      <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden mb-5">
+        <div class="card-header bg-dark p-4 p-xl-5 border-0 position-relative">
+          <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-dark opacity-50"></div>
+          <div class="position-relative z-1">
+            <span class="badge bg-white text-dark rounded-pill fw-bold small mb-3 tracking-wide">RFP MODULE</span>
+            <h3 class="fw-bold text-white mb-2 fs-3">Package Brief</h3>
+            <p class="text-white text-opacity-75 small mb-0 max-w-400">Deploy a completely custom engineering pipeline. Our enterprise architects will review these parameters and return a detailed SLA and cost matrix.</p>
+          </div>
+        </div>
+
+        <div class="card-body p-4 p-xl-5">
+          <form (ngSubmit)="submitConfig()">
+            
+            <div class="row g-4 mb-4">
+              <div class="col-md-8">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Project Designation</label>
+                <input type="text" class="form-control bg-light border-0 py-3 rounded-3" [ngModel]="config().projectName" (ngModelChange)="updateConfig('projectName', $event)" name="projectName" required placeholder="e.g. Next-Gen FinTech Dashboard">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Primary Domain</label>
+                <select class="form-select bg-light border-0 py-3 rounded-3 text-dark" [ngModel]="config().projectType" (ngModelChange)="updateConfig('projectType', $event)" name="projectType">
+                  <option value="Web Application">Web Application</option>
+                  <option value="Mobile App">Mobile App (iOS/Android)</option>
+                  <option value="Enterprise System">Enterprise System (ERP/CRM)</option>
+                  <option value="Cybersecurity">Security / Penetration</option>
+                  <option value="Data Engineering">Data Engineering Pipeline</option>
+                  <option value="Other">Other / Unsure</option>
+                </select>
+              </div>
+            </div>
+
+            <h6 class="fw-bold text-dark mb-3 mt-5 pb-2 border-bottom border-secondary-subtle">Logistics & Economics</h6>
+            
+            <div class="row g-4 mb-4">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Target Timeline</label>
+                <select class="form-select bg-light border-0 py-3 rounded-3 text-dark" [ngModel]="config().timeline" (ngModelChange)="updateConfig('timeline', $event)" name="timeline">
+                  <option value="1-3 Months">1-3 Months (Accelerated)</option>
+                  <option value="3-6 Months">3-6 Months (Standard)</option>
+                  <option value="6+ Months">6+ Months (Long-Term)</option>
+                  <option value="Continuous SLA">Continuous Retainer</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Allocated Capital</label>
+                <select class="form-select bg-light border-0 py-3 rounded-3 text-dark" [ngModel]="config().budget" (ngModelChange)="updateConfig('budget', $event)" name="budget">
+                  <option value="BDT 50,000 - BDT 100,000">BDT 50,000 - 100,000</option>
+                  <option value="BDT 100,000 - BDT 250,000">BDT 100,000 - 250,000</option>
+                  <option value="BDT 250,000 - BDT 500,000">BDT 250,000 - 500,000</option>
+                  <option value="BDT 500,000+">BDT 500,000+</option>
+                </select>
+              </div>
+            </div>
+
+            <h6 class="fw-bold text-dark mb-3 mt-5 pb-2 border-bottom border-secondary-subtle">Core Specifications</h6>
+
+            <div class="row g-4 mb-4">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Pre-existing IP / Branding</label>
+                <select class="form-select bg-light border-0 py-3 rounded-3 text-dark" [ngModel]="config().existingBranding" (ngModelChange)="updateConfig('existingBranding', $event)" name="existingBranding">
+                  <option value="No">No, require full UX/UI conceptualization.</option>
+                  <option value="Yes">Yes, brand guidelines/assets ready.</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Primary Target Vector</label>
+                <input type="text" class="form-control bg-light border-0 py-3 rounded-3" [ngModel]="config().targetAudience" (ngModelChange)="updateConfig('targetAudience', $event)" name="targetAudience" placeholder="e.g. B2B Enterprise clients, Gen-Z Consumers">
+              </div>
+              
+              <div class="col-12">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Key Features / Abstract</label>
+                <textarea class="form-control bg-light border-0 py-3 rounded-3 mb-3" [ngModel]="config().keyFeatures" (ngModelChange)="updateConfig('keyFeatures', $event)" name="keyFeatures" rows="3" placeholder="Comma-separated core features: Real-time sockets, Payment Gateway, Multi-tenant Package..."></textarea>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Comprehensive Narrative</label>
+                <textarea class="form-control bg-light border-0 py-3 rounded-3" [ngModel]="config().description" (ngModelChange)="updateConfig('description', $event)" name="description" rows="6" required placeholder="Describe the business problem, expected outcome, and any technical constraints..."></textarea>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-3 pt-4 mt-5 border-top border-secondary-subtle">
+              <button type="button" class="btn btn-light fw-bold rounded-pill px-4 border border-secondary-subtle" (click)="goBack()">Abort Creation</button>
+              <button type="submit" class="btn btn-dark fw-bold rounded-pill px-5 shadow-sm hover-lift d-flex align-items-center gap-2" [disabled]="loading()">
+                @if (loading()) {
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Transmitting...
+                } @else {
+                  Transmit Proposal <i class="bi bi-send-fill"></i>
+                }
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>

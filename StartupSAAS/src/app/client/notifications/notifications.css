@@ -1,0 +1,113 @@
+/* ── Banner ───────────────────────────────────────────── */
+.notif-banner {
+  background: var(--primary-color);
+}
+
+.circle-decoration {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+.decoration-1 {
+  width: 280px; height: 280px;
+  top: -80px; right: -60px;
+}
+.decoration-2 {
+  width: 160px; height: 160px;
+  bottom: -60px; right: 200px;
+}
+
+/* ── Glass button ─────────────────────────────────────── */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s;
+}
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+.btn-glass:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Filter Tabs ──────────────────────────────────────── */
+.btn-primary-tab {
+  background: var(--primary-color);
+  color: #fff;
+  border: 2px solid var(--primary-color);
+}
+.btn-primary-tab:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+  color: #fff;
+}
+.btn-outline-tab {
+  background: #fff;
+  color: #6b7280;
+  border: 2px solid #e5e7eb;
+}
+.btn-outline-tab:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* ── Notification Card ────────────────────────────────── */
+.notif-card {
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  border-left: 4px solid transparent !important;
+}
+.notif-card:hover {
+  box-shadow: 0 8px 28px rgba(124, 92, 252, 0.12);
+}
+.notif-card.unread {
+  border-left: 4px solid var(--primary-color) !important;
+  background: var(--primary-light);
+}
+
+/* ── Unread dot ───────────────────────────────────────── */
+.unread-dot {
+  display: inline-block;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  flex-shrink: 0;
+}
+
+/* ── Icon Wrapper ─────────────────────────────────────── */
+.notif-icon-wrap {
+  width: 52px; height: 52px;
+}
+
+/* Type colour palettes */
+.notif-blue  { background: var(--primary-light); color: var(--primary-color); }
+.notif-red   { background: #fee2e2; color: #ef4444; }
+.notif-orange{ background: #fff7ed; color: #f97316; }
+.notif-purple{ background: var(--primary-light); color: var(--primary-color); }
+.notif-green { background: #ecfdf5; color: #10b981; }
+
+/* ── Type badge ───────────────────────────────────────── */
+.type-badge {
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ── Primary Button ───────────────────────────────────── */
+.btn-primary-premium {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+}
+.btn-primary-premium:hover {
+  background: var(--primary-hover);
+  color: #fff;
+}

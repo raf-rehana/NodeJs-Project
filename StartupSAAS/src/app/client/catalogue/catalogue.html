@@ -1,0 +1,130 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100" style="background-color: #F8F5FF;">
+  <header class="mb-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2 small text-secondary">
+        <li class="breadcrumb-item">Organization</li>
+        <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Service Package</li>
+      </ol>
+    </nav>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-4">
+      <div class="max-w-600">
+        <h2 class="fw-bold text-dark mb-2 display-6" style="letter-spacing: -1px;">Service Directory</h2>
+        <p class="text-secondary fs-5 mb-0">Browse and deploy individual operational modules tailored to your current business objectives.</p>
+      </div>
+      <div class="w-100 max-w-400">
+        <div class="position-relative shadow-sm rounded-pill overflow-hidden border border-secondary-subtle bg-white">
+          <i class="bi bi-search position-absolute top-50 translate-middle-y ms-4 text-secondary"></i>
+          <input type="text" class="form-control border-0 py-3 ps-5 pe-4 bg-transparent fw-medium" placeholder="Search service modules..." (input)="onSearch($event)">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="row g-4">
+      <!-- Sidebar Filters -->
+      <div class="col-lg-3">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white sticky-top" style="top: 2rem;">
+          <div class="card-body p-4">
+            <h6 class="fw-bold text-secondary text-uppercase small mb-4">Module Categories</h6>
+            
+            <div class="d-flex flex-column gap-2">
+              <button 
+                class="btn text-start py-2 px-3 fw-bold rounded-3 transition-all d-flex justify-content-between align-items-center"
+                [ngClass]="activeCategoryId() === null ? 'btn-dark' : 'btn-white text-secondary hover-bg-light border border-secondary-subtle'"
+                (click)="filterByCategory(null)">
+                <span><i class="bi bi-grid me-2"></i> All Categories</span>
+                @if (activeCategoryId() === null) {
+                  <i class="bi bi-check-lg"></i>
+                }
+              </button>
+
+              @for (cat of categories(); track cat.id) {
+                <button 
+                  class="btn text-start py-2 px-3 fw-bold rounded-3 transition-all d-flex justify-content-between align-items-center"
+                  [ngClass]="activeCategoryId() + '' === cat.id + '' ? 'btn-dark' : 'btn-white text-secondary hover-bg-light border border-secondary-subtle'"
+                  (click)="filterByCategory(cat.id)">
+                  <span><i class="bi {{ cat.icon }} me-2"></i> {{ cat.name }}</span>
+                  @if (activeCategoryId() + '' === cat.id + '') {
+                    <i class="bi bi-check-lg"></i>
+                  }
+                </button>
+              }
+            </div>
+            
+            <div class="mt-5 p-3 bg-light rounded-3 border border-secondary-subtle">
+              <div class="d-flex align-items-start gap-2">
+                <i class="bi bi-info-circle-fill text-dark mt-1"></i>
+                <div>
+                  <h6 class="fw-bold small text-dark mb-1">Custom Package</h6>
+                  <p class="small text-secondary mb-2">Need a module not listed here? Contact your dedicated architect.</p>
+                  <a routerLink="/contact" class="fw-bold small text-dark text-decoration-none">Open Ticket <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Grid -->
+      <div class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h5 class="fw-bold text-dark mb-0 fs-4">{{ activeCategoryName() }}</h5>
+          <span class="badge bg-light text-dark border border-secondary-subtle rounded-pill px-3 py-2 fw-medium">
+            {{ filteredServices().length }} modules found
+          </span>
+        </div>
+
+        @if (filteredServices().length === 0) {
+          <div class="card border-secondary-subtle border-dashed shadow-sm rounded-4 bg-light text-center py-5">
+            <div class="card-body">
+              <i class="bi bi-search fs-1 text-secondary opacity-25 mb-3 d-block"></i>
+              <h5 class="fw-bold text-dark">No modules match your criteria</h5>
+              <p class="text-secondary mb-4">Try adjusting your search terms or category filters.</p>
+              <button class="btn btn-outline-dark fw-bold rounded-pill px-4" (click)="searchQuery.set(''); filterByCategory(null)">Clear Filters</button>
+            </div>
+          </div>
+        }
+
+        <div class="d-flex flex-column gap-5">
+          @for (group of groupedServices(); track group.category.id) {
+            <div>
+              @if (!activeCategoryId()) {
+                <h6 class="fw-bold text-secondary text-uppercase small mb-3 pb-2 border-bottom border-secondary-subtle">{{ group.category.name }}</h6>
+              }
+              <div class="row g-4 align-items-stretch">
+                @for (service of group.services; track service.id) {
+                  <div class="col-md-6 col-xl-4">
+                    <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white hover-lift flex-column d-flex">
+                      <div class="card-body p-4 d-flex flex-column flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                          <h5 class="fw-bold text-dark mb-0 pe-3">{{ service.name }}</h5>
+                        </div>
+                        <p class="small text-secondary mb-4 flex-grow-1">{{ service.description }}</p>
+                        
+                        <div class="bg-light p-3 rounded-3 border border-secondary-subtle mb-4">
+                          <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="small fw-bold text-secondary">Investment</span>
+                            <span class="fw-bold text-dark">BDT {{ service.price | number }}</span>
+                          </div>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <span class="small fw-bold text-secondary">Timeline</span>
+                            <span class="small fw-bold text-dark d-flex align-items-center"><i class="bi bi-clock me-1 text-secondary"></i> {{ service.deliveryDays || 'TBD' }}</span>
+                          </div>
+                        </div>
+
+                        <button class="btn btn-dark w-100 fw-bold rounded-3 shadow-sm mt-auto" (click)="onServiceRequest(service)">
+                          Initialize Request
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

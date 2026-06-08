@@ -1,0 +1,119 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Service Package</h2>
+      <p class="text-secondary small mt-1 mb-0">Define catalog pricing and deliverable timelines.</p>
+    </div>
+    <button class="btn fw-bold rounded-pill shadow-sm px-4 d-flex align-items-center gap-2 hover-lift" [ngClass]="showForm() ? 'btn-white border border-secondary-subtle' : 'btn-dark'" (click)="showForm() ? cancelEdit() : openAdd()">
+      <i class="bi" [ngClass]="showForm() ? 'bi-x-lg' : 'bi-plus-lg'"></i>
+      {{ showForm() ? 'Abort Deployment' : 'New Service Template' }}
+    </button>
+  </header>
+
+  <!-- Add/Edit Service Modal -->
+  @if (showForm()) {
+    <div class="card border-secondary-subtle shadow-sm rounded-4 mb-5 bg-white overflow-hidden">
+      <div class="card-header bg-dark p-4 border-0">
+        <h5 class="fw-bold text-white mb-0 fs-5"><i class="bi bi-box-seam me-2"></i> {{ isEditing() ? 'Modify Template Package' : 'Initialize Service Template' }}</h5>
+      </div>
+      <div class="card-body p-4 p-xl-5">
+        <form (ngSubmit)="isEditing() ? updateService() : addService()" #serviceForm="ngForm">
+          <div class="row g-4 mb-5">
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Template Designation</label>
+              <input type="text" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-medium" name="name" [ngModel]="activeService().name" (ngModelChange)="updateField('name', $event)" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Structural Category</label>
+              <select class="form-select bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-bold" name="categoryId" [ngModel]="activeService().categoryId" (ngModelChange)="updateField('categoryId', $event)" required>
+                @for (cat of categories(); track cat.id) {
+                  <option [value]="cat.id">{{ cat.name }}</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Magnitude (BDT)</label>
+              <input type="number" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-bold font-monospace" name="price" [ngModel]="activeService().price" (ngModelChange)="updateField('price', $event)" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Billing Cycle</label>
+              <select class="form-select bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-bold" name="priceType" [ngModel]="activeService().priceType" (ngModelChange)="updateField('priceType', $event)">
+                <option value="FIXED">One-Time Fixed</option>
+                <option value="MONTHLY">Monthly Recurring</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">SLA (Delivery Days)</label>
+              <input type="text" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-medium font-monospace" name="deliveryDays" [ngModel]="activeService().deliveryDays" (ngModelChange)="updateField('deliveryDays', $event)" placeholder="e.g. 7-14">
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Architectural Scope</label>
+              <textarea class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark" name="description" [ngModel]="activeService().description" (ngModelChange)="updateField('description', $event)" rows="3"></textarea>
+            </div>
+            <div class="col-12 mt-4 border-top border-secondary-subtle pt-4 d-flex justify-content-between align-items-center">
+              <div class="form-check form-switch fs-4 m-0 d-flex align-items-center">
+                <input class="form-check-input mt-0 shadow-sm" type="checkbox" name="isActive" [ngModel]="activeService().isActive" (ngModelChange)="updateField('isActive', $event)">
+                <label class="form-check-label ms-3 fs-6 fw-bold text-dark mt-1">Live Deployment Status</label>
+              </div>
+              <button type="submit" class="btn btn-dark fw-bold rounded-pill px-5 shadow-sm hover-lift" [disabled]="!serviceForm.form.valid">
+                {{ isEditing() ? 'Commit Modifications' : 'Compile Service' }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <!-- Data Table -->
+  <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light border-bottom border-secondary-subtle">
+          <tr>
+            <th class="ps-4 py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Service Registry</th>
+            <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Classification</th>
+            <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Ledger Value</th>
+            <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">System State</th>
+            <th class="pe-4 py-4 border-0 text-end small fw-bold text-secondary text-uppercase tracking-wide">Ops</th>
+          </tr>
+        </thead>
+        <tbody class="border-top-0">
+          @for (s of services(); track s.id) {
+            <tr>
+              <td class="ps-4 py-4">
+                <div class="fw-bold text-dark fs-6">{{ s.name }}</div>
+                <div class="small text-secondary fw-medium"><i class="bi bi-clock-history me-1"></i> SLA: {{ s.deliveryDays }}</div>
+              </td>
+              <td class="py-4 text-secondary small fw-medium">{{ s.categoryName }}</td>
+              <td class="py-4">
+                <div class="fw-bold text-dark font-monospace">BDT {{ s.price | number }} <span class="fw-normal text-secondary small">{{ s.priceType === 'MONTHLY' ? '/mo' : '' }}</span></div>
+              </td>
+              <td class="py-4">
+                <span class="badge rounded-pill fw-bold shadow-sm px-3 py-2" [ngClass]="s.isActive ? 'bg-success text-white' : 'bg-secondary text-white'">
+                  {{ s.isActive ? 'ONLINE' : 'OFFLINE' }}
+                </span>
+              </td>
+              <td class="pe-4 py-4 text-end">
+                <div class="btn-group shadow-sm">
+                  <button class="btn btn-sm btn-light border border-secondary-subtle fw-bold" (click)="editService(s)"><i class="bi bi-pencil"></i></button>
+                  <button class="btn btn-sm btn-outline-danger fw-bold" (click)="deleteService(s.id)"><i class="bi bi-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+          }
+          @if (services().length === 0) {
+            <tr>
+              <td colspan="5" class="text-center py-5">
+                <div class="opacity-50">
+                  <i class="bi bi-hdd-stack display-4 text-secondary mb-3 d-block"></i>
+                  <h5 class="fw-bold text-secondary">Service Array Empty</h5>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

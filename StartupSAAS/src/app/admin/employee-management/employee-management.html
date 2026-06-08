@@ -1,0 +1,156 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Employee Management</h2>
+      <p class="text-secondary small mt-1 mb-0">Manage employees and their assignments.</p>
+    </div>
+    <button class="btn fw-bold rounded-pill shadow-sm px-4 d-flex align-items-center gap-2 hover-lift" [ngClass]="showAddForm() ? 'btn-white border border-secondary-subtle' : 'btn-dark'" (click)="toggleAddForm()">
+      <i class="bi" [ngClass]="showAddForm() ? 'bi-x-lg' : 'bi-person-plus-fill'"></i>
+      {{ showAddForm() ? 'Cancel Allocation' : 'Add Employee' }}
+    </button>
+  </header>
+
+  <!-- Add Employee Vector -->
+  @if (showAddForm()) {
+    <div class="card border-secondary-subtle shadow-sm rounded-4 mb-5 bg-white overflow-hidden">
+      <div class="card-header bg-dark p-4 border-0">
+        <h5 class="fw-bold text-white mb-0 fs-5"><i class="bi bi-person-badge me-2"></i> Register Employee</h5>
+      </div>
+      <div class="card-body p-4 p-xl-5">
+        <form (ngSubmit)="addEmployee()" #employeeForm="ngForm">
+          <div class="row g-4 mb-5">
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Designation Name</label>
+              <input type="text" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-medium" name="name" [ngModel]="newEmployee().name" (ngModelChange)="updateNewEmployee('name', $event)" required placeholder="e.g. Architect Doe">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Corporate Email</label>
+              <input type="email" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-medium" name="email" [ngModel]="newEmployee().email" (ngModelChange)="updateNewEmployee('email', $event)" required placeholder="e.g. node.01@startupsaas.com">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Designation</label>
+              <select class="form-select bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-bold" name="designation" [ngModel]="newEmployee().designation" (ngModelChange)="updateNewEmployee('designation', $event)" required>
+                <option value="Java Developer">Java Systems Engineer</option>
+                <option value="PHP Developer">PHP/Laravel Engineer</option>
+                <option value="Python Developer">Data/Python Architect</option>
+                <option value="AI Developer">AI/ML Specialist</option>
+                <option value="UI/UX Designer">UX/UI Design Lead</option>
+                <option value="Full Stack Developer">Full Stack Generalist</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Initial Password</label>
+              <input type="password" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-medium font-monospace" name="password" [ngModel]="newEmployee().password" (ngModelChange)="updateNewEmployee('password', $event)" required>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end gap-3 border-top border-secondary-subtle pt-4">
+            <button type="submit" class="btn btn-dark fw-bold rounded-pill px-5 shadow-sm hover-lift" [disabled]="!employeeForm.form.valid">Create Employee</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <!-- Node Table -->
+  <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light border-bottom border-secondary-subtle">
+          <tr>
+            <th class="ps-4 py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Employee</th>
+            <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Email</th>
+            <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Designation</th>
+            <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Active Workloads</th>
+            <th class="pe-4 py-4 border-0 text-end small fw-bold text-secondary text-uppercase tracking-wide">Operations</th>
+          </tr>
+        </thead>
+        <tbody class="border-top-0">
+          @for (s of employee(); track s.id) {
+            <tr [ngClass]="selectedEmployee()?.id === s.id ? 'bg-dark bg-opacity-10' : ''">
+              <td class="ps-4 py-4">
+                <div class="d-flex align-items-center cursor-pointer hover-lift transition-all" (click)="viewProfile(s)">
+                  <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-3 shadow-sm fw-bold fs-5" style="width: 48px; height: 48px;">
+                    @if (s.avatar) {
+                      <img [src]="s.avatar" class="w-100 h-100 object-fit-cover rounded-circle">
+                    } @else {
+                      {{ s.name.charAt(0) | uppercase }}
+                    }
+                  </div>
+                  <div>
+                    <div class="fw-bold text-dark">{{ s.name }}</div>
+                    <div class="small text-secondary font-monospace">UID: {{ s.id }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="py-4 text-secondary small fw-medium">{{ s.email }}</td>
+              <td class="py-4">
+                <span class="badge bg-light text-dark border border-secondary-subtle px-3 py-2 rounded-pill fw-bold">{{ s.designation || 'Generalist' }}</span>
+              </td>
+              <td class="py-4">
+                <span class="badge px-3 py-2 rounded-pill fw-bold shadow-sm" 
+                      [ngClass]="(workloads()[s.id] || 0) > 5 ? 'bg-danger text-white' : (workloads()[s.id] || 0) > 2 ? 'bg-warning text-dark' : 'bg-success text-white'">
+                  <i class="bi bi-hdd-network me-1"></i> {{ workloads()[s.id] || 0 }} DEPLOYMENTS
+                </span>
+              </td>
+              <td class="pe-4 py-4 text-end">
+                <button class="btn btn-sm btn-outline-danger fw-bold px-3 rounded-pill shadow-sm" (click)="deleteEmployee(s.id)">Delete</button>
+              </td>
+            </tr>
+          }
+          @if (employee().length === 0) {
+            <tr>
+              <td colspan="5" class="text-center py-5">
+                <div class="opacity-50">
+                  <i class="bi bi-people display-4 text-secondary mb-3 d-block"></i>
+                  <h5 class="fw-bold text-secondary">No Employees Registered</h5>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Profile Inspector -->
+  @if (selectedEmployee()) {
+    <div class="modal-backdrop fade show" (click)="closeProfile()"></div>
+    <div class="modal fade show d-block" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-secondary-subtle shadow-lg rounded-5 overflow-hidden">
+          <div class="modal-header border-0 bg-dark text-white p-4">
+            <h5 class="fw-bold mb-0">Employee Details</h5>
+            <button type="button" class="btn-close btn-close-white" (click)="closeProfile()"></button>
+          </div>
+          <div class="modal-body p-5 bg-white text-center">
+            <div class="bg-light text-dark mx-auto mb-4 rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm border border-secondary-subtle" style="width: 100px; height: 100px; font-size: 2.5rem;">
+              @if (selectedEmployee()?.avatar) {
+                <img [src]="selectedEmployee()?.avatar" class="w-100 h-100 object-fit-cover rounded-circle">
+              } @else {
+                {{ selectedEmployee()?.name?.charAt(0) | uppercase }}
+              }
+            </div>
+            <h4 class="fw-bold text-dark mb-2">{{ selectedEmployee()?.name }}</h4>
+            <div class="badge bg-dark text-white rounded-pill px-3 py-2 mb-4 shadow-sm tracking-wide">{{ selectedEmployee()?.designation }}</div>
+            
+            <div class="text-start">
+              <div class="mb-3 border-bottom border-secondary-subtle pb-3">
+                <div class="small fw-bold text-secondary text-uppercase tracking-wide mb-1">Corporate Address</div>
+                <div class="fw-medium text-dark">{{ selectedEmployee()?.email }}</div>
+              </div>
+              <div class="mb-3 border-bottom border-secondary-subtle pb-3">
+                <div class="small fw-bold text-secondary text-uppercase tracking-wide mb-1">Active Assignments</div>
+                <div class="fw-bold fs-5" [ngClass]="(workloads()[selectedEmployee()!.id] || 0) > 0 ? 'text-danger' : 'text-success'">
+                  {{ workloads()[selectedEmployee()!.id] || 0 }} Active Tasks
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-0 bg-light p-4 pt-0">
+            <button class="btn btn-dark w-100 rounded-pill py-3 fw-bold shadow-sm" (click)="closeProfile()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

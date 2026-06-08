@@ -1,0 +1,97 @@
+<div class="py-5 min-vh-100" style="background-color: lavender;">
+  <div class="container py-5 mt-4">
+    <div class="row g-5 align-items-center">
+      
+      <!-- Text / Info Side -->
+      <div class="col-lg-5 mb-5 mb-lg-0">
+        <span class="badge bg-white text-dark border border-secondary-subtle rounded-pill px-3 py-2 fw-bold small text-uppercase mb-4 shadow-sm tracking-wide">Enterprise Consulting</span>
+        <h1 class="display-4 fw-bold text-dark mb-4" style="letter-spacing: -1px;">Architect Your Next Phase.</h1>
+        <p class="lead text-secondary mb-5">
+          Connect with our technical and operational architects. We analyze your requirements and propose scalable infrastructure deployments tailored to your business model.
+        </p>
+        
+        <div class="d-flex flex-column gap-4">
+          <div class="d-flex align-items-start gap-4">
+            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm border border-secondary-subtle" style="width: 48px; height: 48px; flex-shrink: 0;">
+              <i class="bi bi-geo-alt-fill text-dark fs-5"></i>
+            </div>
+            <div>
+              <h6 class="fw-bold text-dark mb-1">Global Headquarters</h6>
+              <p class="text-secondary small mb-0">Level 4, Corporate Tower<br>Tech Hub, Dhaka 1212</p>
+            </div>
+          </div>
+          
+          <div class="d-flex align-items-start gap-4">
+            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm border border-secondary-subtle" style="width: 48px; height: 48px; flex-shrink: 0;">
+              <i class="bi bi-envelope-fill text-dark fs-5"></i>
+            </div>
+            <div>
+              <h6 class="fw-bold text-dark mb-1">Direct Communications</h6>
+              <p class="text-secondary small mb-0">operations&#64;startupsaas.com<br>support&#64;startupsaas.com</p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-start gap-4">
+            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm border border-secondary-subtle" style="width: 48px; height: 48px; flex-shrink: 0;">
+              <i class="bi bi-telephone-fill text-dark fs-5"></i>
+            </div>
+            <div>
+              <h6 class="fw-bold text-dark mb-1">Priority SLA Line</h6>
+              <p class="text-secondary small mb-0">+880 17 0000 0000<br><span class="badge bg-success bg-opacity-10 text-success border border-success-subtle rounded-pill small px-2 mt-1">24/7 Availability</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Side -->
+      <div class="col-lg-6 offset-lg-1">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 overflow-hidden bg-white">
+          <div class="card-body p-4 p-md-5">
+            <h4 class="fw-bold text-dark mb-2">Initialize Consultation</h4>
+            <p class="text-secondary small mb-4">Submit your operational parameters below.</p>
+
+            @if (isSubmitted()) {
+              <div class="text-center py-5">
+                <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                <h4 class="fw-bold text-dark mt-4 mb-2">Transmission Received</h4>
+                <p class="text-secondary small mb-0">A dedicated architect will review your parameters and initiate contact within 4 business hours.</p>
+              </div>
+            } @else {
+              <form (ngSubmit)="submitForm()">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Primary Contact Name</label>
+                    <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" [ngModel]="formData().name" (ngModelChange)="updateField('name', $event)" name="name" required placeholder="Enter Your Name">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Corporate Email</label>
+                    <input type="email" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" [ngModel]="formData().email" (ngModelChange)="updateField('email', $event)" name="email" required placeholder="Enter Email">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Area of Interest</label>
+                    <select class="form-select bg-white border border-secondary-subtle py-3 rounded-3 text-dark shadow-none" [ngModel]="formData().service" (ngModelChange)="updateField('service', $event)" name="service">
+                      <option value="Enterprise Package">Enterprise Software Package</option>
+                      <option value="Legal & Compliance">Legal & Corporate Compliance</option>
+                      <option value="Marketing Systems">Digital Marketing & SEO Systems</option>
+                      <option value="General Support">General System Support</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide" style="color: #8c98a4 !important; font-size: 0.75rem;">Operational Parameters (Message)</label>
+                    <textarea class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-none" [ngModel]="formData().message" (ngModelChange)="updateField('message', $event)" name="message" rows="5" required placeholder="Outline your infrastructure needs, current roadblocks, and scale expectations..."></textarea>
+                  </div>
+                  <div class="col-12 mt-4">
+                    <button type="submit" class="btn w-100 py-3 fw-bold rounded-3 shadow-sm d-flex justify-content-center align-items-center gap-2 hover-lift" [disabled]="!formData().name || !formData().email || !formData().message" style="background: linear-gradient(135deg, #a88bec, #8b6bed); color: white; border: none;">
+                      Transmit Request <i class="bi bi-send-fill"></i>
+                    </button>
+                    <p class="text-center small text-secondary mt-3 mb-0"><i class="bi bi-lock-fill text-success me-1"></i> Data encrypted securely</p>
+                  </div>
+                </div>
+              </form>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,171 @@
+<div class="container-fluid py-4 px-lg-5">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-1 small text-secondary">
+          <li class="breadcrumb-item">Operations</li>
+          <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Staff Dashboard</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Dashboard Overview</h2>
+    </div>
+    <div class="d-flex gap-3 align-items-center">
+      <div class="text-end d-none d-md-block">
+        <div class="small fw-bold text-dark">{{ authService.currentUser()?.name }}</div>
+        <div class="small text-secondary">{{ authService.currentUser()?.designation || 'Staff Member' }}</div>
+      </div>
+      <img [src]="authService.currentUser()?.avatar || 'assets/default-avatar.png'" class="rounded-circle border" width="40" height="40" alt="Profile">
+    </div>
+  </header>
+
+  <main>
+    <!-- KPIs -->
+    <div class="row g-4 mb-5">
+      <div class="col-md-3">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white">
+          <div class="card-body p-4 border-start border-4 border-primary rounded-4">
+            <div class="small fw-bold text-secondary text-uppercase mb-1">Active Pipeline</div>
+            <div class="fs-1 fw-bold text-dark mb-0">{{ activeCount() }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white">
+          <div class="card-body p-4 border-start border-4 border-success rounded-4">
+            <div class="small fw-bold text-secondary text-uppercase mb-1">Resolved</div>
+            <div class="fs-1 fw-bold text-dark mb-0">{{ completedCount() }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white">
+          <div class="card-body p-4 border-start border-4 border-warning rounded-4">
+            <div class="small fw-bold text-secondary text-uppercase mb-1">Pending QA</div>
+            <div class="fs-1 fw-bold text-dark mb-0">{{ reviewCount() }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-light">
+          <div class="card-body p-4">
+            <div class="small fw-bold text-secondary text-uppercase mb-1">Total Assigned Volume</div>
+            <div class="fs-1 fw-bold text-dark mb-0">{{ myTasks().length }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Task Table -->
+      <div class="col-lg-8">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 overflow-hidden bg-white">
+          <div class="card-header bg-white border-bottom border-secondary-subtle p-4 d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold text-dark mb-0 fs-5">Current Task Allocation</h5>
+            <a routerLink="/employee/my-tasks" class="btn btn-outline-secondary btn-sm fw-bold rounded-pill px-3">View Full List</a>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light">
+                  <tr>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3 ps-4">Assignment</th>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3">Urgency</th>
+                    <th class="border-0 small fw-bold text-secondary text-uppercase py-3">Progress</th>
+                    <th class="border-0 text-end py-3 pe-4">Execute</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (t of myTasks().slice(0, 5); track t.id) {
+                    <tr class="border-bottom border-secondary-subtle">
+                      <td class="ps-4 py-3">
+                        <div class="fw-bold text-dark small">{{ t.serviceName }}</div>
+                        <div class="text-secondary small mt-1">Ref: #REQ-{{ t.id }}</div>
+                      </td>
+                      <td class="py-3">
+                        @if (t.priority === 'URGENT') {
+                          <span class="badge bg-danger bg-opacity-10 text-danger border border-danger-subtle rounded-pill px-3">CRITICAL</span>
+                        } @else if (t.priority === 'HIGH') {
+                          <span class="badge bg-warning bg-opacity-10 text-dark border border-warning-subtle rounded-pill px-3">HIGH</span>
+                        } @else {
+                          <span class="badge bg-light text-dark border border-secondary-subtle rounded-pill px-3">NORMAL</span>
+                        }
+                      </td>
+                      <td class="py-3">
+                        <div class="d-flex align-items-center gap-2">
+                          <div class="progress flex-grow-1" style="height: 6px; width: 60px;">
+                            <div class="progress-bar bg-dark" role="progressbar" [style.width.%]="t.progress || 0"></div>
+                          </div>
+                          <span class="small fw-bold text-secondary" style="font-size: 11px;">{{ t.status }}</span>
+                        </div>
+                      </td>
+                      <td class="text-end pe-4 py-3">
+                        <button class="btn btn-sm btn-dark rounded-3 px-3 fw-bold" [routerLink]="['/employee/task-detail', t.id]">Action</button>
+                      </td>
+                    </tr>
+                  }
+                  @if (myTasks().length === 0) {
+                    <tr>
+                      <td colspan="4" class="text-center py-5">
+                        <div class="text-secondary small fw-bold">Queue clear. No tasks assigned currently.</div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Analytics -->
+      <div class="col-lg-4">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white">
+          <div class="card-body p-4 d-flex flex-column">
+            <h5 class="fw-bold text-dark mb-4 fs-5">Performance Analytics</h5>
+
+            <div class="mb-4 bg-light p-3 rounded-4 border border-secondary-subtle">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small fw-bold text-secondary text-uppercase">Resolution Ratio</span>
+                <span class="small fw-bold text-success">{{ completionRate() }}%</span>
+              </div>
+              <div class="progress" style="height: 6px;">
+                <div class="progress-bar bg-success" [style.width.%]="completionRate()"></div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-4 flex-grow-1">
+              <div class="col-6">
+                <div class="text-center p-3 rounded-4 border border-secondary-subtle h-100 d-flex flex-column justify-content-center">
+                  <div class="fs-3 fw-bold text-dark mb-0">{{ totalHoursLogged() | number:'1.1-1' }}</div>
+                  <div class="small text-secondary fw-bold">Hours Logged</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="text-center p-3 rounded-4 border border-secondary-subtle h-100 d-flex flex-column justify-content-center">
+                  <div class="fs-3 fw-bold text-dark mb-0">{{ avgResolutionDays() }}</div>
+                  <div class="small text-secondary fw-bold">Avg Days/Task</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="text-center p-3 rounded-4 bg-light h-100 d-flex flex-column justify-content-center">
+                  <div class="fs-3 fw-bold text-dark mb-0">{{ thisMonthCompleted() }}</div>
+                  <div class="small text-secondary fw-bold">This Month</div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="text-center p-3 rounded-4 bg-light h-100 d-flex flex-column justify-content-center">
+                  <div class="fs-3 fw-bold text-secondary mb-0">{{ lastMonthCompleted() }}</div>
+                  <div class="small text-secondary fw-bold">Last Month</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-auto pt-3 border-top border-secondary-subtle">
+              <p class="small text-secondary mb-0"><strong class="text-dark">SOP Reminder:</strong> Log operational hours against tickets accurately to maintain billing integrity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

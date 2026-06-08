@@ -1,0 +1,147 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Admin Dashboard: Finance</h2>
+      <p class="text-secondary small mt-1 mb-0">Central ledger and transaction authorization protocol.</p>
+    </div>
+    <div class="d-flex gap-3">
+      <button class="btn btn-dark fw-bold rounded-pill shadow-sm px-4 d-flex align-items-center gap-2 hover-lift" (click)="openManualRecordModal()">
+        <i class="bi bi-plus-lg"></i> Inject Ledger Entry
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Vector Filters -->
+    <div class="d-flex flex-wrap gap-2 mb-4">
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="filterStatus() === 'ALL' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="setFilter('ALL')">All Transactions</button>
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="filterStatus() === 'PAID' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="setFilter('PAID')">Cleared (Paid)</button>
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="filterStatus() === 'PENDING' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="setFilter('PENDING')">Awaiting Auth (Pending)</button>
+      <button class="btn rounded-pill px-4 fw-bold transition-all border" [ngClass]="filterStatus() === 'REFUNDED' ? 'btn-dark shadow-sm' : 'btn-white text-secondary border-secondary-subtle'" (click)="setFilter('REFUNDED')">Reversed (Refunded)</button>
+    </div>
+
+    <!-- Ledger Table -->
+    <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="bg-light border-bottom border-secondary-subtle">
+            <tr>
+              <th class="ps-4 py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">TXN ID / Entity</th>
+              <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Ledger Entry (Service)</th>
+              <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Magnitude (Amount)</th>
+              <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Vector / Protocol</th>
+              <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">State</th>
+              <th class="pe-4 py-4 border-0 text-end small fw-bold text-secondary text-uppercase tracking-wide">Operations</th>
+            </tr>
+          </thead>
+          <tbody class="border-top-0">
+            @for (payment of filteredPayments(); track payment.id) {
+              <tr>
+                <td class="ps-4 py-4">
+                  <div class="fw-bold text-dark font-monospace">TXN-{{ payment.id }}</div>
+                  <div class="small text-secondary mt-1">{{ payment.client }}</div>
+                </td>
+                <td class="py-4">
+                  <div class="fw-bold text-dark">{{ payment.item }}</div>
+                  <div class="small text-secondary font-monospace">{{ payment.date | date:'short' }}</div>
+                </td>
+                <td class="py-4">
+                  <span class="fw-bold text-dark">BDT {{ payment.amount | number }}</span>
+                </td>
+                <td class="py-4">
+                  <div class="d-flex align-items-center gap-2 small fw-bold text-secondary">
+                    <i class="bi" [ngClass]="{'bi-credit-card': payment.method === 'Credit Card', 'bi-cash': payment.method === 'Manual/Cash', 'bi-bank': payment.method === 'Bank Transfer'}"></i>
+                    {{ payment.method }}
+                  </div>
+                </td>
+                <td class="py-4">
+                  @if (payment.status === 'PAID') {
+                    <span class="badge bg-success bg-opacity-10 text-success border border-success-subtle rounded-pill fw-bold px-3 py-2">CLEARED</span>
+                  } @else if (payment.status === 'PENDING') {
+                    <span class="badge bg-warning bg-opacity-10 text-dark border border-warning-subtle rounded-pill fw-bold px-3 py-2">PENDING AUTH</span>
+                  } @else {
+                    <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary-subtle rounded-pill fw-bold px-3 py-2">REVERSED</span>
+                  }
+                </td>
+                <td class="pe-4 py-4 text-end">
+                  <div class="btn-group shadow-sm">
+                    @if (payment.status === 'PAID') {
+                      <button class="btn btn-sm btn-light border border-secondary-subtle fw-bold" (click)="generateInvoice(payment)" title="Extract Invoice"><i class="bi bi-receipt"></i></button>
+                      <button class="btn btn-sm btn-outline-danger fw-bold" (click)="processRefund(payment)" title="Execute Reversal"><i class="bi bi-arrow-counterclockwise"></i></button>
+                    }
+                    @if (payment.status === 'PENDING') {
+                      <button class="btn btn-sm btn-dark fw-bold px-3" (click)="approvePayment(payment)">Authorize <i class="bi bi-check-lg ms-1"></i></button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+            @if (filteredPayments().length === 0) {
+              <tr>
+                <td colspan="6" class="text-center py-5">
+                  <div class="opacity-50">
+                    <i class="bi bi-wallet2 display-4 text-secondary mb-3 d-block"></i>
+                    <h5 class="fw-bold text-secondary">No Ledger Entries Found</h5>
+                    <p class="small text-secondary mb-0">Query builder returned zero results.</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Manual Record Modal -->
+  @if (showManualRecordModal()) {
+    <div class="modal-backdrop fade show"></div>
+    <div class="modal fade show d-block" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-secondary-subtle shadow-lg rounded-5 overflow-hidden">
+          
+          <div class="modal-header border-0 bg-dark text-white p-4">
+            <h5 class="fw-bold mb-0">Inject Manual Ledger Entry</h5>
+            <button type="button" class="btn-close btn-close-white" (click)="closeManualRecordModal()"></button>
+          </div>
+          
+          <div class="modal-body p-4 bg-light">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Client Identifier</label>
+                <input type="text" class="form-control bg-white border-0 py-2 rounded-3 shadow-sm" [ngModel]="newRecord().client" (ngModelChange)="updateRecordField('client', $event)">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Client Email</label>
+                <input type="email" class="form-control bg-white border-0 py-2 rounded-3 shadow-sm" [ngModel]="newRecord().email" (ngModelChange)="updateRecordField('email', $event)">
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Service Description</label>
+                <input type="text" class="form-control bg-white border-0 py-2 rounded-3 shadow-sm" [ngModel]="newRecord().item" (ngModelChange)="updateRecordField('item', $event)">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Magnitude (BDT)</label>
+                <input type="number" class="form-control bg-white border-0 py-2 rounded-3 shadow-sm" [ngModel]="newRecord().amount" (ngModelChange)="updateRecordField('amount', $event)">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Protocol</label>
+                <select class="form-select bg-white border-0 py-2 rounded-3 shadow-sm" [ngModel]="newRecord().method" (ngModelChange)="updateRecordField('method', $event)">
+                  <option value="Manual/Cash">Manual / Cash</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                  <option value="Credit Card">Credit Card</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer border-0 bg-light p-4 pt-0">
+            <button class="btn btn-light border border-secondary-subtle fw-bold rounded-pill px-4" (click)="closeManualRecordModal()">Abort</button>
+            <button class="btn btn-dark fw-bold rounded-pill px-4 shadow-sm" (click)="saveManualRecord()">Authorize Entry</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  }
+</div>

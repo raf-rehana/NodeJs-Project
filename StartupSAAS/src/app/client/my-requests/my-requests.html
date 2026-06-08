@@ -1,0 +1,146 @@
+<div class="container-fluid py-4 px-lg-5">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-1 small text-secondary">
+          <li class="breadcrumb-item">Dashboard</li>
+          <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Active Deployments</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Infrastructure Requests</h2>
+    </div>
+    <div class="d-flex gap-3 align-items-center">
+      <button class="btn btn-outline-dark fw-bold rounded-pill px-4 shadow-sm" routerLink="/service">
+        <i class="bi bi-plus-lg me-2"></i> New Deployment
+      </button>
+    </div>
+  </header>
+
+  <main class="row g-5">
+    <!-- Left Column: Master List -->
+    <div class="col-lg-6 col-xl-5">
+      <h6 class="fw-bold text-secondary text-uppercase small mb-4 tracking-wide">Active Engineering Pipeline</h6>
+      
+      <div class="d-flex flex-column gap-3 mb-5">
+        @for (req of activeRequests(); track req.id) {
+          <div class="card border-secondary-subtle shadow-sm rounded-4 cursor-pointer transition-all"
+               [ngClass]="selectedRequest()?.id === req.id ? 'bg-dark text-white border-dark transform-scale-1' : 'bg-white hover-lift'"
+               (click)="viewDetails(req)">
+            <div class="card-body p-4 position-relative overflow-hidden">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-white text-dark border rounded-pill shadow-sm small" [ngClass]="selectedRequest()?.id === req.id ? 'border-secondary text-secondary' : 'border-secondary-subtle'">
+                    REF-{{ req.id }} &bull; {{ req.serviceName }}
+                  </span>
+                  @if (req.priority === 'HIGH') {
+                    <i class="bi bi-fire text-danger" title="Priority SLA"></i>
+                  }
+                </div>
+                <app-status-badge [status]="req.status" [size]="'sm'"></app-status-badge>
+              </div>
+              <div class="small fw-medium mt-3" [ngClass]="selectedRequest()?.id === req.id ? 'text-white text-opacity-75' : 'text-secondary'">
+                Initiated: {{ req.createdAt || req.date | date:'mediumDate' }}
+              </div>
+              
+              <!-- Mini Progress Bar -->
+              <div class="progress mt-4 rounded-pill bg-secondary bg-opacity-25" style="height: 6px;">
+                <div class="progress-bar" 
+                     [ngClass]="selectedRequest()?.id === req.id ? 'bg-white' : 'bg-dark'" 
+                     [style.width]="req.progress + '%'"></div>
+              </div>
+            </div>
+          </div>
+        }
+        @if (activeRequests().length === 0) {
+          <div class="text-center p-5 bg-white border border-secondary-subtle rounded-4 shadow-sm">
+            <i class="bi bi-hdd-network fs-1 text-secondary mb-3"></i>
+            <h6 class="fw-bold text-dark">No Active Deployments</h6>
+            <p class="small text-secondary mb-0">Your pipeline is currently clear.</p>
+          </div>
+        }
+      </div>
+
+      <h6 class="fw-bold text-secondary text-uppercase small mb-4 tracking-wide">Historical Archive</h6>
+      <div class="d-flex flex-column gap-3">
+        @for (req of historicalRequests(); track req.id) {
+          <div class="card bg-light border-secondary-subtle shadow-sm rounded-4 cursor-pointer hover-bg-white transition-all opacity-75 hover-opacity-100" (click)="viewDetails(req)">
+            <div class="card-body p-3 d-flex justify-content-between align-items-center">
+              <div>
+                <h6 class="fw-bold text-dark mb-0 small">{{ req.serviceName }}</h6>
+                <div class="small text-secondary" style="font-size: 0.75rem;">Archived: {{ req.date | date:'mediumDate' }}</div>
+              </div>
+              <app-status-badge [status]="req.status" [size]="'sm'"></app-status-badge>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Right Column: Detail View -->
+    <div class="col-lg-6 col-xl-7">
+      <div class="sticky-top" style="top: 2rem;">
+        @if (selectedRequest()) {
+          <div class="card border-secondary-subtle shadow-lg rounded-4 bg-white overflow-hidden">
+            <!-- Detail Header -->
+            <div class="card-header bg-dark p-4 p-xl-5 border-0 position-relative">
+              <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-dark opacity-50"></div>
+              <div class="position-relative z-1">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="badge bg-white text-dark shadow-sm rounded-pill fw-bold">REF-{{ selectedRequest()?.id }} &bull; {{ selectedRequest()?.serviceName }}</span>
+                  <app-status-badge [status]="selectedRequest()?.status || ''"></app-status-badge>
+                </div>
+                <h3 class="fw-bold text-white mb-2 fs-2">{{ selectedRequest()?.serviceName }}</h3>
+                <p class="text-white text-opacity-75 small mb-0">{{ selectedRequest()?.companyName || 'Standard Request' }}</p>
+              </div>
+            </div>
+
+            <!-- Detail Body -->
+            <div class="card-body p-4 p-xl-5">
+              
+              <!-- Quick Actions / Finance Block -->
+              @if (selectedRequest()?.status === 'AWAITING_ADVANCE') {
+                <div class="bg-danger bg-opacity-10 border border-danger border-opacity-25 rounded-4 p-4 mb-5 d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="fw-bold text-danger mb-1"><i class="bi bi-shield-lock-fill me-2"></i> Financial Authorization Required</h6>
+                    <p class="small text-danger text-opacity-75 mb-0">Engineering resources are locked pending payment clearing.</p>
+                  </div>
+                  <button class="btn btn-danger fw-bold rounded-pill px-4 shadow-sm" (click)="payAdvance(selectedRequest()!)">Authorize Funds</button>
+                </div>
+              }
+
+              <!-- Description -->
+              <h6 class="fw-bold text-dark text-uppercase small mb-3 tracking-wide">Operational Parameters</h6>
+              <div class="bg-light p-4 rounded-4 border border-secondary-subtle mb-5">
+                <p class="text-secondary small mb-0" style="white-space: pre-wrap;">{{ selectedRequest()?.details || 'No extended parameters provided.' }}</p>
+              </div>
+
+              <!-- Timeline -->
+              <h6 class="fw-bold text-dark text-uppercase small mb-3 tracking-wide">Deployment Telemetry</h6>
+              <div class="mb-5">
+                <app-request-timeline [request]="selectedRequest()!"></app-request-timeline>
+              </div>
+
+              <!-- Action Footer -->
+              <div class="d-flex justify-content-end gap-3 pt-4 border-top border-secondary-subtle">
+                @if (selectedRequest()?.status === 'PENDING' || selectedRequest()?.status === 'IN_PROGRESS') {
+                  <button class="btn btn-outline-danger fw-bold rounded-pill px-4" (click)="cancelRequest()">Terminate Deployment</button>
+                }
+                <button class="btn btn-dark fw-bold rounded-pill px-5 shadow-sm hover-lift d-flex align-items-center gap-2" (click)="viewDeliverables()">
+                  Deep Diagnostics <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <div class="card border-secondary-subtle shadow-sm rounded-4 bg-light h-100 min-h-400 d-flex align-items-center justify-content-center">
+            <div class="text-center p-5 opacity-50">
+              <i class="bi bi-cpu fs-1 text-secondary mb-3 d-block"></i>
+              <h5 class="fw-bold text-secondary mb-1">Telemetry Standby</h5>
+              <p class="small text-secondary mb-0">Select a deployment vector to view metrics.</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </main>
+</div>

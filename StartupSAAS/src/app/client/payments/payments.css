@@ -1,0 +1,333 @@
+/* ── Payments Page Styles ────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.payments-page {
+  font-family: 'Inter', sans-serif;
+  padding: 1.5rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ── Status Banners ── */
+.status-banner-wrap { animation: slideDown 0.4s ease; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  position: relative;
+}
+.status-banner.success  { background: #ecfdf5; border: 1px solid #6ee7b7; }
+.status-banner.failed   { background: #fef2f2; border: 1px solid #fca5a5; }
+.status-banner.cancelled{ background: #fffbeb; border: 1px solid #fcd34d; }
+
+.status-icon { font-size: 2rem; }
+.status-banner.success  .status-icon { color: #059669; }
+.status-banner.failed   .status-icon { color: #dc2626; }
+.status-banner.cancelled .status-icon { color: #d97706; }
+
+.status-title  { font-weight: 700; font-size: 1rem; }
+.status-sub    { font-size: 0.8rem; color: #6b7280; margin-top: 2px; }
+.status-close  { background: none; border: none; position: absolute; right: 1rem; top: 1rem; cursor: pointer; color: #9ca3af; font-size: 1rem; }
+
+/* ── Step Label ── */
+.step-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.step-num {
+  width: 30px; height: 30px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-text { font-weight: 700; font-size: 1.05rem; color: #111827; }
+
+/* ── Method Tabs ── */
+.method-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background: #f3f4f6;
+  border-radius: 14px;
+  padding: 5px;
+  flex-wrap: wrap;
+}
+.method-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.75rem;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  min-width: 0;
+}
+.method-tab i { font-size: 1rem; }
+.method-tab:hover { background: #fff; color: var(--primary-hover); }
+.method-tab.active {
+  background: white;
+  color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(124, 92, 252, 0.15);
+}
+
+/* ── Method Panels ── */
+.method-panel { animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-in { animation: fadeIn 0.3s ease; }
+
+/* ── SSLCommerz Gateway ── */
+.gateway-card {
+  border: 2px solid var(--primary-light);
+  border-radius: 16px;
+  padding: 1.5rem;
+  background: var(--primary-light);
+}
+.ssl-badge {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.bg-success-soft { background: #d1fae5; }
+
+.channel-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.channel-pill {
+  background: white;
+  border: 1px solid var(--primary-light);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.installment-box {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid #e5e7eb;
+}
+
+/* ── Mobile Wallets ── */
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+.wallet-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background: white;
+}
+.wallet-card:hover { border-color: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,.07); }
+.wallet-card.selected { border-color: var(--accent); background: var(--bg, #f8faff); }
+.wallet-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.wallet-label { font-weight: 600; font-size: 0.9rem; flex: 1; }
+.wallet-check { color: #22c55e; font-size: 1.1rem; }
+
+/* ── Bank / Card ── */
+.bank-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+.bank-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  text-align: center;
+  background: white;
+}
+.bank-card:hover { border-color: var(--accent); }
+.bank-card.selected { border-color: var(--accent); background: #f8faff; }
+.bank-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+.bank-label { font-size: 0.72rem; font-weight: 600; color: #374151; }
+.bank-check { color: #22c55e; font-size: 0.9rem; position: absolute; top: 6px; right: 8px; }
+
+/* ── Cash Instructions ── */
+.cash-instructions { display: flex; flex-direction: column; gap: 1rem; }
+.cash-step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+}
+.cash-step-num {
+  width: 30px; height: 30px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Info Box ── */
+.info-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 0.82rem;
+  color: #1d4ed8;
+}
+
+/* ── Pay Button ── */
+.pay-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pay-btn:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+.pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Order Summary ── */
+.summary-header {
+  background: var(--primary-color);
+}
+.summary-header .step-text { color: white !important; }
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.total-row {
+  border-bottom: none;
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+}
+.total-amount {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+.method-chip {
+  background: var(--primary-light);
+  border: 1px solid var(--primary-light);
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+}
+.ssl-trust-box {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 0.6rem 0.85rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.82rem;
+}
+.channel-pills-sm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.channel-pills-sm span {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 15px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+/* ── History Panel ── */
+.history-panel { animation: fadeIn 0.3s ease; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .method-tabs { gap: 0.25rem; }
+  .method-tab span { display: none; }
+  .method-tab { flex: none; padding: 0.6rem 0.8rem; }
+  .wallet-grid { grid-template-columns: repeat(2, 1fr); }
+  .bank-grid { grid-template-columns: repeat(2, 1fr); }
+  .page-header { flex-direction: column; align-items: flex-start; }
+}

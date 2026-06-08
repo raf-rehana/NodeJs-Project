@@ -1,0 +1,281 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h2 class="fw-bold text-dark mb-0 fs-3">All Requests</h2>
+      <p class="text-secondary small mt-1 mb-0">Manage and track all client service requests.</p>
+    </div>
+    <div class="d-flex gap-3">
+      <button class="btn btn-white border border-secondary-subtle fw-bold rounded-pill shadow-sm px-4" (click)="toggleFilters()">
+        <i class="bi" [ngClass]="showFilters() ? 'bi-x-lg' : 'bi-filter'"></i>
+        {{ showFilters() ? 'Close Query Builder' : 'Search' }}
+      </button>
+      <button class="btn btn-dark fw-bold rounded-pill shadow-sm px-4 d-flex align-items-center gap-2 hover-lift" (click)="exportRequests()">
+        <i class="bi bi-cloud-arrow-down"></i> Export Dataset
+      </button>
+    </div>
+  </header>
+
+  <!-- Query Builder -->
+  @if (showFilters()) {
+    <div class="card border-secondary-subtle shadow-sm rounded-4 mb-5 bg-white">
+      <div class="card-body p-4">
+        <div class="row g-4 align-items-end">
+          <div class="col-md-4">
+            <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Status Vector</label>
+            <select class="form-select bg-light border-0 py-3 rounded-3 fw-medium" [ngModel]="filterStatus()" (ngModelChange)="filterStatus.set($event)">
+              <option value="">All Vectors</option>
+              <option value="PROPOSAL_PENDING">PENDING PROPOSALS</option>
+              <option value="PENDING">PENDING</option>
+              <option value="AWAITING_ADVANCE">AWAITING ADVANCE</option>
+              <option value="ADVANCE_PAID">ADVANCE PAID</option>
+              <option value="ASSIGNED">ASSIGNED</option>
+              <option value="IN_PROGRESS">IN_PROGRESS</option>
+              <option value="REVIEW">REVIEW</option>
+              <option value="COMPLETED">COMPLETED</option>
+              <option value="REJECTED">REJECTED</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">SLA Priority</label>
+            <select class="form-select bg-light border-0 py-3 rounded-3 fw-medium" [ngModel]="filterPriority()" (ngModelChange)="filterPriority.set($event)">
+              <option value="">All SLAs</option>
+              <option value="LOW">LOW</option>
+              <option value="NORMAL">NORMAL</option>
+              <option value="HIGH">HIGH</option>
+              <option value="URGENT">URGENT</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <button class="btn btn-light border border-secondary-subtle w-100 py-3 rounded-3 fw-bold" (click)="resetFilters()">Clear Constraints</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <main>
+    <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="bg-light border-bottom border-secondary-subtle">
+            <tr>
+              <th class="ps-4 py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Deployment ID</th>
+              <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Package Class</th>
+              <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Telemetry State</th>
+              <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Priority Matrix</th>
+              <th class="pe-4 py-4 border-0 text-end small fw-bold text-secondary text-uppercase tracking-wide">Directives</th>
+            </tr>
+          </thead>
+          <tbody class="border-top-0">
+            @for (req of filteredRequests(); track req.id) {
+              <tr [ngClass]="selectedRequest()?.id === req.id ? 'bg-dark bg-opacity-10' : ''">
+                <td class="ps-4 py-4">
+                  <div class="fw-bold text-dark font-monospace">REF-{{ req.id }}</div>
+                  <div class="small text-secondary mt-1">Client UID: {{ req.userId }}</div>
+                </td>
+                <td class="py-4">
+                  <div class="fw-bold text-dark">{{ req.serviceName }}</div>
+                  <div class="small text-secondary fw-medium">{{ req.categoryName }}</div>
+                </td>
+                <td class="py-4"><app-status-badge [status]="req.status"></app-status-badge></td>
+                <td class="py-4">
+                  <span class="badge rounded-pill fw-bold" 
+                    [ngClass]="{
+                      'bg-danger text-white': req.priority === 'URGENT', 
+                      'bg-warning text-dark': req.priority === 'HIGH', 
+                      'bg-info text-dark': req.priority === 'NORMAL', 
+                      'bg-secondary text-white': req.priority === 'LOW'
+                    }">
+                    {{ req.priority }}
+                  </span>
+                </td>
+                <td class="pe-4 py-4 text-end">
+                  <button class="btn btn-sm btn-dark fw-bold rounded-pill px-4 shadow-sm" (click)="manageRequest(req)">Engage</button>
+                </td>
+              </tr>
+            }
+            @if (filteredRequests().length === 0) {
+              <tr>
+                <td colspan="5" class="text-center py-5">
+                  <div class="opacity-50">
+                    <i class="bi bi-hdd-network display-4 text-secondary mb-3 d-block"></i>
+                    <h5 class="fw-bold text-secondary">No Active Entities Found</h5>
+                    <p class="small text-secondary mb-0">Query builder returned zero results.</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Override Modal -->
+  @if (selectedRequest()) {
+    <div class="modal-backdrop fade show"></div>
+    <div class="modal fade show d-block" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content border-secondary-subtle shadow-lg rounded-5 overflow-hidden">
+          
+          <div class="modal-header border-0 bg-dark text-white p-4 p-xl-5 position-relative overflow-hidden">
+            <div class="position-absolute top-0 end-0 p-4" style="opacity: 0.05; transform: translate(20%, -20%); pointer-events: none;">
+              <i class="bi bi-cpu" style="font-size: 12rem;"></i>
+            </div>
+            <div class="position-relative z-1 w-100 d-flex justify-content-between align-items-start">
+              <div>
+                <span class="badge bg-light text-dark rounded-pill fw-bold small mb-3 px-3 py-2 shadow-sm">ADMINISTRATIVE OVERRIDE</span>
+                <h3 class="fw-bold text-white mb-0 display-6" style="letter-spacing: -1px;">Entity REF-{{ selectedRequest()?.id }}</h3>
+              </div>
+              <button type="button" class="btn-close btn-close-white" (click)="closeModal()"></button>
+            </div>
+          </div>
+          
+          <div class="modal-body p-4 p-xl-5 bg-light">
+            <div class="row g-5">
+              
+              <div class="col-lg-8">
+                <!-- Status & Priority -->
+                <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white mb-5">
+                  <div class="card-body p-4">
+                    <h6 class="fw-bold text-dark text-uppercase small mb-4 tracking-wide border-bottom border-secondary-subtle pb-3">Vector Manipulation</h6>
+                    <div class="row g-4">
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Global State</label>
+                        <select class="form-select bg-light border-0 py-3 rounded-3 fw-bold text-dark" [ngModel]="selectedRequest()?.status" (ngModelChange)="updateField('status', $event)">
+                          @if (selectedRequest()?.status === 'PROPOSAL_PENDING') {
+                            <option value="PROPOSAL_PENDING">PROPOSAL_PENDING</option>
+                          }
+                          <option value="PENDING">PENDING</option>
+                          <option value="AWAITING_ADVANCE">AWAITING_ADVANCE</option>
+                          <option value="ADVANCE_PAID">ADVANCE_PAID</option>
+                          <option value="ASSIGNED">ASSIGNED</option>
+                          <option value="IN_PROGRESS">IN_PROGRESS</option>
+                          <option value="REVIEW">REVIEW</option>
+                          <option value="COMPLETED">COMPLETED</option>
+                          <option value="REJECTED">REJECTED</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">SLA Priority Matrix</label>
+                        <select class="form-select bg-light border-0 py-3 rounded-3 fw-bold text-dark" [ngModel]="selectedRequest()?.priority" (ngModelChange)="updateField('priority', $event)">
+                          <option value="LOW">LOW</option>
+                          <option value="NORMAL">NORMAL</option>
+                          <option value="HIGH">HIGH</option>
+                          <option value="URGENT">URGENT</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Custom Proposal Block -->
+                @if (selectedRequest()?.status === 'PROPOSAL_PENDING' || selectedRequest()?.status === 'PENDING') {
+                  <div class="card border-primary-subtle shadow-sm rounded-4 bg-primary bg-opacity-10 mb-5">
+                    <div class="card-body p-4">
+                      <h6 class="fw-bold text-primary text-uppercase small mb-4 tracking-wide border-bottom border-primary-subtle pb-3"><i class="bi bi-file-earmark-code-fill me-2"></i> Custom Package Initialization</h6>
+                      
+                      <div class="row g-4">
+                        <div class="col-md-6">
+                          <label class="form-label small fw-bold text-dark text-uppercase tracking-wide">Fixed Total Budget (BDT)</label>
+                          <input type="number" class="form-control bg-white border-0 py-3 rounded-3 shadow-sm" [ngModel]="selectedRequest()?.totalAmount" (ngModelChange)="updateField('totalAmount', $event)" placeholder="0.00">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label small fw-bold text-dark text-uppercase tracking-wide">Custom Advance Deposit</label>
+                          <input type="number" class="form-control bg-white border-0 py-3 rounded-3 shadow-sm" [ngModel]="selectedRequest()?.advanceAmount" (ngModelChange)="updateField('advanceAmount', $event)" placeholder="Default 20%">
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label small fw-bold text-dark text-uppercase tracking-wide">Project Structure Matrix</label>
+                          <textarea class="form-control bg-white border-0 py-3 rounded-3 shadow-sm" rows="3" [ngModel]="selectedRequest()?.projectStructure" (ngModelChange)="updateField('projectStructure', $event)" placeholder="Define module phasing..."></textarea>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label small fw-bold text-dark text-uppercase tracking-wide">Required Client Inputs</label>
+                          <textarea class="form-control bg-white border-0 py-3 rounded-3 shadow-sm" rows="3" [ngModel]="selectedRequest()?.requirementsNeeded" (ngModelChange)="updateField('requirementsNeeded', $event)" placeholder="Missing API keys, domains..."></textarea>
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label small fw-bold text-dark text-uppercase tracking-wide">Detailed Scope Boundaries</label>
+                          <textarea class="form-control bg-white border-0 py-3 rounded-3 shadow-sm" rows="3" [ngModel]="selectedRequest()?.projectDocumentation" (ngModelChange)="updateField('projectDocumentation', $event)" placeholder="SLA bounds..."></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                @if (selectedRequest()?.status === 'PENDING' || selectedRequest()?.status === 'PROPOSAL_PENDING') {
+                  <div class="alert bg-white border border-danger-subtle rounded-4 p-4 d-flex justify-content-between align-items-center shadow-sm mb-5">
+                    <div>
+                      <h6 class="fw-bold text-danger mb-1"><i class="bi bi-shield-lock-fill me-2"></i> Advance Authorization Locked</h6>
+                      <p class="small text-secondary mb-0">Generate a financial claim to unlock engineering resources.</p>
+                    </div>
+                    <button class="btn btn-danger fw-bold rounded-pill px-4 shadow-sm" (click)="requestAdvancePayment(selectedRequest()!)">
+                      Deploy 20% Invoice
+                    </button>
+                  </div>
+                }
+
+                <!-- Assignment -->
+                <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white mb-5">
+                  <div class="card-body p-4">
+                    <h6 class="fw-bold text-dark text-uppercase small mb-4 tracking-wide border-bottom border-secondary-subtle pb-3">Resource Allocation</h6>
+                    
+                    @if (selectedRequest()?.status === 'PROPOSAL_PENDING' || selectedRequest()?.status === 'PENDING' || selectedRequest()?.status === 'AWAITING_ADVANCE') {
+                      <div class="p-3 bg-light rounded-3 text-center small fw-bold text-secondary border border-secondary-subtle">
+                        <i class="bi bi-lock-fill me-2"></i> System lockout active. Await financial clearance before assigning engineering capacity.
+                      </div>
+                    } @else {
+                      <select class="form-select bg-light border-0 py-3 rounded-3 fw-bold text-dark" [ngModel]="selectedRequest()?.assignedTo" (ngModelChange)="updateField('assignedTo', $event)">
+                        <option [ngValue]="undefined">Unassigned (Pool Queue)</option>
+                        @for (s of employee(); track s.id) {
+                          <option [value]="s.id">{{ s.name }} ({{ s.email }})</option>
+                        }
+                      </select>
+                    }
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Right Sidebar -->
+              <div class="col-lg-4">
+                <div class="sticky-top" style="top: 1rem;">
+                  
+                  <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white mb-4">
+                    <div class="card-body p-4">
+                      <h6 class="fw-bold text-dark text-uppercase small mb-3 tracking-wide">Command Directives</h6>
+                      <textarea class="form-control bg-light border-0 py-3 rounded-3 small mb-3" rows="6" [ngModel]="selectedRequest()?.employeeNotes" (ngModelChange)="updateField('employeeNotes', $event)" placeholder="Inject secure notes for engineering team..."></textarea>
+                      <button class="btn btn-dark w-100 fw-bold py-3 rounded-pill shadow-sm" (click)="saveNotes()">Synchronize Entity</button>
+                    </div>
+                  </div>
+
+                  @if (selectedRequest()?.documents?.length) {
+                    <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white">
+                      <div class="card-body p-4">
+                        <h6 class="fw-bold text-dark text-uppercase small mb-3 tracking-wide">Cryptographic Assets</h6>
+                        <div class="d-flex flex-column gap-2 max-h-300 overflow-y-auto pe-2">
+                          @for (doc of selectedRequest()?.documents; track doc.name) {
+                            <a [href]="doc.url" target="_blank" class="btn btn-light border border-secondary-subtle text-start text-dark fw-bold small p-3 rounded-3 d-flex justify-content-between align-items-center">
+                              <span class="text-truncate" style="max-width: 80%;"><i class="bi bi-file-earmark-text text-secondary me-2"></i> {{ doc.name }}</span>
+                              <i class="bi bi-download text-secondary"></i>
+                            </a>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  }
+
+                  <div class="mt-4 text-center">
+                    <button class="btn btn-link text-danger fw-bold text-decoration-none small" (click)="cancelRequest()"><i class="bi bi-trash-fill me-1"></i> Issue Nullification Order</button>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  }
+</div>

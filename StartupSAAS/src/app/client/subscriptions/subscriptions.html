@@ -1,0 +1,143 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div class="d-flex align-items-center gap-4">
+      <button class="btn btn-white border border-secondary-subtle shadow-sm rounded-circle d-flex align-items-center justify-content-center hover-bg-light transition-all" style="width: 44px; height: 44px;" (click)="goBack()">
+        <i class="bi bi-arrow-left fs-5"></i>
+      </button>
+      <div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-1 small text-secondary">
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Service Level Agreements</li>
+          </ol>
+        </nav>
+        <h2 class="fw-bold text-dark mb-0 fs-3">Corporate Subscriptions</h2>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto" style="max-width: 1100px;">
+    
+    @if (loading()) {
+      <div class="d-flex justify-content-center py-5">
+        <div class="spinner-border text-secondary" role="status"></div>
+      </div>
+    } @else {
+      <!-- ── VIEW: ACTIVE SUBSCRIPTION ── -->
+      @if (viewMode() === 'ACTIVE') {
+        
+        @if (activePlan()) {
+          <div class="card border-secondary-subtle shadow-lg rounded-4 overflow-hidden mb-5 bg-white">
+            <div class="card-body p-0">
+              <div class="row g-0">
+                <div class="col-lg-7 p-4 p-xl-5">
+                  <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-success bg-opacity-10 text-success border border-success-subtle small mb-4 tracking-wide fw-bold">
+                    <span class="bg-success rounded-circle" style="width: 6px; height: 6px;"></span>
+                    ACTIVE TIER
+                  </div>
+                  
+                  <h3 class="fw-bold text-dark mb-3 display-6" style="letter-spacing: -1px;">{{ activePlan().name }}</h3>
+                  <p class="text-secondary mb-4 leading-relaxed">
+                    Your corporate entity is actively governed by the <strong>{{ activePlan().name }}</strong> Service Level Agreement. Core infrastructural features are provisioned continuously.
+                  </p>
+                  
+                  <ul class="list-unstyled d-flex flex-column gap-3 mb-5">
+                    @for (feat of activePlan().features; track feat) {
+                      <li class="d-flex align-items-center gap-3 text-dark fw-medium small">
+                        <i class="bi bi-check-circle-fill text-dark"></i>
+                        {{ feat }}
+                      </li>
+                    }
+                  </ul>
+
+                  <div class="d-flex flex-wrap gap-3">
+                    <button (click)="viewMode.set('UPGRADE')" class="btn btn-dark px-4 py-2 rounded-pill fw-bold shadow-sm hover-lift">
+                      Review Package Upgrades
+                    </button>
+                    <button class="btn btn-outline-dark px-4 py-2 rounded-pill fw-bold" routerLink="/client/payments">
+                      Access Ledger
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="col-lg-5 bg-light border-start border-secondary-subtle p-4 p-xl-5 d-flex flex-column justify-content-center text-center">
+                  <div class="mb-5">
+                    <div class="text-secondary small fw-bold text-uppercase mb-2 tracking-wide">Next Audited Cycle</div>
+                    <div class="fs-3 fw-bold text-dark mb-1">June 16, 2026</div>
+                    <div class="text-secondary small">Continuous Auto-Renewal</div>
+                  </div>
+                  
+                  <div>
+                    <div class="text-secondary small fw-bold text-uppercase mb-1 tracking-wide">Allocated Cost</div>
+                    <div class="fs-3 fw-bold text-dark" style="letter-spacing: -1.5px;">
+                      <span class="fs-5 text-secondary align-top">BDT</span>{{ activePlan().price | number }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <div class="card border-secondary-subtle shadow-sm rounded-4 p-5 text-center bg-white">
+            <div class="d-flex align-items-center justify-content-center bg-light rounded-circle mx-auto mb-4 border border-secondary-subtle shadow-sm" style="width: 80px; height: 80px;">
+              <i class="bi bi-slash-circle text-secondary fs-3"></i>
+            </div>
+            <h3 class="fw-bold text-dark mb-3">No Authorized SLA</h3>
+            <p class="text-secondary mb-4 mx-auto" style="max-width: 400px;">Your corporate profile does not currently hold an active Service Level Agreement. Secure an package package to deploy infrastructure.</p>
+            <button (click)="viewMode.set('UPGRADE')" class="btn btn-dark px-5 py-3 rounded-pill fw-bold text-uppercase small shadow-sm tracking-wide hover-lift">
+              Explore Enterprise Packages
+            </button>
+          </div>
+        }
+      }
+
+      <!-- ── VIEW: CHOOSE PLAN (UPGRADE) ── -->
+      @if (viewMode() === 'UPGRADE') {
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="fw-bold text-dark mb-0">Select Package Upgrade</h4>
+          <button (click)="viewMode.set('ACTIVE')" class="btn btn-white border border-secondary-subtle shadow-sm rounded-pill px-4 py-2 small fw-bold">
+            <i class="bi bi-x-lg me-2"></i> Close Marketplace
+          </button>
+        </div>
+        
+        <div class="row g-4 align-items-stretch">
+          @for (plan of plans(); track plan.id) {
+            <div class="col-lg-4 col-md-6">
+              <div class="card shadow-sm rounded-4 p-4 p-xl-5 d-flex flex-column h-100 transition-all border border-2 position-relative overflow-hidden"
+                   [ngClass]="activePlan()?.id === plan.id ? 'border-dark bg-light' : 'border-secondary-subtle bg-white hover-lift'">
+                
+                @if (plan.recommended) {
+                  <div class="position-absolute top-0 start-0 w-100 bg-dark text-white text-center py-1 small fw-bold tracking-wide">RECOMMENDED DEPLOYMENT</div>
+                }
+
+                <div class="text-center mb-4 mt-3">
+                  <h4 class="fw-bold text-dark mb-2">{{ plan.name }}</h4>
+                  <div class="fs-2 fw-bold text-dark" style="letter-spacing: -1px;">
+                    <span class="fs-6 text-secondary align-top">BDT</span>{{ plan.price | number }}
+                  </div>
+                </div>
+
+                <ul class="list-unstyled d-flex flex-column gap-3 mb-5 flex-grow-1">
+                  @for (feat of plan.features; track feat) {
+                    <li class="d-flex align-items-start gap-3 small text-secondary fw-medium">
+                      <i class="bi bi-check-circle-fill text-dark mt-1"></i>
+                      <span>{{ feat }}</span>
+                    </li>
+                  }
+                </ul>
+
+                <button [disabled]="activePlan()?.id === plan.id"
+                        (click)="subscribe(plan)"
+                        class="w-100 py-3 rounded-pill fw-bold text-uppercase small transition-all tracking-wide shadow-sm"
+                        [ngClass]="activePlan()?.id === plan.id ? 'btn btn-light text-secondary border border-secondary-subtle' : 'btn btn-dark'">
+                  {{ activePlan()?.id === plan.id ? 'Current Authorization' : (activePlan() ? 'Execute Upgrade' : 'Authorize Deployment') }}
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    }
+  </main>
+</div>

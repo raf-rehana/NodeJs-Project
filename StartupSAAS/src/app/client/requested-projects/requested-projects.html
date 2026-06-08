@@ -1,0 +1,98 @@
+<div class="container-fluid py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <div class="d-flex align-items-center gap-3">
+      <div>
+        <h2 class="fw-bold text-dark mb-0">Requested Projects</h2>
+        <p class="text-secondary mb-0">Track and manage your submitted custom project proposals awaiting admin approval</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- List -->
+    <div [ngClass]="selectedRequest ? 'col-lg-7' : 'col-12'">
+      <div class="card border shadow-sm rounded-3 h-100 overflow-hidden">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 border-0">
+              <thead class="table-light">
+                <tr>
+                  <th class="ps-4 py-3 border-0">Proposal Details</th>
+                  <th class="py-3 border-0">Submission Date</th>
+                  <th class="py-3 border-0">Status</th>
+                  <th class="pe-4 py-3 border-0 text-end">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let req of requests" 
+                    (click)="viewDetails(req)" 
+                    [class.bg-light]="selectedRequest?.id === req.id"
+                    style="cursor: pointer" class="border-bottom">
+                  <td class="ps-4 py-3">
+                    <div class="fw-bold text-dark">{{ req.serviceName }}</div>
+                    <div class="small text-muted">{{ req.categoryName }} (ID: #PROP-{{ req.id }})</div>
+                  </td>
+                  <td class="py-3 text-muted">{{ req.createdAt | date:'mediumDate' }}</td>
+                  <td class="py-3"><app-status-badge [status]="req.status"></app-status-badge></td>
+                  <td class="pe-4 py-3 text-end">
+                    <i class="bi bi-chevron-right text-muted"></i>
+                  </td>
+                </tr>
+                <tr *ngIf="requests.length === 0">
+                  <td colspan="4" class="text-center py-5">
+                    <div class="py-4 text-center">
+                      <i class="bi bi-file-earmark-text text-primary opacity-25 mb-3 d-block" style="font-size: 3rem;"></i>
+                      <p class="text-secondary fw-semibold mb-1">No pending proposal requests found.</p>
+                      <p class="text-muted small mb-3">Submit a custom project questionnaire to start.</p>
+                      <a routerLink="/client/plans" class="btn btn-primary btn-sm px-4 fw-bold">
+                        <i class="bi bi-plus-circle me-1"></i> Submit Proposal
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail View -->
+    <div class="col-lg-5" *ngIf="selectedRequest">
+      <div class="card border shadow-sm rounded-3 sticky-top" style="top: 80px;">
+        <div class="card-header bg-white border-bottom pt-4 pb-3 px-4 d-flex justify-content-between align-items-start">
+          <div>
+            <span class="badge bg-light text-primary border border-primary px-2 py-1 rounded mb-2">#PROP-{{ selectedRequest.id }}</span>
+            <h5 class="fw-bold mb-0">{{ selectedRequest.serviceName }}</h5>
+            <div class="small text-muted">{{ selectedRequest.categoryName }}</div>
+          </div>
+          <button type="button" class="btn-close" (click)="selectedRequest = null"></button>
+        </div>
+        <div class="card-body p-4">
+          <div class="alert alert-info border-0 rounded small mb-4 d-flex align-items-center gap-2">
+            <i class="bi bi-clock-history fs-5"></i>
+            <div>
+              <strong>Awaiting Review:</strong> Our experts are currently reviewing your project proposal. You will be notified as soon as it is approved.
+            </div>
+          </div>
+          
+          <h6 class="fw-bold mb-3">Proposal Questionnaire Details</h6>
+          <div class="mb-4" *ngIf="selectedRequest.clientNotes">
+            <div class="p-3 bg-light rounded text-dark small border" style="white-space: pre-wrap; line-height: 1.6;">{{ selectedRequest.clientNotes }}</div>
+          </div>
+
+          <div class="mb-4">
+            <div class="small text-muted mb-1">Submitted At</div>
+            <div class="fw-medium text-dark">{{ selectedRequest.createdAt | date:'medium' }}</div>
+          </div>
+          
+          <div class="d-grid gap-2">
+            <button class="btn btn-outline-danger py-2 fw-bold" (click)="cancelRequest()">
+              <i class="bi bi-x-circle me-2"></i> Withdraw Proposal
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

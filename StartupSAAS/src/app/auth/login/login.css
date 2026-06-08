@@ -1,0 +1,137 @@
+
+.auth-container {
+  background: #f8fafc;
+}
+
+
+.bg-shape {
+  position: absolute;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.6;
+  border-radius: 50%;
+  animation: float 20s infinite ease-in-out alternate;
+}
+
+.shape-1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(13, 110, 253, 0.2);
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(102, 16, 242, 0.2);
+  bottom: -50px;
+  right: -100px;
+  animation-delay: -5s;
+}
+
+.shape-3 {
+  width: 300px;
+  height: 300px;
+  background: rgba(13, 202, 240, 0.2);
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(50px, 30px) rotate(180deg); }
+  100% { transform: translate(-30px, 60px) rotate(360deg); }
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15);
+}
+
+.z-index-1 { z-index: 1; }
+
+.logo-box {
+  width: 56px;
+  height: 56px;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+}
+
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+/* Custom Floating Labels */
+.custom-floating > .form-control {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.2s ease;
+  padding: 1rem 1.25rem;
+  height: 3.5rem;
+}
+
+.custom-floating > .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+  background-color: #ffffff;
+}
+
+.custom-floating > label {
+  padding: 1rem 1.25rem;
+  color: #64748b;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.custom-floating > .form-control:focus ~ label,
+.custom-floating > .form-control:not(:placeholder-shown) ~ label {
+  color: #0d6efd;
+  transform: scale(0.85) translateY(-0.75rem) translateX(0.15rem);
+  background: transparent;
+}
+
+/* Custom Checkbox */
+.custom-checkbox {
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: 0.15em;
+  border-color: #cbd5e1;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+.custom-checkbox:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Utilities */
+.hover-underline:hover { text-decoration: underline !important; }
+
+.btn-glow {
+  box-shadow: 0 10px 20px -10px rgba(13, 110, 253, 0.6);
+}
+.btn-glow:hover:not(:disabled) {
+  box-shadow: 0 15px 25px -10px rgba(13, 110, 253, 0.8);
+  transform: translateY(-2px);
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}

@@ -1,0 +1,8 @@
+.timeline-step {
+  width: 80px;
+  background-color: transparent;
+}
+.step-indicator {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0 4px white;
+}

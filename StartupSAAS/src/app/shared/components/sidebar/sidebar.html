@@ -1,0 +1,150 @@
+<aside class="border-end border-secondary-subtle h-100 py-4 d-flex flex-column" style="width: 280px; background-color: #dcd0ff;">
+  
+  <div class="px-4 mb-4">
+    <div class="small fw-bold text-dark text-uppercase mb-1 tracking-wide">Menu</div>
+    <div class="fs-5 fw-bold text-dark">
+      @if (isAdminContext()) {
+        Admin Dashboard
+      } @else if (isEmployeeContext()) {
+        Employee Dashboard
+      } @else if (isClientContext()) {
+        Client Dashboard
+      } @else {
+        Overview
+      }
+    </div>
+  </div>
+
+  <div class="px-3 flex-grow-1 overflow-y-auto">
+    <ul class="nav flex-column gap-2">
+      
+      <!-- ADMIN CONTEXT -->
+      @if (isAdminContext()) {
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all" routerLink="/admin/dashboard" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-speedometer2"></i> Dashboard Overview
+          </a>
+        </li>
+        <li class="nav-item mt-3 mb-1 px-3 small fw-bold text-dark text-uppercase tracking-wide">Operations</li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/all-requests" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-inbox"></i> Request Queue
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/revenue" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-cash-stack"></i> Payments
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/analytics" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-bar-chart-line"></i> Analytics
+          </a>
+        </li>
+        <li class="nav-item mt-3 mb-1 px-3 small fw-bold text-dark text-uppercase tracking-wide">Entity Management</li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/client-management" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-building"></i> Clients
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/employee-management" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-person-badge"></i> Employee Management
+          </a>
+        </li>
+        @if (authService.hasRole('SUPER_ADMIN')) {
+          <li class="nav-item mt-3 mb-1 px-3 small fw-bold text-dark text-uppercase tracking-wide">Package</li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/service-management" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+              <i class="bi bi-hdd-network"></i> Services
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/package-builder" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+              <i class="bi bi-box-seam"></i> Packages
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/site-content" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+              <i class="bi bi-layout-wtf"></i> Content
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/admin/settings" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+              <i class="bi bi-sliders"></i> Settings
+            </a>
+          </li>
+        }
+      }
+
+      <!-- EMPLOYEE CONTEXT -->
+      @if (isEmployeeContext()) {
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all" routerLink="/employee/summary" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-layout-text-window-reverse"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item mt-3 mb-1 px-3 small fw-bold text-dark text-uppercase tracking-wide">Tasks</li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/employee/my-tasks" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-list-task"></i> My Tasks
+          </a>
+        </li>
+        <li class="nav-item mt-3 mb-1 px-3 small fw-bold text-dark text-uppercase tracking-wide">Resources</li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/employee/knowledge-base" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-journal-code"></i> Knowledge Base
+          </a>
+        </li>
+      }
+
+      <!-- CLIENT CONTEXT -->
+      @if (isClientContext()) {
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all" routerLink="/client/dashboard" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-grid"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item mt-3 mb-1 px-3 small fw-bold text-dark text-uppercase tracking-wide">Deployments</li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/client/my-requests" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-hdd-stack"></i> My Requests
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/client/subscriptions" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-shield-check"></i> Subscriptions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/client/payments" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-receipt"></i> Payments
+          </a>
+        </li>
+        <li class="nav-item mt-3 mb-1 px-3 small fw-bold text-dark text-uppercase tracking-wide">Marketplace</li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/service" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-bag"></i> Services
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/client/plans" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+            <i class="bi bi-box"></i> Packages
+          </a>
+        </li>
+      }
+
+      <li class="mt-4 border-top border-secondary-subtle pt-3">
+        <a class="nav-link text-dark fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender" routerLink="/client/profile" routerLinkActive="bg-dark text-white shadow-sm fw-bold">
+          <i class="bi bi-person-gear"></i> Profile Settings
+        </a>
+      </li>
+      <li class="mt-1">
+        <a class="nav-link text-danger fw-medium rounded-3 px-3 py-2 d-flex align-items-center gap-3 transition-all hover-bg-dark-lavender cursor-pointer" (click)="authService.logout()">
+          <i class="bi bi-box-arrow-right"></i> Sign Out
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>

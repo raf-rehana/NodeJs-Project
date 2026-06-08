@@ -1,0 +1,119 @@
+.quick-link-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  color: #495057;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  background: #f8f9fa;
+}
+
+.quick-link-item:hover {
+  background: #e9ecef;
+  color: var(--primary-color);
+}
+
+.quick-link-item i {
+  font-size: 1.1rem;
+}
+
+.sticky-top {
+  z-index: 10;
+}
+
+.welcome-banner {
+  background: var(--primary-color);
+}
+
+.circle-decoration {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.decoration-1 {
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  right: -50px;
+}
+
+.decoration-2 {
+  width: 150px;
+  height: 150px;
+  bottom: -50px;
+  left: 20%;
+}
+
+.stats-card-gradient {
+  background: var(--primary-hover);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.custom-table thead th {
+  padding-bottom: 1rem;
+}
+
+.border-bottom-soft {
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.btn-icon-round {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #adb5bd;
+  transition: all 0.3s ease;
+}
+
+.btn-icon-round:hover {
+  background: #f8f9fa;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.progress-premium {
+  background-color: #f1f3f5;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-bar-premium {
+  border-radius: 100px;
+  transition: width 1s ease;
+}
+
+.btn-primary-premium {
+  background: var(--primary-color);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-premium:hover {
+  background: var(--primary-hover);
+  color: white;
+}
+
+.fw-black { font-weight: 800; }
+.tracking-widest { letter-spacing: 0.1em; }
+.x-small { font-size: 0.75rem; }

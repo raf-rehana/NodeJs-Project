@@ -1,0 +1,168 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  
+  @if (task()) {
+    <header class="d-flex justify-content-between align-items-center mb-5">
+      <div class="d-flex align-items-center gap-4">
+        <button class="btn btn-white border border-secondary-subtle shadow-sm rounded-circle d-flex align-items-center justify-content-center hover-bg-light transition-all" style="width: 44px; height: 44px;" (click)="goBack()">
+          <i class="bi bi-arrow-left fs-5"></i>
+        </button>
+        <div>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-1 small text-secondary">
+              <li class="breadcrumb-item">Employee Dashboard</li>
+              <li class="breadcrumb-item">My Tasks</li>
+              <li class="breadcrumb-item text-dark fw-bold" aria-current="page">REF-{{ task()?.id }}</li>
+            </ol>
+          </nav>
+          <h2 class="fw-bold text-dark mb-0 fs-3 d-flex align-items-center gap-3">
+            {{ task()?.serviceName }}
+            <app-status-badge [status]="task()?.status || ''"></app-status-badge>
+          </h2>
+        </div>
+      </div>
+      
+      <div class="d-flex gap-3 align-items-center">
+        <!-- Telemetry Timer -->
+        <div class="bg-dark rounded-pill px-4 py-2 text-white shadow-sm d-flex align-items-center gap-3 fw-bold font-monospace" style="letter-spacing: 1px;">
+          <i class="bi bi-stopwatch text-white text-opacity-75"></i>
+          <span [ngClass]="isTimerRunning() ? 'text-success' : 'text-white'">{{ formattedElapsed() }}</span>
+          
+          <button class="btn btn-sm btn-link p-0 m-0 ms-2" [ngClass]="isTimerRunning() ? 'text-danger hover-text-white' : 'text-success hover-text-white'" (click)="isTimerRunning() ? stopTimer() : startTimer()" [title]="isTimerRunning() ? 'Stop Timer' : 'Start Timer'">
+            <i class="bi fs-5" [ngClass]="isTimerRunning() ? 'bi-pause-circle-fill' : 'bi-play-circle-fill'"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="row g-5">
+      <!-- Left: Diagnostics & Ops Input -->
+      <div class="col-lg-8">
+        
+        <!-- Context Card -->
+        <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden mb-5">
+          <div class="card-header bg-white border-bottom border-secondary-subtle p-4 d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold text-dark mb-0 fs-5">Task Details</h5>
+            <span class="badge bg-danger text-white rounded-pill shadow-sm small fw-bold">
+              <i class="bi bi-hourglass-split me-1"></i>
+              {{ daysRemaining() !== null ? daysRemaining() + ' Days Remaining SLA' : 'SLA Undefined' }}
+            </span>
+          </div>
+          <div class="card-body p-4 p-xl-5">
+            <h6 class="fw-bold text-dark text-uppercase small mb-3 tracking-wide">Client Notes</h6>
+            <div class="bg-light p-4 rounded-4 border border-secondary-subtle font-monospace text-dark small mb-5" style="white-space: pre-wrap;">{{ task()?.details || task()?.clientNotes || 'No extended parameters provided.' }}</div>
+            
+            <div class="d-flex justify-content-between align-items-center border-top border-secondary-subtle pt-4">
+              <div>
+                <h6 class="fw-bold text-dark mb-1">Attached Files</h6>
+                <p class="small text-secondary mb-0">{{ task()?.documents?.length || 0 }} files attached.</p>
+              </div>
+              <button class="btn btn-outline-dark fw-bold rounded-pill px-4 shadow-sm" [disabled]="!task()?.documents?.length" (click)="downloadAllDocs()">
+                <i class="bi bi-cloud-arrow-down me-2"></i> Download Files
+              </button>
+            </div>
+            
+            <div class="mt-3">
+              @for (doc of task()?.documents; track doc.id) {
+                <div class="d-flex align-items-center justify-content-between bg-white border border-secondary-subtle rounded-3 p-2 mb-2">
+                  <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-file-earmark-text text-primary"></i>
+                    <span class="small fw-medium text-dark">{{ doc.name }}</span>
+                  </div>
+                  <a [href]="doc.url" target="_blank" class="btn btn-sm btn-light rounded-circle">
+                    <i class="bi bi-download"></i>
+                  </a>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Update Action Panel -->
+        <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden">
+          <div class="card-header bg-dark p-4 border-0">
+            <h5 class="fw-bold text-white mb-0 fs-5">Task Updates</h5>
+          </div>
+          <div class="card-body p-4 p-xl-5">
+            <div class="row g-4 mb-5">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Status</label>
+                <select class="form-select bg-light border-0 py-3 rounded-3 text-dark fw-bold" [ngModel]="task()?.status" (ngModelChange)="updateTaskField('status', $event)">
+                  <option value="ASSIGNED">Assigned</option>
+                  <option value="IN_PROGRESS">In Progress</option>
+                  <option value="REVIEW">Ready for Review</option>
+                  <option value="COMPLETED">Completed</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Progress (%)</label>
+                <div class="d-flex align-items-center gap-3">
+                  <input type="range" class="form-range" min="0" max="100" step="5" [ngModel]="task()?.progress" (ngModelChange)="updateTaskField('progress', $event)">
+                  <span class="badge bg-dark rounded-pill px-3 py-2 fs-6">{{ task()?.progress || 0 }}%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-5">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Internal Notes</label>
+              <textarea class="form-control bg-light border-0 py-3 rounded-3" [ngModel]="task()?.employeeNotes" (ngModelChange)="updateTaskField('employeeNotes', $event)" rows="4" placeholder="Log architectural decisions or roadblocks..."></textarea>
+            </div>
+
+            <button class="btn btn-success w-100 py-3 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2 hover-lift" (click)="updateTask()">
+              Save Changes <i class="bi bi-arrow-repeat"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Client Information -->
+      <div class="col-lg-4">
+        <div class="sticky-top" style="top: 2rem;">
+          
+          <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white mb-4 overflow-hidden">
+            <div class="card-body p-4">
+              <h6 class="fw-bold text-dark text-uppercase small mb-4 tracking-wide border-bottom border-secondary-subtle pb-2">Client Details</h6>
+              <div class="d-flex justify-content-between mb-3 border-bottom border-secondary-subtle pb-2">
+                <span class="small fw-medium text-secondary">Client Email</span>
+                <span class="small fw-bold text-dark text-end">{{ task()?.clientEmail || 'Not Provided' }}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-3 border-bottom border-secondary-subtle pb-2">
+                <span class="small fw-medium text-secondary">Company Name</span>
+                <span class="small fw-bold text-dark text-end">{{ task()?.companyName || 'Not Provided' }}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-3 border-bottom border-secondary-subtle pb-2">
+                <span class="small fw-medium text-secondary">Created</span>
+                <span class="small fw-bold text-dark text-end">{{ task()?.createdAt | date:'mediumDate' }}</span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span class="small fw-medium text-secondary">Priority</span>
+                <span class="small fw-bold text-end" [ngClass]="task()?.priority === 'HIGH' ? 'text-danger' : 'text-success'">{{ task()?.priority }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card border-secondary-subtle shadow-sm rounded-4 bg-light mb-4 overflow-hidden">
+            <div class="card-body p-4">
+              <h6 class="fw-bold text-dark text-uppercase small mb-3 tracking-wide"><i class="bi bi-clock-history me-2"></i> Other Active Tasks</h6>
+              <div class="small text-secondary mb-3">This client has {{ clientRequests().length }} other active tasks.</div>
+              <div class="d-flex flex-column gap-2 max-h-200 overflow-y-auto pe-2">
+                @for (req of clientRequests(); track req.id) {
+                  <div class="bg-white border border-secondary-subtle rounded-3 p-2 small d-flex justify-content-between align-items-center">
+                    <span class="fw-bold text-dark text-truncate" style="max-width: 60%;">{{ req.serviceName }}</span>
+                    <app-status-badge [status]="req.status" [size]="'sm'"></app-status-badge>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  } @else {
+    <div class="d-flex flex-column align-items-center justify-content-center h-100 py-5 opacity-50">
+      <div class="spinner-border text-secondary mb-3" role="status"></div>
+      <h5 class="fw-bold text-secondary">Loading Task...</h5>
+    </div>
+  }
+</div>

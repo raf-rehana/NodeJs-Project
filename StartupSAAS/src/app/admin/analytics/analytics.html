@@ -1,0 +1,125 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  <header class="mb-5">
+    <h2 class="fw-bold text-dark mb-0 fs-3">System Analytics</h2>
+    <p class="text-secondary small mt-1 mb-0">Platform telemetry, financial vectors, and operational insights.</p>
+  </header>
+
+  <!-- MRR / ARR / Churn Row -->
+  <div class="row g-4 mb-5">
+    <div class="col-xl-3 col-md-6">
+      <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white" style="border-left: 5px solid #6366f1 !important;">
+        <div class="small fw-bold text-secondary text-uppercase tracking-wide mb-2">Monthly Recurring (MRR)</div>
+        <div class="h3 fw-bold text-dark mb-1 font-monospace">BDT {{ mrr() | number }}</div>
+        <div class="small text-primary fw-bold"><i class="bi bi-arrow-up-right me-1"></i> Baseline Trajectory</div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white" style="border-left: 5px solid #10b981 !important;">
+        <div class="small fw-bold text-secondary text-uppercase tracking-wide mb-2">Annualized (ARR)</div>
+        <div class="h3 fw-bold text-dark mb-1 font-monospace">BDT {{ arr() | number }}</div>
+        <div class="small text-success fw-bold"><i class="bi bi-graph-up-arrow me-1"></i> Aggregate Projection</div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white" style="border-left: 5px solid #f59e0b !important;">
+        <div class="small fw-bold text-secondary text-uppercase tracking-wide mb-2">Entity Churn</div>
+        <div class="h3 fw-bold text-dark mb-1 font-monospace">{{ churnRate() | number:'1.1-1' }}%</div>
+        <div class="small text-warning text-dark fw-bold"><i class="bi bi-dash-circle me-1"></i> Non-converting Leads</div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white" style="border-left: 5px solid #ef4444 !important;">
+        <div class="small fw-bold text-secondary text-uppercase tracking-wide mb-2">Gross Magnitude</div>
+        <div class="h3 fw-bold text-dark mb-1 font-monospace">BDT {{ totalRevenue() | number }}</div>
+        <div class="small text-danger fw-bold"><i class="bi bi-cash-stack me-1"></i> All-Time Gross</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Breakdown & Overview -->
+  <div class="row g-5 mb-5">
+    <div class="col-lg-6">
+      <div class="card border-secondary-subtle shadow-sm rounded-4 p-4 p-xl-5 h-100 bg-white">
+        <h5 class="fw-bold text-dark mb-4 fs-5 text-uppercase tracking-wide">Deployment States</h5>
+        @for (item of statusBreakdown(); track item.label) {
+          <div class="mb-4">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small fw-bold text-dark text-uppercase tracking-wide">{{ item.label }}</span>
+              <span class="small fw-bold text-secondary">{{ item.count }} Vectors</span>
+            </div>
+            <div class="progress rounded-pill bg-light border border-secondary-subtle" style="height: 10px;">
+              <div class="progress-bar rounded-pill" [style.width.%]="item.pct" [style.background]="item.color"></div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card border-secondary-subtle shadow-sm rounded-4 p-4 p-xl-5 h-100 bg-white">
+        <h5 class="fw-bold text-dark mb-4 fs-5 text-uppercase tracking-wide">System Load Matrix</h5>
+        <div class="row g-4">
+          <div class="col-6">
+            <div class="text-center p-4 rounded-4 bg-primary bg-opacity-10 border border-primary-subtle transition-all hover-lift">
+              <div class="h2 fw-bold text-primary mb-1 font-monospace">{{ clientCount() }}</div>
+              <div class="small text-primary fw-bold text-uppercase tracking-wide">Total Entities</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="text-center p-4 rounded-4 bg-success bg-opacity-10 border border-success-subtle transition-all hover-lift">
+              <div class="h2 fw-bold text-success mb-1 font-monospace">{{ activeClients() }}</div>
+              <div class="small text-success fw-bold text-uppercase tracking-wide">Active Actors</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="text-center p-4 rounded-4 bg-warning bg-opacity-10 border border-warning-subtle transition-all hover-lift">
+              <div class="h2 fw-bold text-warning text-dark mb-1 font-monospace">{{ employeeCount() }}</div>
+              <div class="small text-warning text-dark fw-bold text-uppercase tracking-wide">Engineers</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="text-center p-4 rounded-4 bg-danger bg-opacity-10 border border-danger-subtle transition-all hover-lift">
+              <div class="h2 fw-bold text-danger mb-1 font-monospace">{{ pendingRequests() }}</div>
+              <div class="small text-danger fw-bold text-uppercase tracking-wide">Pending Ops</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Clients -->
+  <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden">
+    <div class="card-header bg-dark border-0 p-4">
+      <h5 class="fw-bold text-white mb-0 fs-5"><i class="bi bi-trophy-fill me-2 text-warning"></i> Primary Revenue Nodes (Top 5)</h5>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light border-bottom border-secondary-subtle">
+          <tr>
+            <th class="ps-4 py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Corporate Entity</th>
+            <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Ledger Extraction</th>
+            <th class="py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide">Transaction Vol</th>
+            <th class="pe-4 py-4 border-0 small fw-bold text-secondary text-uppercase tracking-wide text-end">Node Status</th>
+          </tr>
+        </thead>
+        <tbody class="border-top-0">
+          @for (c of topClients(); track c.client) {
+            <tr>
+              <td class="ps-4 py-4 fw-bold text-dark">{{ c.client }}</td>
+              <td class="py-4 text-success fw-bold font-monospace">BDT {{ c.total | number:'1.0-0' }}</td>
+              <td class="py-4 fw-bold text-secondary">{{ c.count }} TXN</td>
+              <td class="pe-4 py-4 text-end">
+                <span class="badge bg-success bg-opacity-10 text-success border border-success-subtle rounded-pill px-3 py-2 fw-bold">ONLINE</span>
+              </td>
+            </tr>
+          }
+          @if (topClients().length === 0) {
+            <tr>
+              <td colspan="4" class="text-center py-5 text-secondary fw-bold">No revenue nodes established.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

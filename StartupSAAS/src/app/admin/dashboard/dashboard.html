@@ -1,0 +1,136 @@
+<div class="container-fluid py-4 px-lg-5">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-1 small text-secondary">
+          <li class="breadcrumb-item">Dashboard</li>
+          <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Overview</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold text-dark mb-0 fs-3">{{ authService.isSuperAdmin() ? 'Super Admin' : 'Administrator' }} Pulse</h2>
+    </div>
+    <div class="d-flex gap-3 align-items-center">
+      <div class="text-end d-none d-md-block">
+        <div class="small fw-bold text-dark">{{ authService.currentUser()?.name }}</div>
+        <div class="small text-secondary">Operations Lead</div>
+      </div>
+      <img [src]="authService.currentUser()?.avatar || 'assets/default-avatar.png'" class="rounded-circle border" width="40" height="40" alt="Profile">
+    </div>
+  </header>
+
+  <main>
+    <div class="row g-4 mb-5">
+      <!-- High Level Metrics -->
+      <div class="col-lg-8">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white">
+          <div class="card-body p-4">
+            <h6 class="fw-bold text-secondary text-uppercase small mb-4">Live Platform Metrics</h6>
+            <div class="row g-4">
+              <div class="col-md-3 col-6 border-end border-secondary-subtle">
+                <div class="small text-secondary mb-1">Total Active Clients</div>
+                <div class="fs-2 fw-bold text-dark">{{ clientCount() }}</div>
+                <div class="small text-success fw-bold"><i class="bi bi-arrow-up-right me-1"></i>+12% MT</div>
+              </div>
+              <div class="col-md-3 col-6 border-end border-secondary-subtle">
+                <div class="small text-secondary mb-1">Support Staff</div>
+                <div class="fs-2 fw-bold text-dark">{{ employeeCount() }}</div>
+                <div class="small text-secondary fw-bold">Active Shift</div>
+              </div>
+              <div class="col-md-3 col-6 border-end border-secondary-subtle">
+                <div class="small text-secondary mb-1">Processed Requests</div>
+                <div class="fs-2 fw-bold text-dark">{{ requests().length }}</div>
+                <div class="small text-success fw-bold"><i class="bi bi-arrow-up-right me-1"></i>+4% Wk</div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="small text-secondary mb-1">Awaiting Triage</div>
+                <div class="fs-2 fw-bold text-danger">{{ pendingCount() }}</div>
+                <div class="small text-secondary fw-bold">Requires Action</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="col-lg-4">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-light">
+          <div class="card-body p-4">
+            <h6 class="fw-bold text-secondary text-uppercase small mb-3">Operations Hub</h6>
+            <div class="d-flex flex-column gap-2">
+              <a routerLink="/admin/all-requests" class="btn btn-white border-secondary-subtle text-start d-flex justify-content-between align-items-center py-2 px-3 fw-bold rounded-3 shadow-sm hover-primary">
+                <span><i class="bi bi-inbox me-2 text-primary"></i> Request Queue</span>
+                <i class="bi bi-chevron-right small text-secondary"></i>
+              </a>
+              @if (!authService.isSuperAdmin()) {
+                <a routerLink="/admin/client-management" class="btn btn-white border-secondary-subtle text-start d-flex justify-content-between align-items-center py-2 px-3 fw-bold rounded-3 shadow-sm hover-primary">
+                  <span><i class="bi bi-people me-2 text-success"></i> Client Directory</span>
+                  <i class="bi bi-chevron-right small text-secondary"></i>
+                </a>
+                <a routerLink="/admin/employee-management" class="btn btn-white border-secondary-subtle text-start d-flex justify-content-between align-items-center py-2 px-3 fw-bold rounded-3 shadow-sm hover-primary">
+                  <span><i class="bi bi-person-badge me-2 text-warning"></i> Staff Rosters</span>
+                  <i class="bi bi-chevron-right small text-secondary"></i>
+                </a>
+              }
+              @if (authService.isSuperAdmin()) {
+                <a routerLink="/admin/service-management" class="btn btn-white border-secondary-subtle text-start d-flex justify-content-between align-items-center py-2 px-3 fw-bold rounded-3 shadow-sm hover-primary">
+                  <span><i class="bi bi-sliders me-2 text-dark"></i> Service Configuration</span>
+                  <i class="bi bi-chevron-right small text-secondary"></i>
+                </a>
+                <a routerLink="/admin/package-builder" class="btn btn-white border-secondary-subtle text-start d-flex justify-content-between align-items-center py-2 px-3 fw-bold rounded-3 shadow-sm hover-primary">
+                  <span><i class="bi bi-box-seam me-2 text-info"></i> Package Package</span>
+                  <i class="bi bi-chevron-right small text-secondary"></i>
+                </a>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Table Area -->
+    <div class="card border-secondary-subtle shadow-sm rounded-4 overflow-hidden bg-white">
+      <div class="card-header bg-white border-bottom border-secondary-subtle p-4 d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="fw-bold text-dark mb-0 fs-5">Incoming Service Stream</h5>
+          <div class="small text-secondary mt-1">Real-time feed of client operations and service requests.</div>
+        </div>
+        <a routerLink="/admin/all-requests" class="btn btn-outline-secondary btn-sm fw-bold rounded-pill px-3">View All Logs</a>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0 border-white">
+            <thead class="bg-light">
+              <tr>
+                <th class="border-0 small fw-bold text-secondary text-uppercase py-3 ps-4">Request ID</th>
+                <th class="border-0 small fw-bold text-secondary text-uppercase py-3">Client Ref</th>
+                <th class="border-0 small fw-bold text-secondary text-uppercase py-3">Service Invoked</th>
+                <th class="border-0 small fw-bold text-secondary text-uppercase py-3">Timestamp</th>
+                <th class="border-0 small fw-bold text-secondary text-uppercase py-3 pe-4">State</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (req of recentRequests(); track req.id) {
+                <tr class="border-bottom border-secondary-subtle align-middle">
+                  <td class="ps-4 py-3"><span class="fw-bold text-dark small">#REQ-{{ req.id }}</span></td>
+                  <td class="py-3"><span class="badge bg-light text-dark border border-secondary-subtle rounded-pill px-3 fw-normal">UID: {{ req.userId }}</span></td>
+                  <td class="py-3 fw-bold small text-dark">{{ req.serviceName }}</td>
+                  <td class="py-3 small text-secondary">{{ req.createdAt ? (req.createdAt | date:'mediumDate') : 'N/A' }}</td>
+                  <td class="py-3 pe-4"><app-status-badge [status]="req.status"></app-status-badge></td>
+                </tr>
+              }
+              @if (requests().length === 0) {
+                <tr>
+                  <td colspan="5" class="text-center py-5">
+                    <i class="bi bi-inbox fs-2 text-secondary opacity-50 mb-3 d-block"></i>
+                    <p class="text-secondary fw-bold mb-0">System Queue is Empty</p>
+                    <p class="small text-secondary mb-0">No active service requests exist in the data stream.</p>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

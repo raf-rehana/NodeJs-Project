@@ -1,0 +1,186 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Bundle Packagesurator</h2>
+      <p class="text-secondary small mt-1 mb-0">Design, price, and compile subscription and service clusters.</p>
+    </div>
+    <button class="btn btn-dark fw-bold rounded-pill shadow-sm px-4 d-flex align-items-center gap-2 hover-lift" (click)="openAddModal()">
+      <i class="bi bi-layers"></i> Initialize New Cluster
+    </button>
+  </header>
+
+  <!-- Display Cards -->
+  <main class="row g-5">
+    @for (pkg of packages(); track pkg.id) {
+      <div class="col-xl-4 col-md-6">
+        <div class="card border-0 shadow-sm rounded-4 h-100 overflow-hidden position-relative bg-white transition-all hover-lift" [style.border-top]="'6px solid ' + pkg.accent">
+          
+          <div class="card-header bg-transparent border-0 pt-5 px-5 pb-0">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <span class="badge rounded-pill fw-bold tracking-wide" [style.backgroundColor]="pkg.accent" style="color: #fff;">{{ pkg.badge || 'TIER' }}</span>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-white border border-secondary-subtle rounded-circle shadow-sm" type="button" data-bs-toggle="dropdown">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-secondary-subtle rounded-3 mt-2">
+                  <li><a class="dropdown-item fw-medium small" (click)="openEditModal(pkg)"><i class="bi bi-pencil me-2"></i> Refactor Tier</a></li>
+                  <li><a class="dropdown-item text-danger fw-bold small" (click)="deletePackage(pkg)"><i class="bi bi-trash me-2"></i> Decommission</a></li>
+                </ul>
+              </div>
+            </div>
+            <h4 class="fw-bold mb-1 text-dark fs-4">{{ pkg.name }}</h4>
+            <div class="text-secondary small fw-medium">{{ pkg.tagline }}</div>
+          </div>
+          
+          <div class="card-body px-5 py-4 d-flex flex-column">
+            <div class="mb-5 pb-4 border-bottom border-secondary-subtle">
+              <div class="d-flex align-items-baseline gap-1 text-dark">
+                <span class="fs-6 fw-bold text-secondary">{{ pkg.currency }}</span>
+                <span class="fs-3 fw-bold font-monospace tracking-tighter">{{ pkg.price | number }}</span>
+                <span class="text-secondary fw-bold small">{{ pkg.period }}</span>
+              </div>
+            </div>
+
+            <div class="mb-4 flex-grow-1">
+              <div class="d-flex flex-column gap-3 max-h-200 overflow-y-auto pe-2">
+                @for (f of pkg.features; track $index) {
+                  <div class="d-flex align-items-start gap-3">
+                    <i class="bi bi-check-circle-fill mt-1" [style.color]="pkg.accent"></i>
+                    <span class="text-dark small fw-medium">{{ f }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+
+            @if (pkg.recommended) {
+              <div class="mt-auto pt-4 text-center">
+                <div class="badge rounded-pill w-100 py-3 fw-bold shadow-sm tracking-wide" [style.backgroundColor]="pkg.accentLight" [style.color]="pkg.accent">
+                  <i class="bi bi-star-fill me-2"></i> PRIMARY RECOMMENDATION
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+    @if (packages().length === 0) {
+      <div class="col-12 text-center py-5">
+        <div class="opacity-50">
+          <i class="bi bi-boxes display-4 text-secondary mb-3 d-block"></i>
+          <h4 class="text-secondary fw-bold">Cluster Matrix Empty</h4>
+          <p class="small text-secondary">No pricing packages have been synthesized.</p>
+        </div>
+      </div>
+    }
+  </main>
+
+  <!-- Editor Modal -->
+  @if (showModal()) {
+    <div class="modal-backdrop fade show"></div>
+    <div class="modal fade show d-block" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-secondary-subtle shadow-lg rounded-5 overflow-hidden">
+          
+          <div class="modal-header border-0 bg-dark text-white p-4 p-xl-5 d-flex justify-content-between align-items-center position-relative">
+            <div class="position-absolute top-0 end-0 p-4 opacity-10">
+              <i class="bi bi-layers-half" style="font-size: 8rem;"></i>
+            </div>
+            <div class="position-relative z-1">
+              <span class="badge bg-white text-dark rounded-pill fw-bold small mb-3 tracking-wide">ARCHITECTURE MODE</span>
+              <h3 class="fw-bold mb-0 display-6" style="letter-spacing: -1px;">{{ isEditing() ? 'Refactor Bundle' : 'Initialize Bundle' }}</h3>
+            </div>
+            <button type="button" class="btn-close btn-close-white position-relative z-1" (click)="closeModal()"></button>
+          </div>
+          
+          <div class="modal-body p-4 p-xl-5 bg-light">
+            <form (ngSubmit)="savePackage()" #pkgForm="ngForm">
+              
+              <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white mb-4">
+                <div class="card-body p-4">
+                  <h6 class="fw-bold text-dark text-uppercase small mb-4 tracking-wide border-bottom border-secondary-subtle pb-3">Identity & Magnitude</h6>
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Cluster Name</label>
+                      <input type="text" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="activePackage().name" (ngModelChange)="updateField('name', $event)" name="name" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Value Proposition (Tagline)</label>
+                      <input type="text" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-medium" [ngModel]="activePackage().tagline" (ngModelChange)="updateField('tagline', $event)" name="tagline" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Base Cost (BDT)</label>
+                      <input type="number" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-bold font-monospace" [ngModel]="activePackage().price" (ngModelChange)="updateField('price', $event)" name="price" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Billing Cycle</label>
+                      <select class="form-select bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="activePackage().period" (ngModelChange)="updateField('period', $event)" name="period">
+                        <option value="/one-time">Perpetual License (One-Time)</option>
+                        <option value="/month">Subscription (Monthly)</option>
+                        <option value="/year">Subscription (Annual)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white mb-4">
+                <div class="card-body p-4">
+                  <h6 class="fw-bold text-dark text-uppercase small mb-4 tracking-wide border-bottom border-secondary-subtle pb-3">Aesthetic Telemetry</h6>
+                  <div class="row g-4">
+                    <div class="col-md-4">
+                      <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Marketing Badge</label>
+                      <input type="text" class="form-control bg-light border-0 py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="activePackage().badge" (ngModelChange)="updateField('badge', $event)" name="badge">
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Vector Hex (Accent)</label>
+                      <div class="d-flex align-items-center gap-2 p-2 bg-light rounded-3 shadow-sm">
+                        <input type="color" class="form-control form-control-color border-0 p-0 m-0 bg-transparent rounded-circle" [ngModel]="activePackage().accent" (ngModelChange)="updateField('accent', $event)" name="accent" style="width: 32px; height: 32px;">
+                        <span class="small fw-bold font-monospace text-dark">{{ activePackage().accent }}</span>
+                      </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center">
+                      <div class="form-check form-switch fs-4 w-100">
+                        <input class="form-check-input mt-0 shadow-sm" type="checkbox" [ngModel]="activePackage().recommended" (ngModelChange)="updateField('recommended', $event)" name="recommended">
+                        <label class="form-check-label ms-3 fs-6 fw-bold text-dark mt-1">Prime Directive</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary-subtle pb-3">
+                    <h6 class="fw-bold text-dark text-uppercase small mb-0 tracking-wide">Feature Inclusion Matrix</h6>
+                    <button type="button" class="btn btn-sm btn-dark fw-bold rounded-pill shadow-sm px-3" (click)="addFeature()">
+                      <i class="bi bi-plus-lg me-1"></i> Append Capability
+                    </button>
+                  </div>
+                  <div class="d-flex flex-column gap-3 max-h-300 overflow-y-auto pe-2">
+                    @for (f of activePackage().features; track $index) {
+                      <div class="d-flex align-items-center gap-3 bg-light p-2 rounded-pill shadow-sm border border-secondary-subtle">
+                        <i class="bi bi-check-circle-fill ms-2" [style.color]="activePackage().accent"></i>
+                        <input type="text" class="form-control border-0 bg-transparent shadow-none fw-medium text-dark px-0 py-1" [ngModel]="activePackage().features[$index]" (ngModelChange)="updateFeature($index, $event)" [name]="'feature'+$index" required>
+                        <button type="button" class="btn btn-sm btn-white text-danger border-0 rounded-circle me-1" (click)="removeFeature($index)"><i class="bi bi-x-lg"></i></button>
+                      </div>
+                    }
+                    @if (activePackage().features.length === 0) {
+                      <div class="text-center text-secondary small py-3 fw-bold">Matrix is hollow. Inject capabilities.</div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-5 d-flex justify-content-end gap-3">
+                <button type="button" class="btn btn-light border border-secondary-subtle rounded-pill px-5 py-3 fw-bold" (click)="closeModal()">Abort Phase</button>
+                <button type="submit" class="btn btn-dark rounded-pill px-5 py-3 fw-bold shadow-sm hover-lift" [disabled]="!pkgForm.form.valid">
+                  {{ isEditing() ? 'Commit Refactor' : 'Execute Compilation' }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

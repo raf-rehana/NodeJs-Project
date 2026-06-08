@@ -1,0 +1,255 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Content Delivery Network Matrix</h2>
+      <p class="text-secondary small mt-1 mb-0">Control primary landing vectors and public telemetry.</p>
+    </div>
+    <div>
+      <button class="btn btn-white border border-secondary-subtle fw-bold rounded-pill shadow-sm px-4 d-inline-flex align-items-center gap-2 hover-lift me-2" (click)="loadContent()">
+        <i class="bi bi-arrow-clockwise"></i> Reload Buffer
+      </button>
+      <button class="btn btn-dark fw-bold rounded-pill shadow-sm px-5 d-inline-flex align-items-center gap-2 hover-lift" (click)="saveContent()" [disabled]="isSaving() || isLoading()">
+        @if (isSaving()) {
+          <span class="spinner-border spinner-border-sm"></span> Syncing...
+        } @else {
+          <i class="bi bi-hdd-network"></i> Commit Matrix
+        }
+      </button>
+    </div>
+  </header>
+
+  @if (message()) {
+    <div class="alert rounded-4 shadow-sm border-0 mb-4 fw-bold d-flex align-items-center gap-2" [ngClass]="messageType() === 'success' ? 'bg-success bg-opacity-10 text-success' : 'bg-danger bg-opacity-10 text-danger'">
+      <i class="bi" [ngClass]="messageType() === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-octagon-fill'"></i>
+      {{ message() }}
+    </div>
+  }
+
+  @if (isLoading()) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-dark" role="status"></div>
+      <p class="mt-3 text-secondary fw-bold text-uppercase tracking-wide">Initializing Buffer...</p>
+    </div>
+  }
+
+  @if (!isLoading() && siteContent()) {
+    <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden">
+      <!-- Tabs -->
+      <div class="bg-dark p-3 border-bottom border-dark">
+        <ul class="nav nav-pills gap-2" role="tablist">
+          @for (tab of tabs; track tab.id) {
+            <li class="nav-item">
+              <button class="nav-link rounded-pill px-4 fw-bold transition-all" [ngClass]="activeTab() === tab.id ? 'active bg-white text-dark' : 'text-white text-opacity-75 hover-text-white'" (click)="setActiveTab(tab.id)">
+                <i class="bi me-2" [ngClass]="tab.icon"></i> {{ tab.label }}
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="card-body p-4 p-xl-5 bg-light">
+        <!-- Hero Section -->
+        @if (activeTab() === 'hero') {
+          <h5 class="fw-bold text-dark text-uppercase tracking-wide mb-4">Hero Vector Config</h5>
+          <div class="row g-4 mb-5">
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Hero Badge Identity</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="siteContent()?.heroBadge" (ngModelChange)="updateContent('heroBadge', $event)">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Hero Background Image URL</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark font-monospace" [ngModel]="siteContent()?.heroImageUrl" (ngModelChange)="updateContent('heroImageUrl', $event)">
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">H1 Core Messaging (HTML Active)</label>
+              <textarea class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark font-monospace" rows="2" [ngModel]="siteContent()?.heroTitle" (ngModelChange)="updateContent('heroTitle', $event)"></textarea>
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Subtext Payload</label>
+              <textarea class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark" rows="3" [ngModel]="siteContent()?.heroSubtitle" (ngModelChange)="updateContent('heroSubtitle', $event)"></textarea>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary-subtle pb-3">
+            <h6 class="fw-bold text-dark text-uppercase tracking-wide mb-0">Feature Indicators</h6>
+            <button class="btn btn-sm btn-dark rounded-pill px-3 fw-bold shadow-sm" (click)="addHeroFeature()"><i class="bi bi-plus-lg me-1"></i> Add Indicator</button>
+          </div>
+          <div class="row g-3">
+            @for (feature of siteContent()?.heroFeatures; track $index) {
+              <div class="col-md-6">
+                <div class="input-group shadow-sm rounded-3 overflow-hidden">
+                  <span class="input-group-text bg-dark border-dark text-white border-end-0"><i class="bi" [ngClass]="feature.icon"></i></span>
+                  <input type="text" class="form-control bg-white border border-secondary-subtle font-monospace border-start-0" [ngModel]="feature.icon" (ngModelChange)="updateHeroFeature($index, 'icon', $event)">
+                  <input type="text" class="form-control bg-white border border-secondary-subtle fw-bold text-dark" [ngModel]="feature.text" (ngModelChange)="updateHeroFeature($index, 'text', $event)">
+                  <button class="btn btn-danger fw-bold px-3" (click)="removeHeroFeature($index)"><i class="bi bi-trash"></i></button>
+                </div>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- About Section -->
+        @if (activeTab() === 'about') {
+          <h5 class="fw-bold text-dark text-uppercase tracking-wide mb-4">About Vector Config</h5>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Badge Identity</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="siteContent()?.aboutBadge" (ngModelChange)="updateContent('aboutBadge', $event)">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Years of Telemetry</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="siteContent()?.experienceYears" (ngModelChange)="updateContent('experienceYears', $event)">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Asset URL</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark font-monospace" [ngModel]="siteContent()?.aboutImageUrl" (ngModelChange)="updateContent('aboutImageUrl', $event)">
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Primary Node Title</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="siteContent()?.aboutTitle" (ngModelChange)="updateContent('aboutTitle', $event)">
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Primary Node Body</label>
+              <textarea class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark" rows="3" [ngModel]="siteContent()?.aboutDescription" (ngModelChange)="updateContent('aboutDescription', $event)"></textarea>
+            </div>
+            <div class="col-md-6 border-top border-secondary-subtle pt-4">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Vision Title</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold mb-3" [ngModel]="siteContent()?.visionTitle" (ngModelChange)="updateContent('visionTitle', $event)">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Vision Body</label>
+              <textarea class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark" rows="4" [ngModel]="siteContent()?.visionDescription" (ngModelChange)="updateContent('visionDescription', $event)"></textarea>
+            </div>
+            <div class="col-md-6 border-top border-secondary-subtle pt-4">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Mission Title</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold mb-3" [ngModel]="siteContent()?.missionTitle" (ngModelChange)="updateContent('missionTitle', $event)">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Mission Body</label>
+              <textarea class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark" rows="4" [ngModel]="siteContent()?.missionDescription" (ngModelChange)="updateContent('missionDescription', $event)"></textarea>
+            </div>
+          </div>
+        }
+
+        <!-- Services Section -->
+        @if (activeTab() === 'services') {
+          <h5 class="fw-bold text-dark text-uppercase tracking-wide mb-4">Service Array Config</h5>
+          <div class="row g-4 mb-5">
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Array Title</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="siteContent()?.servicesTitle" (ngModelChange)="updateContent('servicesTitle', $event)">
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Array Description</label>
+              <textarea class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark" rows="2" [ngModel]="siteContent()?.servicesSubtitle" (ngModelChange)="updateContent('servicesSubtitle', $event)"></textarea>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary-subtle pb-3">
+            <h6 class="fw-bold text-dark text-uppercase tracking-wide mb-0">Service Nodes</h6>
+            <button class="btn btn-sm btn-dark rounded-pill px-3 fw-bold shadow-sm" (click)="addServiceCard()"><i class="bi bi-plus-lg me-1"></i> Add Node</button>
+          </div>
+
+          <div class="row g-4">
+            @for (service of siteContent()?.services; track $index) {
+              <div class="col-12">
+                <div class="card border border-secondary-subtle shadow-sm rounded-4 bg-white overflow-hidden">
+                  <div class="card-header bg-light border-bottom border-secondary-subtle p-3 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold text-secondary text-uppercase tracking-wide mb-0">Node [{{ $index }}]</h6>
+                    <div class="btn-group shadow-sm">
+                      <button class="btn btn-sm btn-white border border-secondary-subtle" (click)="moveServiceCard($index, 'up')" [disabled]="$index === 0"><i class="bi bi-arrow-up"></i></button>
+                      <button class="btn btn-sm btn-white border border-secondary-subtle" (click)="moveServiceCard($index, 'down')" [disabled]="$index === (siteContent()?.services?.length || 1) - 1"><i class="bi bi-arrow-down"></i></button>
+                      <button class="btn btn-sm btn-danger fw-bold" (click)="removeServiceCard($index)"><i class="bi bi-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="card-body p-4">
+                    <div class="row g-3">
+                      <div class="col-md-3">
+                        <label class="form-label small fw-bold text-secondary">Icon Class</label>
+                        <input type="text" class="form-control bg-light border border-secondary-subtle font-monospace" [ngModel]="service.icon" (ngModelChange)="updateServiceCard($index, 'icon', $event)">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label small fw-bold text-secondary">Theme Color</label>
+                        <select class="form-select bg-light border border-secondary-subtle fw-bold" [ngModel]="service.color" (ngModelChange)="updateServiceCard($index, 'color', $event)">
+                          <option value="primary">Primary (Blue)</option>
+                          <option value="success">Success (Green)</option>
+                          <option value="warning">Warning (Orange)</option>
+                          <option value="danger">Danger (Red)</option>
+                          <option value="info">Info (Cyan)</option>
+                          <option value="secondary">Secondary (Gray)</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold text-secondary">Node Title</label>
+                        <input type="text" class="form-control bg-light border border-secondary-subtle fw-bold text-dark" [ngModel]="service.title" (ngModelChange)="updateServiceCard($index, 'title', $event)">
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label small fw-bold text-secondary">Description</label>
+                        <textarea class="form-control bg-light border border-secondary-subtle" rows="2" [ngModel]="service.description" (ngModelChange)="updateServiceCard($index, 'description', $event)"></textarea>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold text-secondary">Action Text</label>
+                        <input type="text" class="form-control bg-light border border-secondary-subtle fw-bold text-dark" [ngModel]="service.linkText" (ngModelChange)="updateServiceCard($index, 'linkText', $event)">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small fw-bold text-secondary">Route Vector</label>
+                        <input type="text" class="form-control bg-light border border-secondary-subtle font-monospace" [ngModel]="service.linkUrl" (ngModelChange)="updateServiceCard($index, 'linkUrl', $event)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- CTA Section -->
+        @if (activeTab() === 'cta') {
+          <h5 class="fw-bold text-dark text-uppercase tracking-wide mb-4">Action Hook Config</h5>
+          <div class="row g-4">
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Hook Title</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="siteContent()?.ctaTitle" (ngModelChange)="updateContent('ctaTitle', $event)">
+            </div>
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Hook Subtitle</label>
+              <textarea class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark" rows="2" [ngModel]="siteContent()?.ctaDescription" (ngModelChange)="updateContent('ctaDescription', $event)"></textarea>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Button Label</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="siteContent()?.ctaButtonText" (ngModelChange)="updateContent('ctaButtonText', $event)">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Route Target</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark font-monospace" [ngModel]="siteContent()?.ctaButtonLink" (ngModelChange)="updateContent('ctaButtonLink', $event)">
+            </div>
+          </div>
+        }
+
+        <!-- Social Proof Section -->
+        @if (activeTab() === 'social') {
+          <h5 class="fw-bold text-dark text-uppercase tracking-wide mb-4">Social Matrix Config</h5>
+          <div class="row g-4 mb-5">
+            <div class="col-12">
+              <label class="form-label small fw-bold text-secondary text-uppercase tracking-wide">Matrix Title</label>
+              <input type="text" class="form-control bg-white border border-secondary-subtle py-3 rounded-3 shadow-sm text-dark fw-bold" [ngModel]="siteContent()?.socialProofTitle" (ngModelChange)="updateContent('socialProofTitle', $event)">
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary-subtle pb-3">
+            <h6 class="fw-bold text-dark text-uppercase tracking-wide mb-0">External Linkages</h6>
+            <button class="btn btn-sm btn-dark rounded-pill px-3 fw-bold shadow-sm" (click)="addSocialLink()"><i class="bi bi-plus-lg me-1"></i> Add Link</button>
+          </div>
+
+          <div class="d-flex flex-column gap-3">
+            @for (link of siteContent()?.socialLinks; track $index) {
+              <div class="input-group shadow-sm rounded-3 overflow-hidden">
+                <span class="input-group-text bg-dark border-dark text-white border-end-0" style="min-width: 46px; justify-content: center;"><i class="bi" [ngClass]="link.icon"></i></span>
+                <input type="text" class="form-control bg-white border border-secondary-subtle fw-bold text-dark" [ngModel]="link.name" (ngModelChange)="updateSocialLink($index, 'name', $event)" placeholder="Platform">
+                <input type="text" class="form-control bg-white border border-secondary-subtle font-monospace" [ngModel]="link.icon" (ngModelChange)="updateSocialLink($index, 'icon', $event)" placeholder="bi-icon">
+                <input type="text" class="form-control bg-white border border-secondary-subtle font-monospace" [ngModel]="link.url" (ngModelChange)="updateSocialLink($index, 'url', $event)" placeholder="https://...">
+                <button class="btn btn-danger px-3 fw-bold" (click)="removeSocialLink($index)"><i class="bi bi-trash"></i></button>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

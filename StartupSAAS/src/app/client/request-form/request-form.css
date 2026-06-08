@@ -1,0 +1,18 @@
+.bg-primary-soft {
+  background-color: var(--primary-light) !important;
+}
+
+.upload-area {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-style: dashed !important;
+}
+
+.upload-area:hover {
+  background-color: #f8f9fa !important;
+  border-color: var(--primary-color) !important;
+}
+
+.x-small {
+  font-size: 0.75rem;
+}

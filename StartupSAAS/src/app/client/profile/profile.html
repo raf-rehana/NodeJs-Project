@@ -1,0 +1,199 @@
+<div class="container-fluid py-4 px-lg-5">
+  <header class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-1 small text-secondary">
+          <li class="breadcrumb-item">Organization</li>
+          <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Identity Management</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold text-dark mb-0 fs-3">Corporate Profile</h2>
+    </div>
+    <div class="d-flex gap-3 align-items-center">
+      @if (isEditMode()) {
+        <button class="btn btn-outline-dark fw-bold rounded-pill px-4" (click)="isEditMode.set(false)">Cancel Revision</button>
+        <button class="btn btn-dark fw-bold rounded-pill px-4 shadow-sm" (click)="saveProfile()" [disabled]="loading()">
+          @if (loading()) {
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          }
+          Commit Changes
+        </button>
+      } @else {
+        <button class="btn btn-outline-dark fw-bold rounded-pill px-4" (click)="isEditMode.set(true)">
+          <i class="bi bi-pencil-square me-2"></i> Revise Credentials
+        </button>
+      }
+    </div>
+  </header>
+
+  <main>
+    <div class="row g-5">
+      <!-- Left Column: Avatar & Quick Info -->
+      <div class="col-lg-4">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white mb-4 position-relative overflow-hidden">
+          <div class="bg-dark position-absolute top-0 w-100" style="height: 100px;"></div>
+          <div class="card-body p-4 pt-5 text-center mt-3 position-relative z-1">
+            <div class="position-relative d-inline-block mb-3">
+              <img [src]="user()?.avatar || 'assets/default-avatar.png'" alt="Avatar" class="rounded-circle border border-4 border-white shadow-sm object-fit-cover" width="120" height="120" style="background-color: #f8f9fa;">
+              @if (isEditMode()) {
+                <label for="avatarUpload" class="position-absolute bottom-0 end-0 bg-dark text-white rounded-circle p-2 cursor-pointer shadow border border-2 border-white transition-all hover-lift" title="Update Avatar">
+                  <i class="bi bi-camera-fill"></i>
+                </label>
+                <input type="file" id="avatarUpload" class="d-none" accept="image/jpeg,image/png,image/webp" (change)="onFileSelected($event)">
+              }
+            </div>
+            <h4 class="fw-bold text-dark mb-1">{{ user()?.name }}</h4>
+            <div class="text-secondary small fw-bold mb-3">{{ user()?.companyName || 'Business Entity' }}</div>
+            
+            <div class="d-inline-block bg-light rounded-pill px-3 py-1 border border-secondary-subtle">
+              <span class="small fw-bold text-dark d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-success"></i> UID: {{ user()?.id }}
+              </span>
+            </div>
+          </div>
+          <div class="card-footer bg-light border-top border-secondary-subtle p-4">
+            <h6 class="fw-bold text-secondary text-uppercase small mb-3">Operational Status</h6>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="small text-dark fw-bold">System Role</span>
+              <span class="badge bg-dark rounded-pill">{{ user()?.role }}</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="small text-dark fw-bold">Active SLA</span>
+              <span class="badge border border-success-subtle bg-success bg-opacity-10 text-success rounded-pill px-3">
+                {{ currentPlan() || 'Standard Tier' }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        @if (isEditMode()) {
+          <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white">
+            <div class="card-body p-4">
+              <h6 class="fw-bold text-danger mb-3 d-flex align-items-center gap-2"><i class="bi bi-key"></i> Security Package</h6>
+              <div class="mb-3">
+                <label class="form-label small fw-bold text-secondary">New Passphrase</label>
+                <input type="password" class="form-control bg-light border-0 py-2 rounded-3" [(ngModel)]="newPassword" placeholder="Leave blank to maintain current">
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Right Column: Form Data -->
+      <div class="col-lg-8">
+        <div class="card border-secondary-subtle shadow-sm rounded-4 bg-white h-100">
+          <div class="card-body p-4 p-xl-5">
+            <h5 class="fw-bold text-dark mb-4 fs-5 border-bottom border-secondary-subtle pb-3">Identity Records</h5>
+            
+            <div class="row g-4 mb-5">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase">Full Legal Name</label>
+                @if (isEditMode()) {
+                  <input type="text" class="form-control bg-light border-0 py-2 rounded-3 fw-medium" [ngModel]="user()?.name" (ngModelChange)="updateUserField('name', $event)">
+                } @else {
+                  <div class="fw-bold text-dark fs-6">{{ user()?.name }}</div>
+                }
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase">Corporate Entity</label>
+                @if (isEditMode()) {
+                  <input type="text" class="form-control bg-light border-0 py-2 rounded-3 fw-medium" [ngModel]="user()?.companyName" (ngModelChange)="updateUserField('companyName', $event)">
+                } @else {
+                  <div class="fw-bold text-dark fs-6">{{ user()?.companyName || 'Not Provided' }}</div>
+                }
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase">Primary Email Address</label>
+                @if (isEditMode()) {
+                  <input type="email" class="form-control bg-light border-0 py-2 rounded-3 fw-medium" [ngModel]="user()?.email" disabled>
+                  <div class="small text-danger mt-1"><i class="bi bi-exclamation-circle"></i> Email acts as primary UID and cannot be mutated.</div>
+                } @else {
+                  <div class="fw-bold text-dark fs-6">{{ user()?.email }}</div>
+                }
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase">Contact Coordinate</label>
+                @if (isEditMode()) {
+                  <div class="input-group border-0 bg-light rounded-3 overflow-hidden">
+                    <span class="input-group-text bg-transparent border-0 fw-bold text-dark">{{ selectedCountry()?.code || '+880' }}</span>
+                    <input type="tel" class="form-control bg-transparent border-0 py-2 fw-medium" [ngModel]="phoneNumber()" (ngModelChange)="phoneNumber.set($event)">
+                  </div>
+                } @else {
+                  <div class="fw-bold text-dark fs-6">{{ user()?.phone || 'Not Provided' }}</div>
+                }
+              </div>
+            </div>
+
+            <h5 class="fw-bold text-dark mb-4 fs-5 border-bottom border-secondary-subtle pb-3">Address Details</h5>
+            
+            <div class="row g-4">
+              <!-- Country -->
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-secondary text-uppercase">Country</label>
+                @if (isEditMode()) {
+                  <select class="form-select bg-light border-0 py-2 rounded-3 fw-medium" [ngModel]="selectedCountry()" (ngModelChange)="updateSelectedCountry($event)">
+                    @for (country of countries(); track country.name) {
+                      <option [ngValue]="country">{{ country.name }} ({{ country.code }})</option>
+                    }
+                  </select>
+                } @else {
+                  <div class="fw-bold text-dark fs-6">{{ selectedCountry()?.name || 'Bangladesh' }}</div>
+                }
+              </div>
+              
+              @if (isEditMode() && selectedCountry()?.name === 'Bangladesh') {
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-secondary text-uppercase">Division</label>
+                  <select class="form-select bg-light border-0 py-2 rounded-3 fw-medium" [ngModel]="selectedDivision()" (ngModelChange)="updateDivision($event)">
+                    <option value="">Select Division</option>
+                    @for (d of divisions(); track d.name) {
+                      <option [value]="d.name">{{ d.name }}</option>
+                    }
+                  </select>
+                </div>
+                
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-secondary text-uppercase">District</label>
+                  <select class="form-select bg-light border-0 py-2 rounded-3 fw-medium" [ngModel]="selectedDistrict()" (ngModelChange)="updateDistrict($event)" [disabled]="!selectedDivision()">
+                    <option value="">Select District</option>
+                    @for (d of districts(); track d.name) {
+                      <option [value]="d.name">{{ d.name }}</option>
+                    }
+                  </select>
+                </div>
+                
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-secondary text-uppercase">Police Station</label>
+                  <select class="form-select bg-light border-0 py-2 rounded-3 fw-medium" [ngModel]="selectedThana()" (ngModelChange)="selectedThana.set($event)" [disabled]="!selectedDistrict()">
+                    <option value="">Select Police Station</option>
+                    @for (t of thanas(); track t.name) {
+                      <option [value]="t.name">{{ t.name }}</option>
+                    }
+                  </select>
+                </div>
+              } @else if (!isEditMode()) {
+                <div class="col-12">
+                  <label class="form-label small fw-bold text-secondary text-uppercase">Address Details</label>
+                  <div class="fw-bold text-dark fs-6">
+                    {{ village() ? village() + ', ' : '' }}{{ user()?.policeStation ? user()?.policeStation + ', ' : '' }}{{ user()?.district ? user()?.district + ', ' : '' }}{{ user()?.division || '' }}
+                    @if (!village() && !user()?.division && !user()?.district && !user()?.policeStation) {
+                      Not Provided
+                    }
+                  </div>
+                </div>
+              }
+              
+              @if (isEditMode()) {
+                <div class="col-12">
+                  <label class="form-label small fw-bold text-secondary text-uppercase">Address</label>
+                  <input type="text" class="form-control bg-light border-0 py-2 rounded-3 fw-medium" [ngModel]="village()" (ngModelChange)="village.set($event)" placeholder="House, Street, Area">
+                </div>
+              }
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

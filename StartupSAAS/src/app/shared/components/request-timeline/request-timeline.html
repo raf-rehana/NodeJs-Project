@@ -1,0 +1,47 @@
+<div class="mb-4" *ngIf="request">
+  <div class="d-flex justify-content-between mb-1">
+    <span class="small fw-bold text-dark">Overall Progress</span>
+    <span class="small fw-bold text-primary">{{ request.progress || 0 }}%</span>
+  </div>
+  <div class="progress" style="height: 10px; border-radius: 5px;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+         role="progressbar" 
+         [style.width.%]="request.progress || 0"
+         [ngClass]="{
+           'bg-primary': request.status !== 'COMPLETED' && request.status !== 'REJECTED',
+           'bg-success': request.status === 'COMPLETED',
+           'bg-danger': request.status === 'REJECTED'
+         }">
+    </div>
+  </div>
+</div>
+
+<div class="timeline position-relative py-3" *ngIf="request">
+  <div class="timeline-line position-absolute top-50 start-0 w-100 bg-light" style="height: 4px; transform: translateY(-50%); z-index: 1;"></div>
+  
+  <div class="d-flex justify-content-between position-relative" style="z-index: 2;">
+    <div *ngFor="let step of timelineSteps; let i = index" class="timeline-step text-center position-relative">
+      <div class="step-indicator rounded-circle mx-auto d-flex align-items-center justify-content-center fw-bold"
+           [ngClass]="{
+             'bg-success text-white border-success': step.completed && request.status !== 'REJECTED',
+             'bg-danger text-white border-danger': request.status === 'REJECTED' && i === 0,
+             'bg-primary text-white border-primary': step.current && request.status !== 'REJECTED' && request.status !== 'COMPLETED',
+             'bg-white text-secondary border': !step.completed && !step.current
+           }"
+           style="width: 40px; height: 40px; border: 3px solid; border-color: #dee2e6;">
+        <i *ngIf="step.completed && request.status !== 'REJECTED'" class="bi bi-check-lg"></i>
+        <i *ngIf="request.status === 'REJECTED' && i === 0" class="bi bi-x-lg"></i>
+        <span *ngIf="(!step.completed || request.status === 'REJECTED') && !(request.status === 'REJECTED' && i === 0)">{{ i + 1 }}</span>
+      </div>
+      <div class="mt-2 small fw-bold" 
+           [ngClass]="{
+             'text-success': step.completed && request.status !== 'REJECTED', 
+             'text-danger': request.status === 'REJECTED' && i === 0,
+             'text-primary': step.current && request.status !== 'REJECTED' && request.status !== 'COMPLETED',
+             'text-muted': !step.completed && !step.current
+           }">
+        {{ request.status === 'REJECTED' && i === 0 ? 'REJECTED' : step.label }}
+      </div>
+    </div>
+  </div>
+</div>

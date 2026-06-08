@@ -1,0 +1,79 @@
+<div class="container-fluid py-4 px-lg-5 min-vh-100 bg-light">
+  
+  <header class="mb-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-1 small text-secondary">
+        <li class="breadcrumb-item">Employee Dashboard</li>
+        <li class="breadcrumb-item text-dark fw-bold" aria-current="page">Knowledge Base</li>
+      </ol>
+    </nav>
+    <h2 class="fw-bold text-dark mb-0 fs-3">Knowledge Base</h2>
+  </header>
+
+  <main>
+    <!-- Search Bar -->
+    <div class="mb-5">
+      <div class="input-group bg-white border border-secondary-subtle rounded-pill shadow-sm overflow-hidden p-1" style="max-width: 500px;">
+        <span class="input-group-text bg-transparent border-0 text-secondary ps-4"><i class="bi bi-search fs-5"></i></span>
+        <input type="text" class="form-control bg-transparent border-0 shadow-none py-3" placeholder="Search standard operating procedures..."
+               [ngModel]="searchTerm()" (ngModelChange)="filterArticles($event)">
+      </div>
+    </div>
+
+    @if (!selectedArticle()) {
+      <div class="row g-4 align-items-stretch">
+        @for (article of filteredArticles(); track article.id) {
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="card border-secondary-subtle shadow-sm rounded-4 h-100 bg-white transition-all hover-lift cursor-pointer overflow-hidden" (click)="selectArticle(article)">
+              <div class="card-body p-4 p-xl-5 d-flex flex-column">
+                <span class="badge bg-dark bg-opacity-10 text-dark border border-secondary-subtle mb-3 align-self-start rounded-pill small fw-bold px-3 tracking-wide">{{ article.category }}</span>
+                <h5 class="fw-bold text-dark mb-3 fs-5">{{ article.title }}</h5>
+                <p class="text-secondary small fw-medium flex-grow-1" style="line-height: 1.6;">{{ article.content | slice:0:120 }}...</p>
+                <div class="mt-4 pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
+                  <span class="text-secondary small fw-bold" style="font-size: 0.7rem;"><i class="bi bi-clock-history me-1"></i> {{ article.updatedAt | date:'shortDate' }}</span>
+                  <span class="btn btn-sm btn-dark rounded-pill fw-bold px-3"><i class="bi bi-arrow-right"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        @if (filteredArticles().length === 0) {
+          <div class="col-12 text-center py-5">
+            <div class="bg-white border border-secondary-subtle rounded-4 p-5 shadow-sm mx-auto" style="max-width: 500px;">
+              <i class="bi bi-journal-x fs-1 text-secondary opacity-50 mb-3 d-block"></i>
+              <h5 class="fw-bold text-dark">No Articles Found</h5>
+              <p class="small text-secondary mb-0">Search query returned zero matching SOPs. Please adjust parameters.</p>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <!-- Article Reader View -->
+      <div class="mx-auto" style="max-width: 900px;">
+        <button class="btn btn-white border border-secondary-subtle shadow-sm rounded-pill px-4 py-2 small fw-bold mb-4 hover-bg-light transition-all d-flex align-items-center gap-2" (click)="selectArticle(null)">
+          <i class="bi bi-arrow-left"></i> Return to Directory
+        </button>
+        
+        <div class="card border-secondary-subtle shadow-lg rounded-4 overflow-hidden bg-white">
+          <div class="card-header bg-dark p-4 p-xl-5 border-0 position-relative text-white">
+            <div class="position-absolute top-0 end-0 p-4 opacity-10">
+              <i class="bi bi-journal-text" style="font-size: 8rem;"></i>
+            </div>
+            <div class="position-relative z-1">
+              <span class="badge bg-white text-dark mb-3 rounded-pill small fw-bold px-3 tracking-wide shadow-sm">{{ selectedArticle()?.category }}</span>
+              <h2 class="fw-bold mb-3 display-6" style="letter-spacing: -1px;">{{ selectedArticle()?.title }}</h2>
+              <div class="small text-white text-opacity-75 d-flex align-items-center gap-2">
+                <i class="bi bi-clock-history"></i> Revision Date: {{ selectedArticle()?.updatedAt | date:'medium' }}
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-4 p-xl-5">
+            <div class="font-monospace text-dark" style="white-space: pre-wrap; line-height: 2; font-size: 0.95rem;">{{ selectedArticle()?.content }}</div>
+          </div>
+        </div>
+      </div>
+    }
+
+  </main>
+</div>

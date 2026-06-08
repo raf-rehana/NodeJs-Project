@@ -1,0 +1,3483 @@
+{
+  "users": [
+    {
+      "id": 10141,
+      "name": "Admin User",
+      "email": "admin@luminex.com",
+      "role": "ADMIN",
+      "password": "demo123",
+      "companyName": "LumiNex",
+      "address": "Dhaka, Bangladesh",
+      "phone": "+880 01605142112"
+    },
+    {
+      "id": 10151,
+      "name": "Super Admin",
+      "email": "superadmin@luminex.com",
+      "role": "SUPER_ADMIN",
+      "password": "demo123",
+      "companyName": "LumiNex Global",
+      "address": "Headquarters",
+      "phone": "+880 0000000000"
+    },
+    {
+      "name": "Badrul",
+      "email": "badrul@gmail.com",
+      "password": "demo123",
+      "role": "CLIENT",
+      "id": 10142,
+      "avatar": "/assets/images/user_10142_badrul.jpg",
+      "address": "",
+      "district": "",
+      "policeStation": "",
+      "phone": "undefined "
+    },
+    {
+      "companyName": "Labaid",
+      "businessType": "HEALTHCARE",
+      "country": "Bangladesh",
+      "division": "Dhaka",
+      "district": "Dhaka District",
+      "thana": "Uttara",
+      "village": "Sector 11",
+      "name": "Sajin Ahmed",
+      "email": "sajin@gmail.com",
+      "countryCode": "+880",
+      "phone": "+880 0178100000",
+      "password": "demo123",
+      "plan": "STARTER",
+      "address": "Sector 11, Bangladesh",
+      "role": "CLIENT",
+      "id": 10144,
+      "avatar": "/assets/images/user_10144_sajin_ahmed.jpg",
+      "policeStation": ""
+    },
+    {
+      "name": "Emon",
+      "email": "emon@gmail.com",
+      "password": "demo123",
+      "role": "EMPLOYEE",
+      "designation": "Full Stack Developer",
+      "id": 10145,
+      "avatar": "/assets/images/user_10145_emon.jpg",
+      "address": "Cumilla, Bangladesh",
+      "district": "",
+      "policeStation": "",
+      "phone": "+880 018450000"
+    },
+    {
+      "name": "Sadiya",
+      "email": "sadiya@gmail.com",
+      "password": "demo123",
+      "role": "EMPLOYEE",
+      "designation": "Java Developer",
+      "id": 10146
+    },
+    {
+      "companyName": "AirAsia",
+      "businessType": "OTHER",
+      "country": "Saudi Arabia",
+      "division": "",
+      "district": "",
+      "thana": "",
+      "village": "Riyadh",
+      "name": "Abdul Hamid",
+      "email": "hamid@gmail.com",
+      "countryCode": "+966",
+      "phone": "+966 9579100000",
+      "password": "demo123",
+      "plan": "STARTER",
+      "address": "Riyadh, Saudi Arabia",
+      "role": "CLIENT",
+      "id": 10147
+    },
+    {
+      "name": "Mahbub Sheikh",
+      "email": "mahbub@gmail.com",
+      "password": "demo123",
+      "role": "EMPLOYEE",
+      "designation": "Full Stack Developer",
+      "id": 10149
+    },
+    {
+      "companyName": "NiJu Bank",
+      "businessType": "FINANCE",
+      "country": "Saudi Arabia",
+      "district": "",
+      "thana": "",
+      "village": "Al Burz",
+      "name": "Fahad Aziz",
+      "email": "fahad@gmail.com",
+      "countryCode": "+966",
+      "phone": "+966 536000000",
+      "password": "demo123",
+      "plan": "STARTER",
+      "address": "Al Burz, Saudi Arabia",
+      "role": "CLIENT",
+      "id": 10152,
+      "avatar": "/assets/images/user_10152_fahad_aziz.jpg",
+      "policeStation": ""
+    },
+    {
+      "name": "Abdur Rohim",
+      "email": "arp@gmail.com",
+      "password": "demo123",
+      "role": "CLIENT",
+      "id": 10153,
+      "avatar": "/assets/images/user_10153_abdur_rohim.jpg",
+      "address": "",
+      "district": "",
+      "policeStation": "",
+      "phone": "undefined "
+    },
+    {
+      "name": "Israt Jahan Jui",
+      "email": "jui@gmail.com",
+      "password": "demo123",
+      "role": "EMPLOYEE",
+      "designation": "Full Stack Developer",
+      "id": 10154,
+      "companyName": "StayHub",
+      "address": "Dhanmondi, Bangladesh",
+      "district": "",
+      "policeStation": "",
+      "phone": "+880 018190000",
+      "avatar": "/assets/images/user_10154_israt_jahan_jui.jpg"
+    },
+    {
+      "companyName": "Hospital Management",
+      "businessType": "HEALTHCARE",
+      "country": "Bangladesh",
+      "district": "",
+      "thana": "",
+      "village": "Dhaka",
+      "name": "Shaharan Hossain",
+      "email": "shaharan@gmail.com",
+      "countryCode": "+880",
+      "phone": "+880 018270000",
+      "password": "demo123",
+      "plan": "STARTER",
+      "address": "Dhaka, Bangladesh",
+      "role": "CLIENT",
+      "id": 10155,
+      "avatar": "/assets/images/user_10155_shaharan_hossain.jpg",
+      "policeStation": ""
+    },
+    {
+      "name": "Tanvir Hossain",
+      "email": "tanvir@gmail.com",
+      "password": "demo123",
+      "role": "EMPLOYEE",
+      "designation": "AI Developer",
+      "id": 10157,
+      "avatar": "/assets/images/user_10157_tanvir_hossain.jpg",
+      "companyName": "LumiNex",
+      "address": "Dhaka, Bangladesh",
+      "district": "",
+      "policeStation": "",
+      "phone": "+880 017810000"
+    },
+    {
+      "name": "Rafiaah",
+      "email": "rafiaah@gmail.com",
+      "password": "demo123",
+      "role": "EMPLOYEE",
+      "designation": "Python Developer",
+      "id": 10158
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Web Development",
+      "icon": "bi-code-slash",
+      "color": "#0d6efd"
+    },
+    {
+      "id": 2,
+      "name": "Graphic Design",
+      "icon": "bi-palette",
+      "color": "#198754"
+    },
+    {
+      "id": 3,
+      "name": "Marketing",
+      "icon": "bi-megaphone",
+      "color": "#fd7e14"
+    },
+    {
+      "id": 4,
+      "name": "Consulting",
+      "icon": "bi-briefcase",
+      "color": "#6f42c1"
+    },
+    {
+      "id": 5,
+      "name": "Legal & Compliance",
+      "icon": "bi-shield-check",
+      "color": "#dc3545"
+    },
+    {
+      "id": 6,
+      "name": "Office Space",
+      "icon": "bi-building",
+      "color": "#6610f2"
+    },
+    {
+      "id": 7,
+      "name": "Office Stationery & Supplies",
+      "icon": "bi-printer",
+      "color": "#6f42c1"
+    },
+    {
+      "id": 8,
+      "name": "Finance & Accounting",
+      "icon": "bi-calculator",
+      "color": "#20c997"
+    },
+    {
+      "id": 9,
+      "name": "IT & Technology",
+      "icon": "bi-laptop",
+      "color": "#0dcaf0"
+    },
+    {
+      "id": 10,
+      "name": "HR & Recruitment",
+      "icon": "bi-people",
+      "color": "#d63384"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "categoryId": 1,
+      "categoryName": "Web Development",
+      "name": "Custom E-Commerce Store",
+      "description": "Full-stack e-commerce solution with payment integration.",
+      "price": 1500,
+      "priceType": "FIXED",
+      "deliveryDays": "14",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "w1",
+          "docName": "Requirements Doc",
+          "isMandatory": true,
+          "description": "Detailed list of features and functionalities."
+        },
+        {
+          "id": "w2",
+          "docName": "Logo Assets",
+          "isMandatory": false,
+          "description": "High-quality logo files for branding."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "categoryId": 2,
+      "categoryName": "Graphic Design",
+      "name": "Brand Identity Kit",
+      "description": "Logo, typography, and brand guidelines for your startup.",
+      "price": 500,
+      "priceType": "FIXED",
+      "deliveryDays": "7",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "g1",
+          "docName": "Design Brief",
+          "isMandatory": true,
+          "description": "Summary of your brand's vision and preferences."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "categoryId": 3,
+      "categoryName": "Marketing",
+      "name": "Social Media Management",
+      "description": "Monthly management of 3 social media profiles.",
+      "price": 300,
+      "priceType": "MONTHLY",
+      "deliveryDays": "Ongoing",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "m1",
+          "docName": "Social Media Links",
+          "isMandatory": true,
+          "description": "URLs of existing profiles."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "categoryId": 1,
+      "categoryName": "Web Development",
+      "name": "Landing Page Design",
+      "description": "Professional landing page for your marketing campaigns.",
+      "price": 200,
+      "priceType": "FIXED",
+      "deliveryDays": "3",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "w3",
+          "docName": "Content Copy",
+          "isMandatory": true,
+          "description": "Text content to be used on the page."
+        }
+      ]
+    },
+    {
+      "id": 10159,
+      "categoryId": 1,
+      "categoryName": "Web Development",
+      "name": "Android App",
+      "description": "High-performance custom Android application development.",
+      "price": 1000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "45",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "ap1",
+          "docName": "App Feature List (SRS)",
+          "isMandatory": true,
+          "description": "Detailed document of app functionalities."
+        },
+        {
+          "id": "ap2",
+          "docName": "UI/UX Wireframes",
+          "isMandatory": false,
+          "description": "Any existing sketches or designs."
+        },
+        {
+          "id": "ap3",
+          "docName": "Server Requirements",
+          "isMandatory": false,
+          "description": "Backend and API specifications if known."
+        }
+      ]
+    },
+    {
+      "id": 10160,
+      "categoryId": 1,
+      "categoryName": "Web Development",
+      "name": "Full-Stack SaaS Platform",
+      "description": "Custom SaaS platform with authentication, billing, and dashboard.",
+      "price": 4999,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "60",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "w5",
+          "docName": "System Architecture Plan",
+          "isMandatory": true,
+          "description": "Initial draft of the system flow."
+        }
+      ]
+    },
+    {
+      "id": 10161,
+      "categoryId": 3,
+      "categoryName": "Marketing",
+      "name": "SEO Optimization Package",
+      "description": "Complete on-page and off-page SEO strategy to rank #1.",
+      "price": 500,
+      "currency": "BDT",
+      "priceType": "MONTHLY",
+      "deliveryDays": "Ongoing",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "m2",
+          "docName": "Website URL",
+          "isMandatory": true,
+          "description": "The site to be optimized."
+        }
+      ]
+    },
+    {
+      "id": 10162,
+      "categoryId": 4,
+      "categoryName": "Consulting",
+      "name": "Cloud Architecture Setup",
+      "description": "Scalable AWS/GCP architecture setup for high-traffic startups.",
+      "price": 1500,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "14",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "c1",
+          "docName": "Current Traffic Stats",
+          "isMandatory": false,
+          "description": "Data on current user load."
+        }
+      ]
+    },
+    {
+      "id": 10163,
+      "categoryId": 2,
+      "categoryName": "Graphic Design",
+      "name": "UI/UX Redesign",
+      "description": "Complete UI/UX redesign of your existing app or website.",
+      "price": 1200,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "21",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "g2",
+          "docName": "Current Site URL",
+          "isMandatory": true,
+          "description": "Site to be redesigned."
+        }
+      ]
+    },
+    {
+      "id": 10164,
+      "categoryId": 2,
+      "categoryName": "Graphic Design",
+      "name": "Social Media Graphics Pack",
+      "description": "10 custom-designed posts for your social media channels.",
+      "price": 3500,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "5",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "g3",
+          "docName": "Brand Assets",
+          "isMandatory": true,
+          "description": "Logo and color preferences."
+        }
+      ]
+    },
+    {
+      "id": 10165,
+      "categoryId": 2,
+      "categoryName": "Graphic Design",
+      "name": "Company Profile Design",
+      "description": "Professional 8-page company profile or brochure design.",
+      "price": 8000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "7-10",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "g4",
+          "docName": "Company Text Content",
+          "isMandatory": true,
+          "description": "Written content for the brochure."
+        }
+      ]
+    },
+    {
+      "id": 10166,
+      "categoryId": 3,
+      "categoryName": "Marketing",
+      "name": "Google Ads Management",
+      "description": "End-to-end management of your Google Search and Display ads.",
+      "price": 10000,
+      "currency": "BDT",
+      "priceType": "MONTHLY",
+      "deliveryDays": "Ongoing",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "m3",
+          "docName": "Ad Account Access",
+          "isMandatory": true,
+          "description": "Access to Google Ads manager."
+        }
+      ]
+    },
+    {
+      "id": 10167,
+      "categoryId": 3,
+      "categoryName": "Marketing",
+      "name": "Content Marketing Strategy",
+      "description": "6-month content plan including blog topics and social strategy.",
+      "price": 15000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "14",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "m4",
+          "docName": "Target Audience Profile",
+          "isMandatory": true,
+          "description": "Details about your ideal customers."
+        }
+      ]
+    },
+    {
+      "id": 10168,
+      "categoryId": 4,
+      "categoryName": "Consulting",
+      "name": "Pitch Deck for Investors",
+      "description": "Professional 12-15 slide pitch deck design and content strategy.",
+      "price": 25000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "10-14",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "c2",
+          "docName": "Business Summary",
+          "isMandatory": true,
+          "description": "Executive summary of your startup."
+        }
+      ]
+    },
+    {
+      "id": 10169,
+      "categoryId": 4,
+      "categoryName": "Consulting",
+      "name": "Market Research Report",
+      "description": "In-depth analysis of your industry, competitors, and trends.",
+      "price": 45000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "30",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "c3",
+          "docName": "Industry Focus",
+          "isMandatory": true,
+          "description": "Specific market segments to analyze."
+        }
+      ]
+    },
+    {
+      "id": 10170,
+      "categoryId": 5,
+      "categoryName": "Legal & Compliance",
+      "name": "Trade License Registration",
+      "description": "Essential registration for any business operating in Bangladesh.",
+      "price": 5000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "7-10",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "tl1",
+          "docName": "National ID Card (both sides)",
+          "isMandatory": true,
+          "description": "Clear scans of front and back of NID."
+        },
+        {
+          "id": "tl2",
+          "docName": "Passport size photo (2 copies)",
+          "isMandatory": true,
+          "description": "Recent laboratory print photos."
+        },
+        {
+          "id": "tl3",
+          "docName": "Utility bill (business address)",
+          "isMandatory": true,
+          "description": "Electricity or gas bill of the commercial space."
+        },
+        {
+          "id": "tl4",
+          "docName": "Rent agreement",
+          "isMandatory": true,
+          "description": "Notarized rent agreement if space is rented."
+        },
+        {
+          "id": "tl5",
+          "docName": "Bank solvency certificate",
+          "isMandatory": true,
+          "description": "Certificate from a scheduled bank."
+        }
+      ]
+    },
+    {
+      "id": 10171,
+      "categoryId": 5,
+      "categoryName": "Legal & Compliance",
+      "name": "Company Incorporation (RJSC)",
+      "description": "Full support for registering your private limited company with RJSC.",
+      "price": 15000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "14-21",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "ci1",
+          "docName": "Memorandum & Articles of Association draft",
+          "isMandatory": true,
+          "description": "Draft copy of MoA and AoA."
+        },
+        {
+          "id": "ci2",
+          "docName": "NID of all directors",
+          "isMandatory": true,
+          "description": "NID copies for all proposed directors."
+        },
+        {
+          "id": "ci3",
+          "docName": "Proposed company name (3 options)",
+          "isMandatory": true,
+          "description": "Three names in order of preference for clearance."
+        },
+        {
+          "id": "ci4",
+          "docName": "Director photos",
+          "isMandatory": true,
+          "description": "Passport size photos of all directors."
+        },
+        {
+          "id": "ci5",
+          "docName": "Registered office address proof",
+          "isMandatory": true,
+          "description": "Utility bill or rent agreement of the office."
+        }
+      ]
+    },
+    {
+      "id": 10172,
+      "categoryId": 5,
+      "categoryName": "Legal & Compliance",
+      "name": "VAT Registration (NBR)",
+      "description": "Get your Business Identification Number (BIN) from NBR.",
+      "price": 3000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "5-7",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "vr1",
+          "docName": "Trade License copy",
+          "isMandatory": true,
+          "description": "Valid and updated trade license."
+        },
+        {
+          "id": "vr2",
+          "docName": "TIN certificate",
+          "isMandatory": true,
+          "description": "Tax Identification Number certificate."
+        },
+        {
+          "id": "vr3",
+          "docName": "Bank account details",
+          "isMandatory": true,
+          "description": "Bank statement or check leaf copy."
+        },
+        {
+          "id": "vr4",
+          "docName": "Business premises photos",
+          "isMandatory": true,
+          "description": "Inside and outside photos of the business office."
+        },
+        {
+          "id": "vr5",
+          "docName": "National ID of proprietor",
+          "isMandatory": true,
+          "description": "NID copy of the main owner."
+        }
+      ]
+    },
+    {
+      "id": 10173,
+      "categoryId": 5,
+      "categoryName": "Legal & Compliance",
+      "name": "TIN Certificate",
+      "description": "Taxpayer Identification Number registration for individuals or companies.",
+      "price": 1500,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "2-3",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "t1",
+          "docName": "NID / Passport",
+          "isMandatory": true,
+          "description": "Identification document."
+        }
+      ]
+    },
+    {
+      "id": 10174,
+      "categoryId": 5,
+      "categoryName": "Legal & Compliance",
+      "name": "Import/Export License (IRC/ERC)",
+      "description": "Required licenses for international trade operations.",
+      "price": 12000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "15-20",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "i1",
+          "docName": "Trade License",
+          "isMandatory": true,
+          "description": "Valid trade license."
+        },
+        {
+          "id": "i2",
+          "docName": "Membership Certificate",
+          "isMandatory": true,
+          "description": "Certificate from recognized chamber of commerce."
+        }
+      ]
+    },
+    {
+      "id": 10175,
+      "categoryId": 5,
+      "categoryName": "Legal & Compliance",
+      "name": "Fire License",
+      "description": "Safety compliance certification from Fire Service & Civil Defence.",
+      "price": 4000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "10-15",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "f1",
+          "docName": "Trade License",
+          "isMandatory": true,
+          "description": "Updated trade license of the business."
+        },
+        {
+          "id": "f2",
+          "docName": "NID of Owner",
+          "isMandatory": true,
+          "description": "National ID card of the applicant."
+        },
+        {
+          "id": "f3",
+          "docName": "Building Layout Plan",
+          "isMandatory": true,
+          "description": "Layout plan attested by an architect or authorized person."
+        },
+        {
+          "id": "f4",
+          "docName": "Rent Agreement / Land Deed",
+          "isMandatory": true,
+          "description": "Proof of commercial space usage."
+        },
+        {
+          "id": "f5",
+          "docName": "Treasury Chalan",
+          "isMandatory": false,
+          "description": "Copy of the payment chalan (if already paid)."
+        }
+      ]
+    },
+    {
+      "id": 10176,
+      "categoryId": 5,
+      "categoryName": "Legal & Compliance",
+      "name": "Environment Clearance",
+      "description": "Environmental impact certification from Department of Environment.",
+      "price": 8000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "20-30",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "e1",
+          "docName": "Trade License",
+          "isMandatory": true,
+          "description": "Valid trade license."
+        },
+        {
+          "id": "e2",
+          "docName": "Layout Plan",
+          "isMandatory": true,
+          "description": "Plan showing waste management details."
+        }
+      ]
+    },
+    {
+      "id": 10177,
+      "categoryId": 5,
+      "categoryName": "Legal & Compliance",
+      "name": "BIDA Registration",
+      "description": "Investment promotion and facilitation registration for industries.",
+      "price": 10000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "15-20",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "b1",
+          "docName": "Incorporation Certificate",
+          "isMandatory": true,
+          "description": "Certificate of incorporation from RJSC."
+        },
+        {
+          "id": "b2",
+          "docName": "Project Profile",
+          "isMandatory": true,
+          "description": "Detailed project description."
+        }
+      ]
+    },
+    {
+      "id": 10178,
+      "categoryId": 6,
+      "categoryName": "Office Space",
+      "name": "Virtual Office Address",
+      "description": "Premium business address for registration and mail handling.",
+      "price": 3000,
+      "currency": "BDT",
+      "priceType": "MONTHLY",
+      "deliveryDays": "Immediate",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "o1",
+          "docName": "NID of Applicant",
+          "isMandatory": true,
+          "description": "National ID card."
+        }
+      ]
+    },
+    {
+      "id": 10179,
+      "categoryId": 6,
+      "categoryName": "Office Space",
+      "name": "Hot Desk (Shared)",
+      "description": "Flexible workspace in a shared environment.",
+      "price": 8000,
+      "currency": "BDT",
+      "priceType": "MONTHLY",
+      "deliveryDays": "1-2",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "o2",
+          "docName": "NID / Passport",
+          "isMandatory": true,
+          "description": "Identification for entry pass."
+        }
+      ]
+    },
+    {
+      "id": 10180,
+      "categoryId": 6,
+      "categoryName": "Office Space",
+      "name": "Dedicated Desk",
+      "description": "Your own permanent desk in a professional co-working space.",
+      "price": 15000,
+      "currency": "BDT",
+      "priceType": "MONTHLY",
+      "deliveryDays": "1-2",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "o3",
+          "docName": "Company Letterhead",
+          "isMandatory": true,
+          "description": "Formal request on company letterhead."
+        }
+      ]
+    },
+    {
+      "id": 10181,
+      "categoryId": 6,
+      "categoryName": "Office Space",
+      "name": "Private Office (2-4 seats)",
+      "description": "Secure, private office space for small teams.",
+      "price": 35000,
+      "currency": "BDT",
+      "priceType": "MONTHLY",
+      "deliveryDays": "3-5",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "o4",
+          "docName": "Company Registration",
+          "isMandatory": true,
+          "description": "Trade license or incorporation copy."
+        }
+      ]
+    },
+    {
+      "id": 10182,
+      "categoryId": 6,
+      "categoryName": "Office Space",
+      "name": "Conference Room (per day)",
+      "description": "Fully equipped meeting rooms for professional presentations.",
+      "price": 5000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "Booking basis",
+      "isActive": true,
+      "requiredDocuments": []
+    },
+    {
+      "id": 10183,
+      "categoryId": 6,
+      "categoryName": "Office Space",
+      "name": "Co-working Space Tour",
+      "description": "Free guided tour of our facilities.",
+      "price": 0,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "Same day",
+      "isActive": true,
+      "requiredDocuments": []
+    },
+    {
+      "id": 10184,
+      "categoryId": 7,
+      "categoryName": "Office Stationery & Supplies",
+      "name": "Basic Stationery Pack",
+      "description": "Essential office supplies including pens, pads, and folders.",
+      "price": 2500,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "1-2",
+      "isActive": true,
+      "requiredDocuments": []
+    },
+    {
+      "id": 10185,
+      "categoryId": 7,
+      "categoryName": "Office Stationery & Supplies",
+      "name": "Premium Stationery Pack",
+      "description": "High-quality stationery set for executive needs.",
+      "price": 5000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "1-2",
+      "isActive": true,
+      "requiredDocuments": []
+    },
+    {
+      "id": 10186,
+      "categoryId": 7,
+      "categoryName": "Office Stationery & Supplies",
+      "name": "Business Card Design & Print (500)",
+      "description": "Professional business cards with custom design.",
+      "price": 2000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "3-5",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "st1",
+          "docName": "Logo File",
+          "isMandatory": true,
+          "description": "High-res logo for printing."
+        }
+      ]
+    },
+    {
+      "id": 10187,
+      "categoryId": 7,
+      "categoryName": "Office Stationery & Supplies",
+      "name": "Letterhead Design & Print",
+      "description": "Official company letterheads for formal communication.",
+      "price": 1800,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "3-5",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "st2",
+          "docName": "Company Details",
+          "isMandatory": true,
+          "description": "Address and contacts for letterhead."
+        }
+      ]
+    },
+    {
+      "id": 10188,
+      "categoryId": 7,
+      "categoryName": "Office Stationery & Supplies",
+      "name": "Office Stamp / Seal",
+      "description": "Customized company stamps and official seals.",
+      "price": 800,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "2-3",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "st3",
+          "docName": "Seal Draft",
+          "isMandatory": true,
+          "description": "Text to be included in the seal."
+        }
+      ]
+    },
+    {
+      "id": 10189,
+      "categoryId": 7,
+      "categoryName": "Office Stationery & Supplies",
+      "name": "Company Signage Board",
+      "description": "Professional office signage and branding boards.",
+      "price": 4500,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "5-7",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "st4",
+          "docName": "Design Preview",
+          "isMandatory": false,
+          "description": "Any existing design idea."
+        }
+      ]
+    },
+    {
+      "id": 10190,
+      "categoryId": 7,
+      "categoryName": "Office Stationery & Supplies",
+      "name": "Receipt Book / Invoice Pad",
+      "description": "Customized billing and receipt books for your business.",
+      "price": 600,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "1",
+      "isActive": true,
+      "requiredDocuments": []
+    },
+    {
+      "id": 10191,
+      "categoryId": 8,
+      "categoryName": "Finance & Accounting",
+      "name": "Monthly Bookkeeping",
+      "description": "Ongoing management of your company's daily financial records.",
+      "price": 6000,
+      "currency": "BDT",
+      "priceType": "MONTHLY",
+      "deliveryDays": "Ongoing",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "acc1",
+          "docName": "Previous Month's Records",
+          "isMandatory": true,
+          "description": "Existing financial logs."
+        }
+      ]
+    },
+    {
+      "id": 10192,
+      "categoryId": 8,
+      "categoryName": "Finance & Accounting",
+      "name": "Annual Tax Filing",
+      "description": "Professional preparation and submission of annual tax returns.",
+      "price": 8000,
+      "currency": "BDT",
+      "priceType": "YEARLY",
+      "deliveryDays": "7-14",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "acc2",
+          "docName": "Bank Statement (1 Year)",
+          "isMandatory": true,
+          "description": "Last 12 months bank statement."
+        },
+        {
+          "id": "acc3",
+          "docName": "Company TIN",
+          "isMandatory": true,
+          "description": "Tax ID certificate."
+        }
+      ]
+    },
+    {
+      "id": 10193,
+      "categoryId": 8,
+      "categoryName": "Finance & Accounting",
+      "name": "Bank Account Opening Assist",
+      "description": "Expert assistance in opening business bank accounts.",
+      "price": 2000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "3-5",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "ba1",
+          "docName": "Trade License",
+          "isMandatory": true,
+          "description": "Valid and updated trade license."
+        },
+        {
+          "id": "ba2",
+          "docName": "Company Incorporation certificate",
+          "isMandatory": true,
+          "description": "RJSC registration certificate."
+        },
+        {
+          "id": "ba3",
+          "docName": "NID of all signatories",
+          "isMandatory": true,
+          "description": "Identity of persons authorized to operate the account."
+        },
+        {
+          "id": "ba4",
+          "docName": "Board resolution letter",
+          "isMandatory": true,
+          "description": "Letter from board authorizing account opening."
+        },
+        {
+          "id": "ba5",
+          "docName": "Company seal impression",
+          "isMandatory": true,
+          "description": "Official company stamp on the form."
+        }
+      ]
+    },
+    {
+      "id": 10194,
+      "categoryId": 8,
+      "categoryName": "Finance & Accounting",
+      "name": "Payroll Management",
+      "description": "End-to-end management of employee salaries and benefits.",
+      "price": 5000,
+      "currency": "BDT",
+      "priceType": "MONTHLY",
+      "deliveryDays": "Ongoing",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "acc6",
+          "docName": "Employee List",
+          "isMandatory": true,
+          "description": "List with salary details."
+        }
+      ]
+    },
+    {
+      "id": 10195,
+      "categoryId": 8,
+      "categoryName": "Finance & Accounting",
+      "name": "Financial Statement Prep",
+      "description": "Preparation of Balance Sheets, P&L, and Cash Flow statements.",
+      "price": 7000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "5-7",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "acc7",
+          "docName": "Transaction Logs",
+          "isMandatory": true,
+          "description": "Raw financial data for the period."
+        }
+      ]
+    },
+    {
+      "id": 10196,
+      "categoryId": 8,
+      "categoryName": "Finance & Accounting",
+      "name": "Business Plan Financial Model",
+      "description": "Detailed financial projections for business plans and investors.",
+      "price": 12000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "7-10",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "acc8",
+          "docName": "Project Description",
+          "isMandatory": true,
+          "description": "Summary of business goals."
+        }
+      ]
+    },
+    {
+      "id": 10197,
+      "categoryId": 9,
+      "categoryName": "IT & Technology",
+      "name": "Domain & Hosting Setup",
+      "description": "Registration and configuration of your business website address and hosting.",
+      "price": 3500,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "1-2",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "it1",
+          "docName": "Preferred Domain Names",
+          "isMandatory": true,
+          "description": "List of domains to check."
+        }
+      ]
+    },
+    {
+      "id": 10198,
+      "categoryId": 9,
+      "categoryName": "IT & Technology",
+      "name": "Business Email Setup (G-Suite)",
+      "description": "Professional email setup for your team using Google Workspace.",
+      "price": 4000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "1-2",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "it2",
+          "docName": "User List",
+          "isMandatory": true,
+          "description": "Names and preferred email IDs."
+        }
+      ]
+    },
+    {
+      "id": 10199,
+      "categoryId": 9,
+      "categoryName": "IT & Technology",
+      "name": "Basic Website (5 pages)",
+      "description": "A professional 5-page website to establish your online presence.",
+      "price": 20000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "10-14",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "it3",
+          "docName": "Logo Assets",
+          "isMandatory": true,
+          "description": "High-quality logo."
+        },
+        {
+          "id": "it4",
+          "docName": "Content Outline",
+          "isMandatory": true,
+          "description": "What goes in each page."
+        }
+      ]
+    },
+    {
+      "id": 10200,
+      "categoryId": 9,
+      "categoryName": "IT & Technology",
+      "name": "IT Equipment Procurement",
+      "description": "Sourcing and setup of necessary IT hardware for your office.",
+      "price": 0,
+      "currency": "BDT",
+      "priceType": "CUSTOM",
+      "deliveryDays": "5-7",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "it5",
+          "docName": "Requirements Specification",
+          "isMandatory": true,
+          "description": "List of needed hardware."
+        }
+      ]
+    },
+    {
+      "id": 10201,
+      "categoryId": 9,
+      "categoryName": "IT & Technology",
+      "name": "Cloud Storage Setup",
+      "description": "Configuring secure cloud storage solutions for business data.",
+      "price": 2500,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "1",
+      "isActive": true,
+      "requiredDocuments": []
+    },
+    {
+      "id": 10202,
+      "categoryId": 9,
+      "categoryName": "IT & Technology",
+      "name": "CCTV & Security Setup",
+      "description": "Installation and configuration of security camera systems.",
+      "price": 15000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "3-5",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "it6",
+          "docName": "Premises Layout",
+          "isMandatory": false,
+          "description": "Plan to identify camera points."
+        }
+      ]
+    },
+    {
+      "id": 10203,
+      "categoryId": 10,
+      "categoryName": "HR & Recruitment",
+      "name": "Employment Contract Templates",
+      "description": "Legally compliant templates for various employment agreements.",
+      "price": 2000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "1",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "hr1",
+          "docName": "Company Registration Copy",
+          "isMandatory": true,
+          "description": "To verify company details."
+        }
+      ]
+    },
+    {
+      "id": 10204,
+      "categoryId": 10,
+      "categoryName": "HR & Recruitment",
+      "name": "Job Posting & Shortlisting",
+      "description": "End-to-end recruitment support from posting to candidate shortlisting.",
+      "price": 8000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "7-14",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "hr2",
+          "docName": "Job Description",
+          "isMandatory": true,
+          "description": "Detailed JD for the role."
+        }
+      ]
+    },
+    {
+      "id": 10205,
+      "categoryId": 10,
+      "categoryName": "HR & Recruitment",
+      "name": "HR Policy Manual",
+      "description": "Customized HR policy handbook for your organization.",
+      "price": 5000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "5-7",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "hr3",
+          "docName": "Current Policies (if any)",
+          "isMandatory": false,
+          "description": "Existing draft or rules."
+        }
+      ]
+    },
+    {
+      "id": 10206,
+      "categoryId": 10,
+      "categoryName": "HR & Recruitment",
+      "name": "Staff Training Coordination",
+      "description": "Organizing and managing professional development workshops for staff.",
+      "price": 10000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "As scheduled",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "hr4",
+          "docName": "Training Topic Ideas",
+          "isMandatory": true,
+          "description": "What you want your staff to learn."
+        }
+      ]
+    },
+    {
+      "id": 10207,
+      "categoryId": 10,
+      "categoryName": "HR & Recruitment",
+      "name": "Payroll & Leave System Setup",
+      "description": "Implementing automated systems for payroll and leave management.",
+      "price": 6000,
+      "currency": "BDT",
+      "priceType": "FIXED",
+      "deliveryDays": "3-5",
+      "isActive": true,
+      "requiredDocuments": [
+        {
+          "id": "hr5",
+          "docName": "Employee Records",
+          "isMandatory": true,
+          "description": "Names, IDs, and joining dates."
+        }
+      ]
+    },
+    {
+      "name": "Static Website",
+      "categoryId": 1,
+      "categoryName": "Web Development",
+      "price": 20000,
+      "priceType": "FIXED",
+      "deliveryDays": "7",
+      "description": "",
+      "isActive": true,
+      "link": "/client/payments",
+      "id": 10208
+    }
+  ],
+  "service-requests": [
+    {
+      "id": 1,
+      "userId": 10142,
+      "serviceId": 1,
+      "serviceName": "Custom E-Commerce Store",
+      "categoryName": "Web Development",
+      "status": "COMPLETED",
+      "priority": "HIGH",
+      "createdAt": "2026-05-01T10:00:00.000Z",
+      "progress": 100,
+      "assignedTo": 10145,
+      "workedHours": 0
+    },
+    {
+      "id": 2,
+      "userId": 10144,
+      "serviceId": 2,
+      "serviceName": "Brand Identity Kit",
+      "categoryName": "Graphic Design",
+      "status": "COMPLETED",
+      "priority": "NORMAL",
+      "createdAt": "2026-04-15T14:30:00.000Z",
+      "progress": 100,
+      "workedHours": 0
+    },
+    {
+      "id": 3,
+      "userId": 10142,
+      "serviceId": 3,
+      "serviceName": "Social Media Management",
+      "categoryName": "Marketing",
+      "status": "COMPLETED",
+      "priority": "NORMAL",
+      "createdAt": "2026-05-07T09:15:00.000Z",
+      "clientNotes": "Please focus on Instagram and LinkedIn.",
+      "progress": 0,
+      "workedHours": 0,
+      "assignedTo": 10146
+    },
+    {
+      "id": 4,
+      "userId": null,
+      "serviceId": 4,
+      "serviceName": "Landing Page Design",
+      "categoryName": "Web Development",
+      "status": "COMPLETED",
+      "priority": "URGENT",
+      "createdAt": "2026-05-08T08:00:00.000Z",
+      "progress": 90,
+      "workedHours": 0
+    },
+    {
+      "userId": 10147,
+      "serviceId": 4,
+      "serviceName": "Landing Page Design",
+      "categoryName": "Web Development",
+      "status": "IN_PROGRESS",
+      "priority": "URGENT",
+      "clientNotes": "Web and Mobile Application",
+      "progress": 0,
+      "createdAt": "2026-05-09T09:15:32.082Z",
+      "id": 10209,
+      "workedHours": 0.01
+    },
+    {
+      "userId": 10142,
+      "serviceId": 10159,
+      "serviceName": "Android App",
+      "categoryName": "Web Development",
+      "status": "AWAITING_ADVANCE",
+      "priority": "NORMAL",
+      "clientNotes": "dgedhrthrh",
+      "progress": 0,
+      "totalAmount": 50000,
+      "advanceAmount": 12000,
+      "projectStructure": "Phase 1: Wireframing & UI Design (3 days)\nPhase 2: Core Frontend/Backend Dev (7 days)\nPhase 3: Final Testing & Deployment (4 days)",
+      "requirementsNeeded": "- High-res SVG Logo\n- Production database connection string\n- Google Play developer account details",
+      "projectDocumentation": "Fully featured custom Android App with integrated payment gateway, modern material design theme, and real-time tracking dashboard.",
+      "createdAt": "2026-05-12T17:41:44.704Z",
+      "documents": [
+        {
+          "id": "doc-1778607704704-0",
+          "name": "App Feature List (SRS) - Screenshot 2026-05-09 222721.png",
+          "url": "assets/docs/App Feature List (SRS) - Screenshot 2026-05-09 222721.png",
+          "uploadedAt": "2026-05-12T17:41:44.704Z"
+        },
+        {
+          "id": "doc-1778607704704-1",
+          "name": "UI/UX Wireframes - Screenshot 2026-05-09 222721.png",
+          "url": "assets/docs/UI/UX Wireframes - Screenshot 2026-05-09 222721.png",
+          "uploadedAt": "2026-05-12T17:41:44.704Z"
+        },
+        {
+          "id": "doc-1778607704704-2",
+          "name": "Server Requirements - Screenshot 2026-05-09 222721.png",
+          "url": "assets/docs/Server Requirements - Screenshot 2026-05-09 222721.png",
+          "uploadedAt": "2026-05-12T17:41:44.704Z"
+        },
+        {
+          "id": "doc-1778607704704-3",
+          "name": "JSP MCQs -Final1.pdf",
+          "url": "assets/docs/JSP MCQs -Final1.pdf",
+          "uploadedAt": "2026-05-12T17:41:44.704Z"
+        },
+        {
+          "id": "doc-1778607704704-4",
+          "name": "Screenshot 2026-05-09 232951.png",
+          "url": "assets/docs/Screenshot 2026-05-09 232951.png",
+          "uploadedAt": "2026-05-12T17:41:44.704Z"
+        }
+      ],
+      "id": 10210,
+      "workedHours": 0,
+      "assignedTo": 10154
+    },
+    {
+      "userId": 10152,
+      "serviceId": 10178,
+      "serviceName": "Virtual Office Address",
+      "categoryName": "Office Space",
+      "status": "ASSIGNED",
+      "priority": "NORMAL",
+      "clientNotes": "ferwfsddsgfed",
+      "progress": 50,
+      "createdAt": "2026-05-12T21:37:06.011Z",
+      "documents": [
+        {
+          "id": "doc-1778621826010-0",
+          "name": "NID of Applicant - Screenshot 2026-05-13 032507.png",
+          "url": "assets/docs/NID of Applicant - Screenshot 2026-05-13 032507.png",
+          "uploadedAt": "2026-05-12T21:37:06.010Z"
+        },
+        {
+          "id": "doc-1778621826011-1",
+          "name": "Screenshot 2026-05-09 222721.png",
+          "url": "assets/docs/Screenshot 2026-05-09 222721.png",
+          "uploadedAt": "2026-05-12T21:37:06.011Z"
+        }
+      ],
+      "id": 10211,
+      "assignedTo": 10149,
+      "employeeNotes": "test note from powershell",
+      "workedHours": 0
+    },
+    {
+      "userId": 10142,
+      "serviceId": 10190,
+      "serviceName": "Receipt Book / Invoice Pad",
+      "categoryName": "Office Stationery & Supplies",
+      "status": "IN_PROGRESS",
+      "priority": "NORMAL",
+      "clientNotes": "Book Store",
+      "progress": 40,
+      "createdAt": "2026-05-15T18:17:00.973Z",
+      "documents": [
+        {
+          "id": "doc-1778869020972-0",
+          "name": "UML_Question.pdf",
+          "url": "assets/docs/UML_Question.pdf",
+          "uploadedAt": "2026-05-15T18:17:00.972Z"
+        },
+        {
+          "id": "doc-1778869020973-1",
+          "name": "Classmate.jpg",
+          "url": "assets/docs/Classmate.jpg",
+          "uploadedAt": "2026-05-15T18:17:00.973Z"
+        }
+      ],
+      "id": 10212,
+      "workedHours": 0
+    },
+    {
+      "userId": 10144,
+      "clientEmail": "sajin@gmail.com",
+      "serviceId": 10160,
+      "serviceName": "Full-Stack SaaS Platform",
+      "categoryName": "Web Development",
+      "status": "ASSIGNED",
+      "priority": "HIGH",
+      "clientNotes": "frsetwerteyte5y",
+      "progress": 0,
+      "createdAt": "2026-05-16T09:52:12.642Z",
+      "documents": [
+        {
+          "id": "doc-1778925132642-0",
+          "name": "System Architecture Plan - bg-pic.png",
+          "url": "assets/docs/System Architecture Plan - bg-pic.png",
+          "uploadedAt": "2026-05-16T09:52:12.642Z"
+        },
+        {
+          "id": "doc-1778925132642-1",
+          "name": "971.jpg",
+          "url": "assets/docs/971.jpg",
+          "uploadedAt": "2026-05-16T09:52:12.642Z"
+        },
+        {
+          "id": "doc-1778925132642-2",
+          "name": "Bg pic.png",
+          "url": "assets/docs/Bg pic.png",
+          "uploadedAt": "2026-05-16T09:52:12.642Z"
+        }
+      ],
+      "id": 10213,
+      "assignedTo": 10149,
+      "workedHours": 0
+    },
+    {
+      "userId": 10142,
+      "clientEmail": "badrul@gmail.com",
+      "serviceId": 10186,
+      "serviceName": "Business Card Design & Print (500)",
+      "categoryName": "Office Stationery & Supplies",
+      "status": "ASSIGNED",
+      "priority": "NORMAL",
+      "clientNotes": "Logo Design",
+      "progress": 0,
+      "createdAt": "2026-05-16T22:44:00.547Z",
+      "documents": [
+        {
+          "id": "doc-1778971440547-0",
+          "name": "Logo File - LumiNex_Invoice_L4xhnI_A_mY (1).pdf",
+          "url": "assets/docs/Logo File - LumiNex_Invoice_L4xhnI_A_mY (1).pdf",
+          "uploadedAt": "2026-05-16T22:44:00.547Z"
+        },
+        {
+          "id": "doc-1778971440547-1",
+          "name": "LumiNex_Invoice_L4xhnI_A_mY (1).pdf",
+          "url": "assets/docs/LumiNex_Invoice_L4xhnI_A_mY (1).pdf",
+          "uploadedAt": "2026-05-16T22:44:00.547Z"
+        },
+        {
+          "id": "doc-1778971440547-2",
+          "name": "badrul.jpeg",
+          "url": "assets/docs/badrul.jpeg",
+          "uploadedAt": "2026-05-16T22:44:00.547Z"
+        }
+      ],
+      "id": 10214,
+      "assignedTo": 10146
+    },
+    {
+      "userId": 10142,
+      "clientEmail": "badrul@gmail.com",
+      "serviceId": 10203,
+      "serviceName": "Employment Contract Templates",
+      "categoryName": "HR & Recruitment",
+      "status": "IN_PROGRESS",
+      "priority": "NORMAL",
+      "clientNotes": "Employee Contract",
+      "progress": 50,
+      "createdAt": "2026-05-16T23:16:04.437Z",
+      "documents": [
+        {
+          "id": "doc-1778973364437-0",
+          "name": "Company Registration Copy - LumiNex_Invoice_LNX-08B9AF32-4ED.pdf",
+          "url": "assets/docs/Company Registration Copy - LumiNex_Invoice_LNX-08B9AF32-4ED.pdf",
+          "uploadedAt": "2026-05-16T23:16:04.437Z"
+        },
+        {
+          "id": "doc-1778973364437-1",
+          "name": "LumiNex_Invoice_L4xhnI_A_mY (2).pdf",
+          "url": "assets/docs/LumiNex_Invoice_L4xhnI_A_mY (2).pdf",
+          "uploadedAt": "2026-05-16T23:16:04.437Z"
+        }
+      ],
+      "id": 10215,
+      "assignedTo": 10145,
+      "employeeNotes": "Working on layout setup...",
+      "workedHours": 0
+    },
+    {
+      "userId": 10144,
+      "clientEmail": "sajin@gmail.com",
+      "serviceId": 10196,
+      "serviceName": "Business Plan Financial Model",
+      "categoryName": "Finance & Accounting",
+      "status": "IN_PROGRESS",
+      "priority": "HIGH",
+      "clientNotes": "Business Plan Financial Model",
+      "progress": 25,
+      "createdAt": "2026-05-17T04:13:13.801Z",
+      "documents": [
+        {
+          "id": "doc-1778991193800-0",
+          "name": "Project Description - LumiNex_Invoice_LNX-03DC1CCE-816.pdf",
+          "url": "assets/docs/Project Description - LumiNex_Invoice_LNX-03DC1CCE-816.pdf",
+          "uploadedAt": "2026-05-17T04:13:13.800Z"
+        },
+        {
+          "id": "doc-1778991193801-1",
+          "name": "LumiNex_Invoice_LNX-03DC1CCE-816.pdf",
+          "url": "assets/docs/LumiNex_Invoice_LNX-03DC1CCE-816.pdf",
+          "uploadedAt": "2026-05-17T04:13:13.801Z"
+        }
+      ],
+      "id": 10216,
+      "workedHours": 0,
+      "employeeNotes": "updated few things"
+    },
+    {
+      "userId": 10144,
+      "clientEmail": "sajin@gmail.com",
+      "serviceId": 10203,
+      "serviceName": "Employment Contract Templates",
+      "categoryName": "HR & Recruitment",
+      "status": "IN_PROGRESS",
+      "priority": "NORMAL",
+      "clientNotes": "fsfsgsdg",
+      "progress": 50,
+      "createdAt": "2026-05-17T04:47:47.621Z",
+      "documents": [
+        {
+          "id": "doc-1778993267621-0",
+          "name": "Company Registration Copy - LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "url": "assets/docs/Company Registration Copy - LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "uploadedAt": "2026-05-17T04:47:47.621Z"
+        },
+        {
+          "id": "doc-1778993267621-1",
+          "name": "LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "url": "assets/docs/LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "uploadedAt": "2026-05-17T04:47:47.621Z"
+        },
+        {
+          "id": "doc-1778993267621-2",
+          "name": "WhatsApp Image 2026-05-16 at 02.54.22 (1).jpeg",
+          "url": "assets/docs/WhatsApp Image 2026-05-16 at 02.54.22 (1).jpeg",
+          "uploadedAt": "2026-05-17T04:47:47.621Z"
+        }
+      ],
+      "id": 10217,
+      "assignedTo": 10157,
+      "workedHours": 0
+    },
+    {
+      "userId": 10152,
+      "clientEmail": "fahad@gmail.com",
+      "serviceId": 10204,
+      "serviceName": "Job Posting & Shortlisting",
+      "categoryName": "HR & Recruitment",
+      "status": "ASSIGNED",
+      "priority": "HIGH",
+      "clientNotes": "Job Posting & Shortlisting",
+      "progress": 0,
+      "createdAt": "2026-05-17T08:33:15.959Z",
+      "documents": [
+        {
+          "id": "doc-1779006795958-0",
+          "name": "Job Description - LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "url": "assets/docs/Job Description - LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "uploadedAt": "2026-05-17T08:33:15.958Z"
+        },
+        {
+          "id": "doc-1779006795959-1",
+          "name": "LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "url": "assets/docs/LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "uploadedAt": "2026-05-17T08:33:15.959Z"
+        },
+        {
+          "id": "doc-1779006795959-2",
+          "name": "WhatsApp Image 2026-05-16 at 02.54.23.jpeg",
+          "url": "assets/docs/WhatsApp Image 2026-05-16 at 02.54.23.jpeg",
+          "uploadedAt": "2026-05-17T08:33:15.959Z"
+        }
+      ],
+      "id": 10218
+    },
+    {
+      "userId": 10152,
+      "clientEmail": "fahad@gmail.com",
+      "serviceId": 20102,
+      "serviceName": "E2E Test Proposal",
+      "categoryName": "Web Application",
+      "status": "AWAITING_ADVANCE",
+      "priority": "NORMAL",
+      "clientNotes": "Timeline: 1-3 Months\nBudget Range: BDT 50,000 - BDT 100,000\nTarget Customer/Audience: General Users\nExisting Branding? No\nDescription: This is a comprehensive end-to-end test project proposal.",
+      "createdAt": "2026-05-17T12:02:09.397Z",
+      "progress": 0,
+      "id": 10219
+    },
+    {
+      "userId": 10152,
+      "clientEmail": "fahad@gmail.com",
+      "serviceId": 20102,
+      "serviceName": "Hospital Management System",
+      "categoryName": "Web Application",
+      "status": "ASSIGNED",
+      "priority": "HIGH",
+      "clientNotes": "Timeline: 1-3 Months\nBudget Range: BDT 100,000 - BDT 500,000\nTarget Customer/Audience: High Society for five Star Hotel\nExisting Branding? No\nDescription: Make a High Sequrity Web App for five star hotel management, make it fully dynamic.",
+      "createdAt": "2026-05-17T12:08:14.121Z",
+      "progress": 0,
+      "id": 10220,
+      "assignedTo": 10145,
+      "employeeNotes": "Contact with client as needed"
+    },
+    {
+      "userId": 10142,
+      "clientEmail": "badrul@gmail.com",
+      "serviceId": 10184,
+      "serviceName": "Basic Stationery Pack",
+      "categoryName": "Office Stationery & Supplies",
+      "status": "ASSIGNED",
+      "priority": "NORMAL",
+      "clientNotes": "Please deliver 10 packs of high quality office stationery.",
+      "progress": 0,
+      "createdAt": "2026-05-17T18:14:20.722Z",
+      "documents": [],
+      "id": 10221,
+      "assignedTo": 10145
+    },
+    {
+      "userId": 10152,
+      "clientEmail": "fahad@gmail.com",
+      "serviceId": 10164,
+      "serviceName": "Social Media Graphics Pack",
+      "categoryName": "Graphic Design",
+      "status": "ASSIGNED",
+      "priority": "NORMAL",
+      "clientNotes": "Social Media Graphics Pack",
+      "progress": 0,
+      "createdAt": "2026-05-19T06:49:35.515Z",
+      "documents": [
+        {
+          "id": "doc-1779173375515-0",
+          "name": "Brand Assets - LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "url": "assets/docs/Brand Assets - LumiNex_Invoice_LNX-3514A070-273.pdf",
+          "uploadedAt": "2026-05-19T06:49:35.515Z"
+        },
+        {
+          "id": "doc-1779173375515-1",
+          "name": "LumiNex_Invoice_LNX-C77FFF5D-865.pdf",
+          "url": "assets/docs/LumiNex_Invoice_LNX-C77FFF5D-865.pdf",
+          "uploadedAt": "2026-05-19T06:49:35.515Z"
+        },
+        {
+          "id": "doc-1779173375515-2",
+          "name": "fahad.jpeg",
+          "url": "assets/docs/fahad.jpeg",
+          "uploadedAt": "2026-05-19T06:49:35.515Z"
+        }
+      ],
+      "id": 10222
+    },
+    {
+      "userId": 10142,
+      "clientEmail": "badrul@gmail.com",
+      "serviceId": 20102,
+      "serviceName": "Mobile Banking App",
+      "categoryName": "Mobile App (iOS/Android)",
+      "status": "AWAITING_ADVANCE",
+      "priority": "NORMAL",
+      "clientNotes": "Timeline: 1-3 Months\nBudget Range: BDT 50,000 - BDT 100,000\nTarget Customer/Audience: Smartphone Users\nExisting Branding? No\nDescription: A premium mobile wallet application. Key Features: Payments, Transactions, Profiles",
+      "createdAt": "2026-05-19T08:00:45.677Z",
+      "progress": 0,
+      "id": 10223,
+      "totalAmount": 150000,
+      "projectDocumentation": "Deliverables:\n1. Mobile designs.\n2. Backend auth APIs.\n3. Dynamic dashboards."
+    }
+  ],
+  "notifications": [
+    {
+      "userId": 10142,
+      "title": "Payment Due",
+      "message": "Your request for \"Social Media Management\" has been completed. Please proceed to payment.",
+      "type": "PAYMENT_DUE",
+      "isRead": false,
+      "createdAt": "2026-05-16T09:35:56.145Z",
+      "id": 10224
+    },
+    {
+      "userId": 10146,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Social Media Management",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-16T09:35:56.158Z",
+      "id": 10225
+    },
+    {
+      "userId": 10154,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Android App",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-16T09:36:05.676Z",
+      "id": 10226
+    },
+    {
+      "userId": 10149,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Full-Stack SaaS Platform",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-16T09:55:08.683Z",
+      "id": 10227
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Full-Stack SaaS Platform\" has been updated to Assigned (30% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-16T09:56:34.870Z",
+      "id": 10228
+    },
+    {
+      "userId": 10145,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Employment Contract Templates",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-16T23:44:12.256Z",
+      "id": 10229
+    },
+    {
+      "userId": 10146,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Business Card Design & Print (500)",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-16T23:44:42.342Z",
+      "id": 10230
+    },
+    {
+      "userId": 10154,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Android App",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-16T23:45:56.020Z",
+      "id": 10231
+    },
+    {
+      "userId": 10149,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Virtual Office Address",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-16T23:46:09.978Z",
+      "id": 10232
+    },
+    {
+      "userId": 10149,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Virtual Office Address",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-16T23:46:11.665Z",
+      "id": 10233
+    },
+    {
+      "userId": 10142,
+      "title": "Work Progress Update",
+      "message": "Your request \"Custom E-Commerce Store\" has been updated to Completed (100% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-16T23:56:32.820Z",
+      "id": 10234
+    },
+    {
+      "userId": 10142,
+      "title": "Work Progress Update",
+      "message": "Your request \"Receipt Book / Invoice Pad\" has been updated to In Progress (40% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-16T23:57:29.254Z",
+      "id": 10235
+    },
+    {
+      "userId": 10142,
+      "title": "Work Progress Update",
+      "message": "Your request \"Employment Contract Templates\" has been updated to Assigned (10% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-16T23:57:56.850Z",
+      "id": 10236
+    },
+    {
+      "userId": 10157,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Employment Contract Templates",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-17T08:39:34.842Z",
+      "id": 10237
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Employment Contract Templates\" has been updated to Assigned (5% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T08:40:41.070Z",
+      "id": 10238
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Business Plan Financial Model\" has been updated to Assigned (10% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:07:38.789Z",
+      "id": 10239
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Business Plan Financial Model\" has been updated to Assigned (40% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:08:13.880Z",
+      "id": 10240
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Business Plan Financial Model\" has been updated to Assigned (40% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:08:17.810Z",
+      "id": 10241
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Business Plan Financial Model\" has been updated to Assigned (40% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:09:17.076Z",
+      "id": 10242
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Business Plan Financial Model\" has been updated to In Progress (40% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:10:05.710Z",
+      "id": 10243
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Business Plan Financial Model\" has been updated to In Progress (40% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:12:41.830Z",
+      "id": 10244
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Business Plan Financial Model\" has been updated to In Progress (40% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:12:50.577Z",
+      "id": 10245
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Business Plan Financial Model\" has been updated to In Progress (25% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:16:25.748Z",
+      "id": 10246
+    },
+    {
+      "userId": 10142,
+      "title": "Work Progress Update",
+      "message": "Your request \"Employment Contract Templates\" has been updated to Assigned (10% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:21:46.499Z",
+      "id": 10247
+    },
+    {
+      "userId": 10142,
+      "title": "Work Progress Update",
+      "message": "Your request \"Employment Contract Templates\" has been updated to Assigned (10% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:22:01.752Z",
+      "id": 10248
+    },
+    {
+      "userId": 10142,
+      "title": "Work Progress Update",
+      "message": "Your request \"Employment Contract Templates\" has been updated to In Progress (50% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:22:34.549Z",
+      "id": 10249
+    },
+    {
+      "userId": 10144,
+      "title": "Work Progress Update",
+      "message": "Your request \"Employment Contract Templates\" has been updated to In Progress (50% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T09:45:51.384Z",
+      "id": 10250
+    },
+    {
+      "userId": 10152,
+      "title": "Work Progress Update",
+      "message": "Your request \"Virtual Office Address\" has been updated to Assigned (50% complete).",
+      "type": "STATUS_UPDATE",
+      "isRead": true,
+      "createdAt": "2026-05-17T10:13:31.974Z",
+      "id": 10251
+    },
+    {
+      "userId": 10152,
+      "title": "Project Proposal Approved!",
+      "message": "Congratulations! Your project proposal \"E2E Test Proposal\" has been accepted. It is now active and ready for assignment/invoice setup.",
+      "type": "STATUS_UPDATE",
+      "isRead": true,
+      "createdAt": "2026-05-17T12:03:39.754Z",
+      "id": 10252
+    },
+    {
+      "userId": 10145,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Hospital Management System",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-17T12:09:26.366Z",
+      "id": 10253
+    },
+    {
+      "userId": 10142,
+      "title": "20% Advance Payment Required",
+      "message": "An advance payment of 20% (BDT 500) is required to start your project \"Basic Stationery Pack\".",
+      "type": "PAYMENT_DUE",
+      "isRead": false,
+      "createdAt": "2026-05-17T18:17:06.814Z",
+      "id": 10254
+    },
+    {
+      "id": 20000,
+      "userId": 10142,
+      "title": "Advance Payment Approved",
+      "message": "We have approved your 20% advance payment. Awaiting employee assignment by Admin.",
+      "type": "STATUS_UPDATE",
+      "isRead": false,
+      "createdAt": "2026-05-17T18:47:26.432Z"
+    },
+    {
+      "id": 20001,
+      "userId": 10151,
+      "title": "20% Advance Paid",
+      "message": "Client paid the 20% advance for request Basic Stationery Pack. You can now assign employees.",
+      "type": "INFO",
+      "isRead": false,
+      "createdAt": "2026-05-17T18:47:26.432Z"
+    },
+    {
+      "id": 20002,
+      "userId": 10145,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Basic Stationery Pack",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-17T18:47:56.768Z"
+    },
+    {
+      "userId": 10151,
+      "title": "New Project Proposal",
+      "message": "A new custom project proposal \"Mobile Banking App\" has been submitted by Badrul.",
+      "type": "INFO",
+      "isRead": false,
+      "createdAt": "2026-05-19T08:00:45.699Z",
+      "id": 20003
+    },
+    {
+      "userId": 10141,
+      "title": "New Project Proposal",
+      "message": "A new custom project proposal \"Mobile Banking App\" has been submitted by Badrul.",
+      "type": "INFO",
+      "isRead": false,
+      "createdAt": "2026-05-19T08:00:45.700Z",
+      "id": 20004
+    },
+    {
+      "userId": 10142,
+      "title": "20% Advance Payment Required",
+      "message": "An advance payment of 20% (BDT 30000) is required to start your project \"Mobile Banking App\".",
+      "type": "PAYMENT_DUE",
+      "isRead": false,
+      "createdAt": "2026-05-19T08:04:49.016Z",
+      "id": 20005
+    },
+    {
+      "userId": 10154,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Android App",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-19T09:28:59.398Z",
+      "id": 20006
+    },
+    {
+      "userId": 10154,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Android App",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-19T09:29:03.009Z",
+      "id": 20007
+    },
+    {
+      "userId": 10154,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Android App",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-19T09:30:22.373Z",
+      "id": 20008
+    },
+    {
+      "userId": 10154,
+      "title": "New Task Assigned",
+      "message": "You have been assigned: Android App",
+      "type": "TASK_ASSIGNED",
+      "isRead": false,
+      "createdAt": "2026-05-19T09:30:26.720Z",
+      "id": 20009
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": 1,
+      "name": "Digital Foundation",
+      "price": 50000,
+      "features": [
+        "Professional Website Design",
+        "Domain & Hosting (1 Year)",
+        "Business Email Setup",
+        "Basic SEO Optimization",
+        "3 Months Support"
+      ],
+      "recommended": false
+    },
+    {
+      "id": 2,
+      "name": "Growth Accelerator",
+      "price": 150000,
+      "features": [
+        "E-Commerce / Custom Web Platform",
+        "Digital Marketing (3 Months)",
+        "Social Media Management",
+        "Logo & Brand Identity",
+        "Priority 24/7 Support"
+      ],
+      "recommended": true
+    },
+    {
+      "id": 3,
+      "name": "A-to-Z Launchpad",
+      "price": 350000,
+      "features": [
+        "Full Business Formation Support",
+        "Trade License & Legal Paperwork",
+        "Full Online Platform Readiness",
+        "Premium Web & Mobile App",
+        "1 Year Marketing Strategy",
+        "Dedicated Launch Manager"
+      ],
+      "recommended": false
+    },
+    {
+      "id": 4,
+      "name": "E-Commerce Pro",
+      "price": 99000,
+      "features": [
+        "Full E-Commerce Platform",
+        "Payment Gateway Integration",
+        "Mobile App (Android)"
+      ],
+      "recommended": false
+    },
+    {
+      "id": 5,
+      "name": "Digital Marketing Boost",
+      "price": 29000,
+      "features": [
+        "Facebook & Instagram Ads",
+        "Google Ads Campaign",
+        "SEO Optimization"
+      ],
+      "recommended": false
+    },
+    {
+      "id": 6,
+      "name": "Business Registration Pack",
+      "price": 39000,
+      "features": [
+        "Business Name Registration",
+        "Trade License",
+        "TIN Certificate"
+      ],
+      "recommended": false
+    },
+    {
+      "id": 7,
+      "name": "Complete Brand Kit",
+      "price": 24000,
+      "features": [
+        "Custom Logo Design",
+        "Brand Color Palette",
+        "Business Card Design"
+      ],
+      "recommended": false
+    },
+    {
+      "id": 8,
+      "name": "Custom Enterprise App",
+      "price": 499000,
+      "features": [
+        "Custom Web + Mobile App",
+        "AI-Powered Features",
+        "Enterprise-Grade Security"
+      ],
+      "recommended": false
+    }
+  ],
+  "payments": [
+    {
+      "id": 1,
+      "clientId": 20103,
+      "client": "Rafiaah",
+      "item": "Premium Plan",
+      "amount": 250000,
+      "method": "bKash",
+      "status": "PAID",
+      "date": "2026-05-08"
+    },
+    {
+      "id": 2,
+      "clientId": 20104,
+      "client": "Siam Ahmed",
+      "item": "Web Development",
+      "amount": 120000,
+      "method": "Bank Transfer",
+      "status": "PAID",
+      "date": "2026-05-07"
+    },
+    {
+      "id": 3,
+      "clientId": 20105,
+      "client": "Arifur Rahman",
+      "item": "Logo Design",
+      "amount": 150000,
+      "method": "Nagad",
+      "status": "PENDING",
+      "date": "2026-05-06"
+    },
+    {
+      "id": 4,
+      "clientId": 20106,
+      "client": "Mehedi Hasan",
+      "item": "Starter Plan",
+      "amount": 90000,
+      "method": "Rocket",
+      "status": "PAID",
+      "date": "2026-05-05"
+    },
+    {
+      "id": 5,
+      "clientId": 20107,
+      "client": "Kamrul Islam",
+      "item": "AI Consultation",
+      "amount": 85000,
+      "method": "Bank Transfer",
+      "status": "PAID",
+      "date": "2026-05-04"
+    },
+    {
+      "clientId": 10148,
+      "client": "Client",
+      "item": "Digital Foundation",
+      "amount": 52300.95,
+      "method": "CASH",
+      "status": "PENDING",
+      "date": "2026-05-09",
+      "id": 20010
+    },
+    {
+      "clientId": 10148,
+      "client": "Client",
+      "item": "Digital Foundation",
+      "amount": 52300.95,
+      "method": "CASH",
+      "status": "PENDING",
+      "date": "2026-05-09",
+      "id": 20011
+    },
+    {
+      "clientId": 10148,
+      "client": "Digital Foundation - Client",
+      "item": "Digital Foundation",
+      "planId": "1",
+      "amount": 100000,
+      "method": "BKASH-BKash",
+      "status": "PAID",
+      "date": "2026-05-10",
+      "tranId": "LNX-6CB800C0-DF0",
+      "bankTranId": "2605101801566lleeJdcbNEKBuf",
+      "currency": "BDT",
+      "id": 20012
+    },
+    {
+      "clientId": 10148,
+      "client": "Digital Foundation - Client",
+      "item": "Digital Foundation",
+      "planId": "1",
+      "amount": 523.95,
+      "method": "BKASH-BKash",
+      "status": "PAID",
+      "date": "2026-05-11",
+      "tranId": "LNX-8C56BD36-DD9",
+      "bankTranId": "260511184437EqWQl7CeU2lYGNx",
+      "currency": "BDT",
+      "id": 20013
+    },
+    {
+      "clientId": 20108,
+      "client": "Digital Foundation - Client",
+      "item": "Digital Foundation",
+      "planId": "1",
+      "amount": 52500,
+      "method": "DBBLMOBILEB-Dbbl Mobile Banking",
+      "status": "PAID",
+      "date": "2026-05-12",
+      "tranId": "LNX-570FF173-664",
+      "bankTranId": "260512163745UTTLzdZgPHk0cm0",
+      "currency": "BDT",
+      "id": 20014
+    },
+    {
+      "clientId": 10142,
+      "client": "Android App - Client",
+      "item": "Android App",
+      "planId": "YgR6ewGkq1w",
+      "amount": 1050,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-12",
+      "tranId": "LNX-EAE35043-7D8",
+      "bankTranId": "260512235816cNht5jxlG6tsWDc",
+      "currency": "BDT",
+      "id": 20015
+    },
+    {
+      "clientId": 10142,
+      "client": "Digital Foundation - Client",
+      "item": "Digital Foundation",
+      "planId": "1",
+      "amount": 52500,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-12",
+      "tranId": "LNX-E97EA278-585",
+      "bankTranId": "26051300357AqoHggdYX5HILXZ",
+      "currency": "BDT",
+      "id": 20016
+    },
+    {
+      "clientId": 10152,
+      "client": "Digital Foundation - Client",
+      "item": "Digital Foundation",
+      "planId": "1",
+      "amount": 52500,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-12",
+      "tranId": "LNX-44201479-827",
+      "bankTranId": "260513338252dSVcqjw6RRA89N",
+      "currency": "BDT",
+      "id": 20017
+    },
+    {
+      "clientId": 10142,
+      "client": "Receipt Book / Invoice Pad - Client",
+      "item": "Receipt Book / Invoice Pad",
+      "planId": "s125",
+      "amount": 630,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-15",
+      "tranId": "LNX-A0876B53-ABB",
+      "bankTranId": "26051601748E8SGc3Lcq5GU6xl",
+      "currency": "BDT",
+      "id": 20018
+    },
+    {
+      "clientId": 10142,
+      "client": "Client Name",
+      "item": "Social Media Management",
+      "amount": 300,
+      "method": "BKASH-BKash",
+      "status": "PAID",
+      "date": "2026-05-16",
+      "id": 20019,
+      "tranId": "LNX-03DC1CCE-816",
+      "bankTranId": "26051752000INA5Dk1mnwnQCOc",
+      "currency": "BDT"
+    },
+    {
+      "clientId": 10144,
+      "client": "Full-Stack SaaS Platform - Client",
+      "item": "Full-Stack SaaS Platform",
+      "planId": "s101",
+      "amount": 5248.95,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-16",
+      "tranId": "LNX-247C3A91-6CB",
+      "bankTranId": "2605161552546rB4MZqNYkQZNL7",
+      "currency": "BDT",
+      "id": 20020
+    },
+    {
+      "clientId": 10144,
+      "client": "Digital Foundation - Client",
+      "item": "Digital Foundation",
+      "planId": "1",
+      "amount": 52500,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-16",
+      "tranId": "LNX-16FCF9D7-A72",
+      "bankTranId": "260516161819gmXtMUOiywHoqdd",
+      "currency": "BDT",
+      "id": 20021
+    },
+    {
+      "clientId": 10142,
+      "client": "Social Media Management - Client",
+      "item": "Social Media Management",
+      "planId": "4rWVqWLQiPM",
+      "amount": 315,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-16",
+      "tranId": "LNX-08B9AF32-4ED",
+      "bankTranId": "260517448056qQ85cvhidCMqKZ",
+      "currency": "BDT",
+      "id": 20022
+    },
+    {
+      "clientId": 10142,
+      "client": "Employment Contract Templates - Client",
+      "item": "Employment Contract Templates",
+      "planId": "s138",
+      "amount": 2100,
+      "method": "BKASH-BKash",
+      "status": "PAID",
+      "date": "2026-05-16",
+      "tranId": "LNX-280CB0D8-DEF",
+      "bankTranId": "26051751631My1h1bEVLmA6vfS",
+      "currency": "BDT",
+      "id": 20023
+    },
+    {
+      "clientId": 10144,
+      "client": "Business Plan Financial Model - Client",
+      "item": "Business Plan Financial Model",
+      "amount": 12600,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-17",
+      "tranId": "LNX-3514A070-273",
+      "bankTranId": "260517101409kb03nU6FUoMDibO",
+      "currency": "BDT",
+      "requestId": 10216,
+      "id": 20024
+    },
+    {
+      "clientId": 10152,
+      "client": "Job Posting & Shortlisting - Client",
+      "item": "Job Posting & Shortlisting",
+      "amount": 8400,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-17",
+      "tranId": "LNX-C77FFF5D-865",
+      "bankTranId": "260517143552cZF5FixeCGpkTSf",
+      "currency": "BDT",
+      "requestId": 10218,
+      "id": 20025
+    },
+    {
+      "clientId": 10142,
+      "client": "Client Name",
+      "email": "badrul@gmail.com",
+      "item": "Basic Stationery Pack (20% Advance)",
+      "amount": 500,
+      "method": "CASH",
+      "status": "PAID",
+      "date": "2026-05-17",
+      "requestId": 10221,
+      "id": 20026
+    },
+    {
+      "clientId": 10142,
+      "client": "Badrul",
+      "email": "badrul@gmail.com",
+      "item": "Basic Stationery Pack (20% Advance)",
+      "amount": 525,
+      "method": "CASH",
+      "status": "PENDING",
+      "date": "2026-05-17",
+      "requestId": 10221,
+      "id": 20027
+    },
+    {
+      "clientId": 10142,
+      "client": "Badrul",
+      "email": "badrul@gmail.com",
+      "item": "Basic Stationery Pack (20% Advance)",
+      "amount": 551.25,
+      "method": "CASH",
+      "status": "PENDING",
+      "date": "2026-05-17",
+      "requestId": 10221,
+      "id": 20028
+    },
+    {
+      "clientId": 10142,
+      "client": "Badrul",
+      "email": "badrul@gmail.com",
+      "item": "Basic Stationery Pack (20% Advance)",
+      "amount": 551.25,
+      "method": "CASH",
+      "status": "PENDING",
+      "date": "2026-05-17",
+      "requestId": 10221,
+      "id": 20029
+    },
+    {
+      "clientId": 10152,
+      "client": "Social Media Graphics Pack - Client",
+      "item": "Social Media Graphics Pack",
+      "amount": 3675,
+      "method": "VISA-Dutch Bangla",
+      "status": "PAID",
+      "date": "2026-05-19",
+      "tranId": "LNX-927C0A80-632",
+      "bankTranId": "2605191250216LBUrWpy2sGc3FU",
+      "currency": "BDT",
+      "requestId": 10222,
+      "id": 20030
+    },
+    {
+      "clientId": 10142,
+      "client": "Client Name",
+      "email": "badrul@gmail.com",
+      "item": "Mobile Banking App (20% Advance)",
+      "amount": 30000,
+      "method": "WAITING",
+      "status": "PENDING",
+      "date": "2026-05-19",
+      "requestId": 10223,
+      "id": 20031
+    }
+  ],
+  "auth": {
+    "login": {
+      "token": "mock-jwt-token-for-dev",
+      "user": {
+        "id": "2",
+        "name": "Siam Ahmed",
+        "email": "client@luminex.com",
+        "role": "CLIENT"
+      }
+    }
+  },
+  "theme-settings": [
+    {
+      "id": 1,
+      "primaryColor": "#111827",
+      "accentColor": "#64748b",
+      "logoUrl": "assets/logo.png",
+      "fontFamily": "Roboto, \"Helvetica Neue\", sans-serif",
+      "siteName": "LumiNex"
+    }
+  ],
+  "site-content": [
+    {
+      "id": 1,
+      "heroBadge": "NEXT GEN SERVICE HUB",
+      "heroTitle": "You Bring the <span class=\"text-dark-lavender\">Idea</span>. We Build the <span class=\"text-dark-lavender\">Business</span>.",
+      "heroSubtitle": "Have money and a vision? We handle the rest. From Trade Licenses and Legal Paperwork to Web Development and Digital Marketing — LumiNex is your complete startup partner.",
+      "heroImageUrl": "assets/images/hero_office.jpg",
+      "heroFeatures": [
+        {
+          "icon": "bi-check-circle-fill",
+          "text": "Expert Teams"
+        },
+        {
+          "icon": "bi-check-circle-fill",
+          "text": "24/7 Support"
+        },
+        {
+          "icon": "bi-check-circle-fill",
+          "text": "Secure Portal"
+        }
+      ],
+      "aboutBadge": "Who We Are",
+      "aboutTitle": "Driving Innovation with a Purpose",
+      "aboutDescription": "At LumiNex, we believe that professional service management should be seamless, transparent, and scalable for every business.",
+      "aboutImageUrl": "assets/images/lumi-two.jpg",
+      "visionTitle": "Our Vision",
+      "visionDescription": "To redefine the global landscape of B2B service delivery by creating an intelligent, transparent, and highly accessible ecosystem. We envision a future where every business can access world-class professional services through a single, unified digital platform that blends cutting-edge AI automation with specialized human ingenuity.",
+      "missionTitle": "Our Mission",
+      "missionDescription": "Our mission is to eliminate the operational hurdles that stifle business growth. We are committed to providing a secure, reliable, and user-centric platform that handles everything from IT infrastructure and brand development to legal compliance. By simplifying complex workflows, we empower entrepreneurs to focus on innovation.",
+      "experienceYears": "10+ Years",
+      "servicesTitle": "Startup Packages",
+      "servicesSubtitle": "We don't just provide services; we build foundations. Choose a package that covers everything from your legal identity to your digital presence.",
+      "services": [
+        {
+          "icon": "bi-laptop",
+          "title": "Digital Foundation",
+          "description": "Professional Website, Domain (1 Year), Business Email, and Basic SEO.",
+          "linkText": "Subscribe Now",
+          "linkUrl": "/client/payments",
+          "color": "primary",
+          "features": [
+            "Professional Website Design",
+            "Domain & Hosting (1 Year)",
+            "Business Email Setup",
+            "Basic SEO Optimization",
+            "3 Months Support"
+          ]
+        },
+        {
+          "icon": "bi-graph-up-arrow",
+          "title": "Growth Accelerator",
+          "description": "E-Commerce Platform, Marketing (3 Months), Social Media Mgmt, and 24/7 Support.",
+          "linkText": "Subscribe Now",
+          "linkUrl": "/client/payments",
+          "color": "success",
+          "features": [
+            "E-Commerce / Custom Web Platform",
+            "Digital Marketing (3 Months)",
+            "Social Media Management",
+            "Logo & Brand Identity",
+            "Priority 24/7 Support"
+          ]
+        },
+        {
+          "icon": "bi-rocket-takeoff",
+          "title": "A-to-Z Launchpad",
+          "description": "Business Formation, Trade License, Web & Mobile App, and Launch Manager.",
+          "linkText": "Subscribe Now",
+          "linkUrl": "/client/payments",
+          "color": "warning",
+          "features": [
+            "Full Business Formation Support",
+            "Trade License & Legal Paperwork",
+            "Full Online Platform Readiness",
+            "Premium Web & Mobile App",
+            "1 Year Marketing Strategy",
+            "Dedicated Launch Manager"
+          ]
+        }
+      ],
+      "ctaTitle": "Ready to start your journey?",
+      "ctaDescription": "Join hundreds of successful businesses already using LumiNex.",
+      "ctaButtonText": "Explore All Packages",
+      "ctaButtonLink": "/packages",
+      "socialProofTitle": "Join our growing community",
+      "socialLinks": [
+        {
+          "name": "Facebook",
+          "url": "https://facebook.com",
+          "icon": "bi-facebook"
+        },
+        {
+          "name": "LinkedIn",
+          "url": "https://linkedin.com",
+          "icon": "bi-linkedin"
+        },
+        {
+          "name": "GitHub",
+          "url": "https://github.com",
+          "icon": "bi-github"
+        },
+        {
+          "name": "YouTube",
+          "url": "https://youtube.com",
+          "icon": "bi-youtube"
+        },
+        {
+          "name": "WhatsApp",
+          "url": "https://wa.me",
+          "icon": "bi-whatsapp"
+        }
+      ],
+      "isActive": true,
+      "updatedAt": "2026-05-11T10:51:42.822Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": 20032,
+      "timestamp": "2026-05-13T05:00:00.000Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "System Initialized",
+      "details": "Admin dashboard accessed for the first time."
+    },
+    {
+      "id": 20033,
+      "timestamp": "2026-05-13T05:10:00.000Z",
+      "userId": null,
+      "userName": "tanvir",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #1 status changed to IN_PROGRESS"
+    },
+    {
+      "id": 20034,
+      "timestamp": "2026-05-13T05:20:00.000Z",
+      "userId": 10145,
+      "userName": "Emon",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #2 status changed to COMPLETED"
+    },
+    {
+      "timestamp": "2026-05-16T09:29:32.052Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #3 status changed to IN_PROGRESS",
+      "id": 20035
+    },
+    {
+      "timestamp": "2026-05-16T09:30:03.236Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #jceFbCdS93I status changed to PENDING",
+      "id": 20036
+    },
+    {
+      "timestamp": "2026-05-16T09:30:48.571Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Op-oKy-aBRo status changed to PENDING",
+      "id": 20037
+    },
+    {
+      "timestamp": "2026-05-16T09:30:50.026Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Op-oKy-aBRo status changed to PENDING",
+      "id": 20038
+    },
+    {
+      "timestamp": "2026-05-16T09:31:42.715Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #3 status changed to IN_PROGRESS",
+      "id": 20039
+    },
+    {
+      "timestamp": "2026-05-16T09:31:43.865Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #3 status changed to IN_PROGRESS",
+      "id": 20040
+    },
+    {
+      "timestamp": "2026-05-16T09:32:00.456Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #jceFbCdS93I status changed to PENDING",
+      "id": 20041
+    },
+    {
+      "timestamp": "2026-05-16T09:32:01.777Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #jceFbCdS93I status changed to PENDING",
+      "id": 20042
+    },
+    {
+      "timestamp": "2026-05-16T09:32:17.952Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #3 status changed to IN_PROGRESS",
+      "id": 20043
+    },
+    {
+      "timestamp": "2026-05-16T09:32:55.164Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #4 status changed to COMPLETED",
+      "id": 20044
+    },
+    {
+      "timestamp": "2026-05-16T09:33:07.340Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #jceFbCdS93I status changed to IN_PROGRESS",
+      "id": 20045
+    },
+    {
+      "timestamp": "2026-05-16T09:33:25.187Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #4 status changed to COMPLETED",
+      "id": 20046
+    },
+    {
+      "timestamp": "2026-05-16T09:33:35.657Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #4 status changed to COMPLETED",
+      "id": 20047
+    },
+    {
+      "timestamp": "2026-05-16T09:33:36.611Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #4 status changed to COMPLETED",
+      "id": 20048
+    },
+    {
+      "timestamp": "2026-05-16T09:34:13.841Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #3 status changed to COMPLETED",
+      "id": 20049
+    },
+    {
+      "timestamp": "2026-05-16T09:34:17.355Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #3 status changed to COMPLETED",
+      "id": 20050
+    },
+    {
+      "timestamp": "2026-05-16T09:34:35.266Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #3 status changed to COMPLETED",
+      "id": 20051
+    },
+    {
+      "timestamp": "2026-05-16T09:34:52.269Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #jceFbCdS93I status changed to IN_PROGRESS",
+      "id": 20052
+    },
+    {
+      "timestamp": "2026-05-16T09:35:56.132Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #3 to status: COMPLETED",
+      "id": 20053
+    },
+    {
+      "timestamp": "2026-05-16T09:36:05.660Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #Op-oKy-aBRo to status: PENDING",
+      "id": 20054
+    },
+    {
+      "timestamp": "2026-05-16T09:45:20.022Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #4 status changed to COMPLETED",
+      "id": 20055
+    },
+    {
+      "timestamp": "2026-05-16T09:45:45.670Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #jceFbCdS93I status changed to IN_PROGRESS",
+      "id": 20056
+    },
+    {
+      "timestamp": "2026-05-16T09:45:47.650Z",
+      "userId": 10154,
+      "userName": "Israt Jahan Jui",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #jceFbCdS93I status changed to IN_PROGRESS",
+      "id": 20057
+    },
+    {
+      "timestamp": "2026-05-16T09:55:08.661Z",
+      "userId": 10151,
+      "userName": "Super Admin",
+      "userRole": "SUPER_ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #ekgMTs2jikQ to status: PENDING",
+      "id": 20058
+    },
+    {
+      "timestamp": "2026-05-16T09:56:34.869Z",
+      "userId": 10149,
+      "userName": "Mahbub Sheikh",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #ekgMTs2jikQ status changed to ASSIGNED",
+      "id": 20059
+    },
+    {
+      "timestamp": "2026-05-16T23:44:05.929Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #EyIRAhqnyj8 to status: ASSIGNED",
+      "id": 20060
+    },
+    {
+      "timestamp": "2026-05-16T23:44:12.240Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #EyIRAhqnyj8 to status: ASSIGNED",
+      "id": 20061
+    },
+    {
+      "timestamp": "2026-05-16T23:44:38.114Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #qOpP7vRHz6c to status: ASSIGNED",
+      "id": 20062
+    },
+    {
+      "timestamp": "2026-05-16T23:44:42.328Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #qOpP7vRHz6c to status: ASSIGNED",
+      "id": 20063
+    },
+    {
+      "timestamp": "2026-05-16T23:45:56.005Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #Op-oKy-aBRo to status: ASSIGNED",
+      "id": 20064
+    },
+    {
+      "timestamp": "2026-05-16T23:46:09.963Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #jiUV3wkCfJw to status: PENDING",
+      "id": 20065
+    },
+    {
+      "timestamp": "2026-05-16T23:46:11.651Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #jiUV3wkCfJw to status: ASSIGNED",
+      "id": 20066
+    },
+    {
+      "timestamp": "2026-05-16T23:56:32.820Z",
+      "userId": 10145,
+      "userName": "Emon",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #1 status changed to COMPLETED (100% complete)",
+      "id": 20067
+    },
+    {
+      "timestamp": "2026-05-16T23:57:29.253Z",
+      "userId": 10145,
+      "userName": "Emon",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #xvOl2D3Lbfg status changed to IN_PROGRESS (40% complete)",
+      "id": 20068
+    },
+    {
+      "timestamp": "2026-05-16T23:57:56.850Z",
+      "userId": 10145,
+      "userName": "Emon",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #EyIRAhqnyj8 status changed to ASSIGNED (10% complete)",
+      "id": 20069
+    },
+    {
+      "timestamp": "2026-05-17T08:39:29.226Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #vIPqiXXUe30 to status: ASSIGNED",
+      "id": 20070
+    },
+    {
+      "timestamp": "2026-05-17T08:39:34.813Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #vIPqiXXUe30 to status: ASSIGNED",
+      "id": 20071
+    },
+    {
+      "timestamp": "2026-05-17T08:40:41.069Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #vIPqiXXUe30 status changed to ASSIGNED (5% complete)",
+      "id": 20072
+    },
+    {
+      "timestamp": "2026-05-17T09:07:38.788Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Kv-AcewsPMQ status changed to ASSIGNED (10% complete)",
+      "id": 20073
+    },
+    {
+      "timestamp": "2026-05-17T09:08:13.879Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Kv-AcewsPMQ status changed to ASSIGNED (40% complete)",
+      "id": 20074
+    },
+    {
+      "timestamp": "2026-05-17T09:08:17.809Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Kv-AcewsPMQ status changed to ASSIGNED (40% complete)",
+      "id": 20075
+    },
+    {
+      "timestamp": "2026-05-17T09:09:17.075Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Kv-AcewsPMQ status changed to ASSIGNED (40% complete)",
+      "id": 20076
+    },
+    {
+      "timestamp": "2026-05-17T09:10:05.710Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Kv-AcewsPMQ status changed to IN_PROGRESS (40% complete)",
+      "id": 20077
+    },
+    {
+      "timestamp": "2026-05-17T09:12:41.828Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Kv-AcewsPMQ status changed to IN_PROGRESS (40% complete)",
+      "id": 20078
+    },
+    {
+      "timestamp": "2026-05-17T09:12:50.576Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Kv-AcewsPMQ status changed to IN_PROGRESS (40% complete)",
+      "id": 20079
+    },
+    {
+      "timestamp": "2026-05-17T09:16:25.747Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #Kv-AcewsPMQ status changed to IN_PROGRESS (25% complete)",
+      "id": 20080
+    },
+    {
+      "timestamp": "2026-05-17T09:21:46.497Z",
+      "userId": 10145,
+      "userName": "Emon",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #EyIRAhqnyj8 status changed to ASSIGNED (10% complete)",
+      "id": 20081
+    },
+    {
+      "timestamp": "2026-05-17T09:22:01.750Z",
+      "userId": 10145,
+      "userName": "Emon",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #EyIRAhqnyj8 status changed to ASSIGNED (10% complete)",
+      "id": 20082
+    },
+    {
+      "timestamp": "2026-05-17T09:22:34.547Z",
+      "userId": 10145,
+      "userName": "Emon",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #EyIRAhqnyj8 status changed to IN_PROGRESS (50% complete)",
+      "id": 20083
+    },
+    {
+      "timestamp": "2026-05-17T09:45:51.383Z",
+      "userId": 10157,
+      "userName": "Tanvir Hossain",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #vIPqiXXUe30 status changed to IN_PROGRESS (50% complete)",
+      "id": 20084
+    },
+    {
+      "timestamp": "2026-05-17T10:13:31.972Z",
+      "userId": 10145,
+      "userName": "Emon",
+      "userRole": "EMPLOYEE",
+      "action": "Task Updated",
+      "details": "Task #jiUV3wkCfJw status changed to ASSIGNED (50% complete)",
+      "id": 20085
+    },
+    {
+      "timestamp": "2026-05-17T12:03:39.753Z",
+      "userId": 10151,
+      "userName": "Super Admin",
+      "userRole": "SUPER_ADMIN",
+      "action": "Proposal Accepted",
+      "details": "Admin accepted project proposal #0WX9lM40Qgo (\"E2E Test Proposal\")",
+      "id": 20086
+    },
+    {
+      "timestamp": "2026-05-17T12:09:18.673Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #5e-nPWUUW88 to status: ASSIGNED (Priority: NORMAL)",
+      "id": 20087
+    },
+    {
+      "timestamp": "2026-05-17T12:09:21.771Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #5e-nPWUUW88 to status: ASSIGNED (Priority: HIGH)",
+      "id": 20088
+    },
+    {
+      "timestamp": "2026-05-17T12:09:26.337Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #5e-nPWUUW88 to status: ASSIGNED (Priority: HIGH)",
+      "id": 20089
+    },
+    {
+      "timestamp": "2026-05-17T18:17:06.812Z",
+      "userId": 10151,
+      "userName": "Super Admin",
+      "userRole": "SUPER_ADMIN",
+      "action": "Advance Requested",
+      "details": "Admin requested 20% advance payment for request #t08Nb8QIqwI (BDT 500)",
+      "id": 20090
+    },
+    {
+      "timestamp": "2026-05-19T04:37:55.386Z",
+      "userId": 10151,
+      "userName": "Super Admin",
+      "userRole": "SUPER_ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #0WX9lM40Qgo to status: AWAITING_ADVANCE (Priority: NORMAL)",
+      "id": 20091
+    },
+    {
+      "timestamp": "2026-05-19T08:04:49.014Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Advance Requested",
+      "details": "Admin requested 20% advance payment for request #JiM0Wexq_RA (BDT 30000)",
+      "id": 20092
+    },
+    {
+      "timestamp": "2026-05-19T09:28:59.355Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #Op-oKy-aBRo to status: IN_PROGRESS (Priority: NORMAL)",
+      "id": 20093
+    },
+    {
+      "timestamp": "2026-05-19T09:29:02.986Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #Op-oKy-aBRo to status: REVIEW (Priority: NORMAL)",
+      "id": 20094
+    },
+    {
+      "timestamp": "2026-05-19T09:30:22.343Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #Op-oKy-aBRo to status: IN_PROGRESS (Priority: NORMAL)",
+      "id": 20095
+    },
+    {
+      "timestamp": "2026-05-19T09:30:26.678Z",
+      "userId": 10141,
+      "userName": "Admin User",
+      "userRole": "ADMIN",
+      "action": "Request Updated",
+      "details": "Admin updated request #Op-oKy-aBRo to status: ASSIGNED (Priority: NORMAL)",
+      "id": 20096
+    }
+  ],
+  "knowledgeBase": [
+    {
+      "id": 20097,
+      "title": "How to Handle a New Client Request",
+      "category": "Client Support",
+      "content": "When a new client submits a request:\n1. Review the request details in All Requests.\n2. Assign it to the appropriate employee based on their specialization.\n3. Set the priority level (LOW, NORMAL, HIGH, URGENT).\n4. Send an internal note to the client confirming the assignment.\n5. Follow up within 24 hours.",
+      "createdAt": "2026-05-10T09:00:00.000Z",
+      "updatedAt": "2026-05-10T09:00:00.000Z"
+    },
+    {
+      "id": 20098,
+      "title": "Invoice Generation SOP",
+      "category": "Billing",
+      "content": "To generate an invoice for a completed payment:\n1. Navigate to Admin > Payments.\n2. Find the relevant payment record.\n3. Click 'Generate Invoice'.\n4. The PDF will be automatically created and downloaded.\n5. Share the invoice with the client via email.\n\nNote: Only PAID payments can have invoices generated.",
+      "createdAt": "2026-05-10T10:00:00.000Z",
+      "updatedAt": "2026-05-10T10:00:00.000Z"
+    },
+    {
+      "id": 20099,
+      "title": "Employee Task Management Guide",
+      "category": "Technical",
+      "content": "Managing your assigned tasks:\n1. Go to Employee > My Tasks to see all your assignments.\n2. Click a task to open the Task Detail view.\n3. Use the Time Tracker to log your working hours accurately.\n4. Update the progress slider as you advance.\n5. Change status to REVIEW when done for admin approval.\n6. Add detailed employee notes for every action taken.\n\nBest Practice: Update progress daily to keep the admin informed.",
+      "createdAt": "2026-05-11T08:00:00.000Z",
+      "updatedAt": "2026-05-11T08:00:00.000Z"
+    },
+    {
+      "id": 20100,
+      "title": "Trade License Registration Process",
+      "category": "Legal",
+      "content": "For clients requesting Trade License registration:\n1. Collect: NID copy, recent photo, and rent agreement from client.\n2. Visit the local City Corporation or Municipal office.\n3. Fill out the application form.\n4. Submit documents along with the required fees.\n5. Expected delivery: 7-10 working days.\n\nFee: BDT 5,000 (may vary by location and business type).",
+      "createdAt": "2026-05-11T09:00:00.000Z",
+      "updatedAt": "2026-05-11T09:00:00.000Z"
+    },
+    {
+      "id": 20101,
+      "title": "Escalation Policy",
+      "category": "Client Support",
+      "content": "When to escalate a request to the Admin:\n- Client is unresponsive for more than 3 business days.\n- Technical issues are beyond your skill set.\n- A refund or payment dispute is raised.\n- The delivery deadline cannot be met.\n\nHow to escalate:\n1. Add a detailed note to the task explaining the situation.\n2. Change the task priority to URGENT.\n3. Notify the admin directly through the internal chat.",
+      "createdAt": "2026-05-12T08:00:00.000Z",
+      "updatedAt": "2026-05-12T08:00:00.000Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

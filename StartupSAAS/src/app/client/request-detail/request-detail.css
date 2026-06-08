@@ -1,0 +1,14 @@
+.bg-primary-soft {
+  background-color: var(--primary-light) !important;
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--primary-color) !important;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.btn-white:hover {
+  background: #f8fafc;
+  color: var(--primary-hover) !important;
+}

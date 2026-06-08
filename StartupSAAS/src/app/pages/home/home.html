@@ -1,0 +1,178 @@
+@if (isLoading()) {
+  <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="spinner-border text-dark" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading system...</span>
+    </div>
+  </div>
+} @else {
+  @if (siteContent()) {
+    <!-- Hero Section -->
+    <section class="bg-light pt-5 pb-0 overflow-hidden position-relative border-bottom border-secondary-subtle">
+      <div class="container pt-5 mt-5 position-relative z-1">
+        <div class="row align-items-center g-5 pb-5">
+          <!-- Image Column: Order 1 on mobile (top), Order 2 on desktop (right) -->
+          <div class="col-lg-6 order-1 order-lg-2 position-relative">
+            <div class="bg-dark rounded-4 shadow-lg overflow-hidden position-relative" style="transform: perspective(1000px) rotateY(-5deg); border: 1px solid rgba(255,255,255,0.1);">
+              <div class="position-absolute top-0 w-100 bg-black bg-opacity-50 p-3 d-flex gap-2 z-1">
+                <div class="rounded-circle bg-danger" style="width: 12px; height: 12px;"></div>
+                <div class="rounded-circle bg-warning" style="width: 12px; height: 12px;"></div>
+                <div class="rounded-circle bg-success" style="width: 12px; height: 12px;"></div>
+              </div>
+              <img [src]="siteContent()!.heroImageUrl" alt="Dashboard Preview" class="w-100 h-auto object-fit-cover">
+            </div>
+          </div>
+
+          <!-- Text Column: Order 2 on mobile (bottom), Order 1 on desktop (left) -->
+          <div class="col-lg-6 order-2 order-lg-1 text-center text-lg-start">
+            <span class="badge bg-white text-dark border border-secondary-subtle rounded-pill px-3 py-2 fw-bold small text-uppercase mb-4 shadow-sm tracking-wide">{{ siteContent()!.heroBadge }}</span>
+            <h1 class="display-3 fw-bold text-dark mb-4" style="letter-spacing: -2px; line-height: 1.1;" [innerHTML]="siteContent()!.heroTitle"></h1>
+            <p class="lead text-secondary mb-5 fs-5" style="max-width: 600px;">{{ siteContent()!.heroSubtitle }}</p>
+            
+            <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-5">
+              <a routerLink="/client" class="btn btn-dark rounded-pill px-5 py-3 fw-bold shadow-sm transition-all hover-lift">Initialize Dashboard</a>
+              <a routerLink="/packages" class="btn btn-outline-secondary bg-white rounded-pill px-5 py-3 fw-bold transition-all hover-bg-light">Explore Package</a>
+            </div>
+            
+            <div class="d-flex flex-wrap gap-4 justify-content-center justify-content-lg-start pt-4 border-top border-secondary-subtle">
+              @for (feat of siteContent()!.heroFeatures; track feat.text) {
+                <div class="d-flex align-items-center text-dark fw-bold small">
+                  <i class="bi {{ feat.icon }} text-dark me-2 fs-5"></i>
+                  {{ feat.text }}
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-5 bg-white" id="about">
+      <div class="container py-5">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="position-relative rounded-4 overflow-hidden shadow-lg">
+              <img [src]="siteContent()!.aboutImageUrl" alt="About Us" class="img-fluid w-100">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <span class="badge bg-dark text-white rounded-pill px-3 py-2 fw-bold small text-uppercase mb-4 shadow-sm tracking-wide">{{ siteContent()!.aboutBadge }}</span>
+            <h2 class="display-5 fw-bold text-dark mb-4" style="letter-spacing: -1px;">{{ siteContent()!.aboutTitle }}</h2>
+            <p class="lead text-secondary mb-4">{{ siteContent()!.aboutDescription }}</p>
+            <div class="row g-4 mt-2">
+              <div class="col-sm-6">
+                <h4 class="fw-bold text-dark mb-2">{{ siteContent()!.visionTitle }}</h4>
+                <p class="text-secondary small mb-0">{{ siteContent()!.visionDescription }}</p>
+              </div>
+              <div class="col-sm-6">
+                <h4 class="fw-bold text-dark mb-2">{{ siteContent()!.missionTitle }}</h4>
+                <p class="text-secondary small mb-0">{{ siteContent()!.missionDescription }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Tiers -->
+    <section class="py-5 bg-white" id="packages">
+      <div class="container py-5">
+        <div class="text-center mb-5 max-w-700 mx-auto">
+          <h2 class="display-5 fw-bold text-dark mb-3" style="letter-spacing: -1px;">{{ siteContent()!.servicesTitle }}</h2>
+          <p class="lead text-secondary">{{ siteContent()!.servicesSubtitle }}</p>
+        </div>
+
+        <div class="row g-4 justify-content-center align-items-stretch">
+          @for (service of siteContent()!.services; track service.title; let i = $index) {
+            <div class="col-lg-4 col-md-6">
+              <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bg-white hover-lift transition-all p-4">
+                <div class="card-body p-0 d-flex flex-column">
+                  
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="badge bg-lavender text-white rounded-pill px-3 py-2 fw-bold small text-uppercase shadow-sm">
+                      {{ i === 0 ? 'STARTER' : (i === 1 ? 'GROWTH' : 'MOST POPULAR') }}
+                    </span>
+                    <i class="bi {{ service.icon }} fs-4 text-secondary opacity-50"></i>
+                  </div>
+                  
+                  <h3 class="fw-bold text-dark mb-2">{{ service.title }}</h3>
+                  <p class="text-secondary small mb-4">{{ service.description }}</p>
+                  
+                  <div class="mb-4 pb-4 border-bottom border-secondary-subtle">
+                    <span class="fs-6 text-secondary fw-bold">BDT</span>
+                    <span class="fs-2 fw-bold text-dark mx-1">{{ i === 0 ? '50,000' : (i === 1 ? '150,000' : '350,000') }}</span>
+                    <span class="small text-secondary fw-bold">one-time</span>
+                  </div>
+                  
+                  <ul class="list-unstyled mb-5 flex-grow-1">
+                    @for (feat of service.features; track feat) {
+                      <li class="d-flex align-items-center mb-3 text-dark small fw-medium">
+                        <i class="bi bi-check-circle-fill text-secondary me-3 fs-6 opacity-75"></i>
+                        <span>{{ feat }}</span>
+                      </li>
+                    }
+                  </ul>
+                  
+                  <button class="btn btn-lavender fw-bold w-100 py-3 rounded-3 mt-auto" (click)="onServiceAction(service)">
+                    Deploy Package <i class="bi bi-arrow-right ms-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Category Sections -->
+    @for (group of groupedServices(); track group.category.id; let i = $index) {
+      <section class="py-5 border-top border-secondary-subtle" [id]="'sector-' + group.category.id" [style.background-color]="i % 2 === 0 ? '#f8f9fa' : '#f4efff'">
+        <div class="container py-5">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5">
+            <div class="max-w-600">
+              <span class="badge bg-dark text-white rounded-pill px-3 py-2 fw-bold small text-uppercase mb-3 shadow-sm">{{ group.category.name }}</span>
+              <h2 class="display-6 fw-bold text-dark mb-3" style="letter-spacing: -1px;">Core {{ group.category.name }} Modules</h2>
+              <p class="lead text-secondary mb-0">{{ group.category.description }}</p>
+            </div>
+            <div class="mt-4 mt-md-0">
+              <a [routerLink]="['/service']" [queryParams]="{ categoryId: group.category.id }" class="btn btn-outline-dark fw-bold rounded-pill px-4">
+                View All Modules <i class="bi bi-arrow-right ms-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            @for (service of group.services; track service.id) {
+              <div class="col-lg-3 col-md-6">
+                <div class="card h-100 border-secondary-subtle shadow-sm rounded-4 bg-white hover-lift transition-all">
+                  <div class="card-body p-4 d-flex flex-column">
+                    <h5 class="fw-bold text-dark mb-2">{{ service.name }}</h5>
+                    <p class="small text-secondary mb-4 flex-grow-1">{{ service.description | slice:0:90 }}{{ service.description.length > 90 ? '...' : '' }}</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center border-top border-secondary-subtle pt-3 mt-auto">
+                      <div class="fw-bold text-dark">
+                        BDT {{ service.price | number }} <span class="text-secondary fw-normal small" *ngIf="service.priceType === 'MONTHLY'">/mo</span>
+                      </div>
+                      <button class="btn btn-sm btn-dark rounded-3 px-3 fw-bold" (click)="onServiceRequest(service)">Deploy</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+    }
+
+    <!-- CTA Section -->
+    <section class="py-5 border-top border-secondary-subtle" style="background-color: #9B8EC4;">
+      <div class="container py-5 text-center">
+        <h2 class="display-5 fw-bold mb-3 text-white" style="letter-spacing: -1px;">{{ siteContent()!.ctaTitle }}</h2>
+        <p class="lead text-white text-opacity-85 mb-5 max-w-600 mx-auto">{{ siteContent()!.ctaDescription }}</p>
+        <a [routerLink]="siteContent()!.ctaButtonLink" class="btn btn-light text-dark rounded-pill px-5 py-3 fw-bold fs-5 shadow-lg transition-all hover-lift">
+          {{ siteContent()!.ctaButtonText }}
+        </a>
+      </div>
+    </section>
+  }
+}

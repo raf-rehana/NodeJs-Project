@@ -1,0 +1,15 @@
+.bg-success-soft {
+  background-color: rgba(25, 135, 84, 0.1) !important;
+}
+
+.revenue-chart {
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.chart-bar {
+  background: var(--primary-color) !important;
+}
+
+.chart-bar-wrapper {
+  width: 100%;
+}
