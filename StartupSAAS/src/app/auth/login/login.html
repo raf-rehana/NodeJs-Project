@@ -1,175 +1,81 @@
 <div class="py-5 min-vh-100" style="background-color: lavender;">
-
   <div class="container py-5 mt-4">
-
     <div class="row g-5 align-items-center">
-
-
       <!-- Left Side -->
-
       <div class="col-lg-5 mb-5 mb-lg-0">
-
-
         <a routerLink="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-4">
-
           <div class="bg-white shadow-sm rounded-circle d-flex align-items-center justify-content-center"
             style="width:48px;height:48px;">
-
             <i class="bi bi-box-fill text-dark fs-5"></i>
-
           </div>
-
-
           <span class="fw-bold text-dark fs-4">
             StartupSAAS
           </span>
-
         </a>
-
-
-
         <h1 class="display-4 fw-bold text-dark mb-4" style="letter-spacing:-1px;">
-
           Secure Corporate Infrastructure.
-
         </h1>
-
-
-
         <p class="lead text-secondary mb-5">
-
           Authenticate to access your unified SaaS command center.
           Manage compliance, deployments and business operations securely.
 
         </p>
-
-
-
         <div class="d-flex flex-column gap-4">
-
-
           <div class="d-flex align-items-start gap-4">
-
             <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
               style="width:48px;height:48px;">
-
               <i class="bi bi-shield-check text-dark"></i>
-
             </div>
-
-
             <div>
-
               <h6 class="fw-bold text-dark mb-1">
                 Enterprise Security
               </h6>
-
               <p class="small text-secondary mb-0">
                 SOC2 compliant infrastructure
               </p>
-
             </div>
-
-
           </div>
-
-
-
           <div class="d-flex align-items-start gap-4">
-
-
             <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
               style="width:48px;height:48px;">
-
               <i class="bi bi-lock-fill text-dark"></i>
-
             </div>
-
-
             <div>
-
               <h6 class="fw-bold text-dark mb-1">
                 Encrypted Access
               </h6>
-
               <p class="small text-secondary mb-0">
                 End-to-end protected sessions
               </p>
-
             </div>
-
-
           </div>
-
-
-
         </div>
-
-
       </div>
-
-
-
-
-
       <!-- Login Card -->
-
-
       <div class="col-lg-6 offset-lg-1">
-
-
         <div class="card border-secondary-subtle shadow-sm rounded-4 overflow-hidden bg-white">
-
-
           <div class="card-body p-4 p-md-5">
-
-
             <h4 class="fw-bold text-dark mb-2">
               Welcome back
             </h4>
-
-
             <p class="text-secondary small mb-4">
               Please enter your credentials to initialize your session.
             </p>
-
-
-
             @if(error()) {
-
             <div class="alert bg-danger bg-opacity-10 border border-danger rounded-3">
-
               <i class="bi bi-exclamation-triangle-fill me-2"></i>
-
               {{error()}}
-
             </div>
-
             }
-
-
-
-
-
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-
               <div class="row g-3">
-
-
-
                 <!-- Email -->
-
                 <div class="col-12">
-
-
                   <label class="form-label small fw-bold text-uppercase" style="color:#8c98a4;font-size:.75rem;">
                     Corporate Email
                   </label>
                   <div class="input-group">
-                    <span class="input-group-text bg-white border-secondary-subtle py-3 rounded-start-3">
-                    </span>
-                    <input type="email" class="form-control py-3 border-secondary-subtle shadow-none rounded-end-3"
+                    <input type="email" class="form-control border-secondary-subtle shadow-none rounded-end-3"
                       formControlName="email" placeholder="Enter Your Email">
                   </div>
                   @if(email?.invalid && (email?.dirty || email?.touched)) {
@@ -189,17 +95,11 @@
                       Forgot?</a>
                   </div>
                   <div class="input-group">
-                    <span class="input-group-text bg-white border-secondary-subtle py-3">
-                    </span>
                     <input [type]="showPassword()?'text':'password'"
-                      class="form-control py-3 border-secondary-subtle shadow-none" formControlName="password"
+                      class="form-control border-secondary-subtle shadow-none" formControlName="password"
                       placeholder="Enter Your Password">
-
-
-
                     <button type="button" class="btn bg-white border-secondary-subtle"
                       (click)="showPassword.set(!showPassword())">
-
                       <i class="bi" [ngClass]="showPassword()?'bi-eye-slash':'bi-eye'">
                       </i>
                     </button>
@@ -207,13 +107,9 @@
                 </div>
 
                 <!-- Remember -->
-
                 <div class="col-12">
-
                   <div class="form-check mt-2">
-
                     <input class="form-check-input" type="checkbox">
-
                     <label class="form-check-label small fw-bold text-secondary">
                       Remember Password
                     </label>
@@ -226,17 +122,11 @@
                     [disabled]="loading()">
                     @if(loading()){
                     <span class="spinner-border spinner-border-sm"></span>
-                    Authenticating...
-                    }
-                    @else{
-                    Login
-                    <i class="bi bi-arrow-right ms-2"></i>
-                    }
+                    Authenticating...}
+                    @else{Login<i class="bi bi-arrow-right ms-2"></i>}
                   </button>
                   <p class="text-center small text-secondary mt-3">
-
                     <i class="bi bi-lock-fill text-success"></i>
-
                     Session secured by StartupSAAS protocols
                   </p>
                 </div>
