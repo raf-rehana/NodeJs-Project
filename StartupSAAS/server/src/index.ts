@@ -16,7 +16,7 @@ app.enable('trust proxy');
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ['http://localhost:4200', 'https://saas-startupsaas.vercel.app'],
+    origin: ['http://localhost:4200', 'https://saas-startupsaas.vercel.app', 'https://startupsaas-iota.vercel.app'],
     credentials: true
   }
 });
@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 4000;
 
 // Middlewares
 app.use(cors({
-  origin: ['http://localhost:4200', 'https://saas-startupsaas.vercel.app'],
+  origin: ['http://localhost:4200', 'https://saas-startupsaas.vercel.app', 'https://startupsaas-iota.vercel.app'],
   credentials: true
 }));
 app.use(bodyParser.json({ limit: '50mb' }));
