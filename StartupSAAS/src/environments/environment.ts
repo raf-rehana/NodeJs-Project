@@ -2,6 +2,6 @@ const isLocal = typeof window !== 'undefined' && (window.location.hostname === '
 
 export const environment = {
   production: !isLocal,
-  apiUrl: isLocal ? 'http://localhost:4000/api' : 'https://angular-project-2o3k.onrender.com/api',
-  backendUrl: isLocal ? 'http://localhost:4000' : 'https://angular-project-2o3k.onrender.com'
+  apiUrl: isLocal ? 'http://localhost:4000/api' : 'https://nodejs-project-czep.onrender.com/api',
+  backendUrl: isLocal ? 'http://localhost:4000' : 'https://nodejs-project-czep.onrender.com'
 };
