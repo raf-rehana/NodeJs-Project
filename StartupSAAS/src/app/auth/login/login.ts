@@ -29,19 +29,19 @@ export class LoginComponent {
     private redirectService: RedirectService
   ) {
     this.form = this.fb.group({
-      email:    ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
     this.returnUrl.set(this.route.snapshot.queryParams['returnUrl'] || '');
   }
 
-  get email()    { return this.form.get('email'); }
+  get email() { return this.form.get('email'); }
   get password() { return this.form.get('password'); }
 
   onSubmit(): void {
-    if (this.form.invalid) { 
-      this.form.markAllAsTouched(); 
-      return; 
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
     }
     this.loading.set(true);
     this.error.set('');
@@ -63,7 +63,7 @@ export class LoginComponent {
         const role = res.user.role;
         const storedReturnUrl = this.redirectService.getReturnUrl();
         const finalRoute = this.returnUrl() || storedReturnUrl || '/client';
-        
+
         let targetRoute = finalRoute;
         if (!this.returnUrl() && !storedReturnUrl) {
           if (role === 'ADMIN' || role === 'SUPER_ADMIN') targetRoute = '/admin/dashboard';
@@ -81,15 +81,5 @@ export class LoginComponent {
         this.loading.set(false);
       }
     });
-  }
-
-  demoLogin(role: string): void {
-    const demos: Record<string, any> = {
-      client: { email: 'badrul@gmail.com',  password: 'demo123' },
-      employee: { email: 'emon@gmail.com', password: 'demo123' },
-      admin:  { email: 'admin@startupsaas.com', password: 'demo123' },
-      superadmin: { email: 'superadmin@startupsaas.com', password: 'demo123' }
-    };
-    this.form.setValue(demos[role]);
   }
 }

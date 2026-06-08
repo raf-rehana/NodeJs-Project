@@ -13,7 +13,7 @@
         <a routerLink="/" class="d-inline-flex align-items-center gap-2 text-decoration-none mb-4">
 
           <div class="bg-white shadow-sm rounded-circle d-flex align-items-center justify-content-center"
-          style="width:48px;height:48px;">
+            style="width:48px;height:48px;">
 
             <i class="bi bi-box-fill text-dark fs-5"></i>
 
@@ -28,8 +28,7 @@
 
 
 
-        <h1 class="display-4 fw-bold text-dark mb-4"
-        style="letter-spacing:-1px;">
+        <h1 class="display-4 fw-bold text-dark mb-4" style="letter-spacing:-1px;">
 
           Secure Corporate Infrastructure.
 
@@ -52,7 +51,7 @@
           <div class="d-flex align-items-start gap-4">
 
             <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
-            style="width:48px;height:48px;">
+              style="width:48px;height:48px;">
 
               <i class="bi bi-shield-check text-dark"></i>
 
@@ -80,7 +79,7 @@
 
 
             <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
-            style="width:48px;height:48px;">
+              style="width:48px;height:48px;">
 
               <i class="bi bi-lock-fill text-dark"></i>
 
@@ -152,283 +151,147 @@
 
 
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
 
-<div class="row g-3">
+              <div class="row g-3">
 
 
 
-<!-- Email -->
+                <!-- Email -->
 
-<div class="col-12">
+                <div class="col-12">
 
 
-<label class="form-label small fw-bold text-uppercase"
-style="color:#8c98a4;font-size:.75rem;">
+                  <label class="form-label small fw-bold text-uppercase" style="color:#8c98a4;font-size:.75rem;">
 
-Corporate Email
+                    Corporate Email
 
-</label>
+                  </label>
 
 
 
-<div class="input-group">
+                  <div class="input-group">
 
 
-<span class="input-group-text bg-white border-secondary-subtle py-3 rounded-start-3">
+                    <span class="input-group-text bg-white border-secondary-subtle py-3 rounded-start-3">
 
-<i class="bi bi-envelope text-secondary"></i>
+                      <i class="bi bi-envelope text-secondary"></i>
 
-</span>
+                    </span>
 
 
 
-<input
-type="email"
-class="form-control py-3 border-secondary-subtle shadow-none rounded-end-3"
-formControlName="email"
-placeholder="Enter Your Email">
+                    <input type="email" class="form-control py-3 border-secondary-subtle shadow-none rounded-end-3"
+                      formControlName="email" placeholder="Enter Your Email">
 
 
-</div>
+                  </div>
 
 
-@if(email?.invalid && (email?.dirty || email?.touched)) {
+                  @if(email?.invalid && (email?.dirty || email?.touched)) {
 
-<div class="text-danger small mt-2">
+                  <div class="text-danger small mt-2">
 
-<i class="bi bi-info-circle"></i>
-Valid email required
+                    <i class="bi bi-info-circle"></i>
+                    Valid email required
 
-</div>
+                  </div>
 
-}
+                  }
 
 
-</div>
+                </div>
 
 
 
 
 
-<!-- Password -->
+                <!-- Password -->
 
 
-<div class="col-12">
+                <div class="col-12">
 
 
-<div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-between">
 
-<label class="form-label small fw-bold text-uppercase"
-style="color:#8c98a4;font-size:.75rem;">
+                    <label class="form-label small fw-bold text-uppercase" style="color:#8c98a4;font-size:.75rem;">
 
-Password
+                      Password
 
-</label>
+                    </label>
 
 
-<a href="#" 
-class="small fw-bold text-decoration-none"
-style="color:#9b72ea;">
+                    <a href="#" class="small fw-bold text-decoration-none" style="color:#9b72ea;">
+                      Forgot?</a>
 
-Forgot?
+                  </div>
 
-</a>
+                  <div class="input-group">
+                    <span class="input-group-text bg-white border-secondary-subtle py-3">
+                      <i class="bi bi-key text-secondary"></i>
+                    </span>
+                    <input [type]="showPassword()?'text':'password'"
+                      class="form-control py-3 border-secondary-subtle shadow-none" formControlName="password"
+                      placeholder="Enter Your Password">
 
 
-</div>
 
+                    <button type="button" class="btn bg-white border-secondary-subtle"
+                      (click)="showPassword.set(!showPassword())">
 
+                      <i class="bi" [ngClass]="showPassword()?'bi-eye-slash':'bi-eye'">
+                      </i>
+                    </button>
+                  </div>
+                </div>
 
-<div class="input-group">
+                <!-- Remember -->
 
+                <div class="col-12">
 
-<span class="input-group-text bg-white border-secondary-subtle py-3">
+                  <div class="form-check mt-2">
 
-<i class="bi bi-key text-secondary"></i>
-
-</span>
-
-
-
-
-<input
-[type]="showPassword()?'text':'password'"
-class="form-control py-3 border-secondary-subtle shadow-none"
-formControlName="password"
-placeholder="Enter Your Password">
-
-
-
-<button
-type="button"
-class="btn bg-white border-secondary-subtle"
-(click)="showPassword.set(!showPassword())">
-
-<i class="bi"
-[ngClass]="showPassword()?'bi-eye-slash':'bi-eye'">
-
-</i>
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- Remember -->
-
-<div class="col-12">
-
-<div class="form-check mt-2">
-
-<input class="form-check-input" type="checkbox">
-
-<label class="form-check-label small fw-bold text-secondary">
-
-Maintain session
-
-</label>
-
-
-</div>
-
-</div>
-
-
-
-
-
-
-<!-- Button -->
-
-
-<div class="col-12 mt-4">
-
-
-<button
-class="btn btn-lavender w-100 py-3 fw-bold rounded-3 shadow-sm hover-lift"
-type="submit"
-[disabled]="loading()">
-
-
-@if(loading()){
-
-<span class="spinner-border spinner-border-sm"></span>
-Authenticating...
-
-}
-
-@else{
-
-Login
-<i class="bi bi-arrow-right ms-2"></i>
-
-}
-
-
-</button>
-
-
-
-
-<p class="text-center small text-secondary mt-3">
-
-<i class="bi bi-lock-fill text-success"></i>
-
-Session secured by StartupSAAS protocols
-
-</p>
-
-
-</div>
-
-
-
-</div>
-
-</form>
-
-
-
-
-<div class="text-center mt-5">
-
-
-<p class="small text-secondary">
-
-New to StartupSAAS?
-
-<a routerLink="/register"
-class="fw-bold text-dark text-decoration-none border-bottom border-dark">
-
-Deploy new infrastructure
-
-</a>
-
-</p>
-
-
-</div>
-
-
-
-
-<div class="mt-4 pt-4 border-top">
-
-
-<p class="small text-secondary fw-bold text-uppercase">
-
-Debug Access
-
-</p>
-
-
-
-<div class="d-flex flex-wrap gap-2">
-
-
-<button class="btn btn-sm btn-outline-secondary rounded-pill" (click)="demoLogin('client')">
-Client Test
-</button>
-
-
-<button class="btn btn-sm btn-outline-secondary rounded-pill" (click)="demoLogin('employee')">
-Employee Test
-</button>
-
-
-<button class="btn btn-sm btn-outline-secondary rounded-pill" (click)="demoLogin('admin')">
-Admin
-</button>
-
-
-<button class="btn btn-sm btn-outline-secondary rounded-pill" (click)="demoLogin('superadmin')">
-Super Admin
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+                    <input class="form-check-input" type="checkbox">
+
+                    <label class="form-check-label small fw-bold text-secondary">
+                      Remember Password
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Button -->
+                <div class="col-12 mt-4">
+                  <button class="btn btn-lavender w-100 py-3 fw-bold rounded-3 shadow-sm hover-lift" type="submit"
+                    [disabled]="loading()">
+                    @if(loading()){
+                    <span class="spinner-border spinner-border-sm"></span>
+                    Authenticating...
+                    }
+                    @else{
+                    Login
+                    <i class="bi bi-arrow-right ms-2"></i>
+                    }
+                  </button>
+                  <p class="text-center small text-secondary mt-3">
+
+                    <i class="bi bi-lock-fill text-success"></i>
+
+                    Session secured by StartupSAAS protocols
+                  </p>
+                </div>
+              </div>
+            </form>
+            <div class="text-center mt-5">
+              <p class="small text-secondary">
+                New to StartupSAAS?
+                <a routerLink="/register" class="fw-bold text-dark text-decoration-none border-bottom border-dark">
+                  Deploy new infrastructure
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
