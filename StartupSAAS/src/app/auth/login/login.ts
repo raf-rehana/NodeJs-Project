@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ import { RedirectService } from '../../core/services/redirect.service';
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: FormGroup;
   loading = signal(false);
   error = signal('');
@@ -30,13 +30,26 @@ export class LoginComponent {
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      rememberMe: [false]
     });
     this.returnUrl.set(this.route.snapshot.queryParams['returnUrl'] || '');
   }
 
   get email() { return this.form.get('email'); }
   get password() { return this.form.get('password'); }
+
+  ngOnInit(): void {
+    const savedEmail = localStorage.getItem('remembered_email');
+    const savedPassword = localStorage.getItem('remembered_password');
+    if (savedEmail && savedPassword) {
+      this.form.patchValue({
+        email: savedEmail,
+        password: savedPassword,
+        rememberMe: true
+      });
+    }
+  }
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -48,6 +61,15 @@ export class LoginComponent {
 
     const emailVal = this.email?.value;
     const passwordVal = this.password?.value;
+    const rememberMeVal = this.form.get('rememberMe')?.value;
+
+    if (rememberMeVal) {
+      localStorage.setItem('remembered_email', emailVal);
+      localStorage.setItem('remembered_password', passwordVal);
+    } else {
+      localStorage.removeItem('remembered_email');
+      localStorage.removeItem('remembered_password');
+    }
 
     this.auth.checkEmail(emailVal).pipe(
       switchMap(exists => {
