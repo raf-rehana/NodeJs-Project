@@ -5,7 +5,7 @@ const client = new Client({
   password: '1234',
   host: 'localhost',
   port: 5432,
-  database: 'postgres', // Connect to default db to create a new one
+  database: 'postgres',
 });
 
 async function createDb() {
