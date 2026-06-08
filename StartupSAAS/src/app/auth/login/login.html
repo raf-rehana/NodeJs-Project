@@ -164,72 +164,32 @@
 
 
                   <label class="form-label small fw-bold text-uppercase" style="color:#8c98a4;font-size:.75rem;">
-
                     Corporate Email
-
                   </label>
-
-
-
                   <div class="input-group">
-
-
                     <span class="input-group-text bg-white border-secondary-subtle py-3 rounded-start-3">
-
-                      <i class="bi bi-envelope text-secondary"></i>
-
                     </span>
-
-
-
                     <input type="email" class="form-control py-3 border-secondary-subtle shadow-none rounded-end-3"
                       formControlName="email" placeholder="Enter Your Email">
-
-
                   </div>
-
-
                   @if(email?.invalid && (email?.dirty || email?.touched)) {
-
                   <div class="text-danger small mt-2">
-
                     <i class="bi bi-info-circle"></i>
                     Valid email required
-
                   </div>
-
                   }
-
-
                 </div>
-
-
-
-
-
                 <!-- Password -->
-
-
                 <div class="col-12">
-
-
                   <div class="d-flex justify-content-between">
-
                     <label class="form-label small fw-bold text-uppercase" style="color:#8c98a4;font-size:.75rem;">
-
                       Password
-
                     </label>
-
-
                     <a href="#" class="small fw-bold text-decoration-none" style="color:#9b72ea;">
                       Forgot?</a>
-
                   </div>
-
                   <div class="input-group">
-                    <span class="input-group-text bg-white border-secondary-subtle">
-                      <i class="bi bi-key text-secondary"></i>
+                    <span class="input-group-text bg-white border-secondary-subtle py-3">
                     </span>
                     <input [type]="showPassword()?'text':'password'"
                       class="form-control py-3 border-secondary-subtle shadow-none" formControlName="password"
